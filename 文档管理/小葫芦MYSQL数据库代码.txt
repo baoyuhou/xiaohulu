@@ -1,0 +1,154 @@
+/*创建小葫芦数据库*/
+create database SmallgourdDB
+
+
+/*                      RBAC                                */
+/*创建后台用户表*/
+create table Users 
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   Name                 nvarchar(10)                   null,   /*登录名*/
+   Password             nvarchar(100)                  null,   /*登录密码*/
+   PRIMARY KEY (Id)
+);
+/*创建角色表*/
+create table Role 
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   Name                 nvarchar(10)                   null    /*角色名称*/
+   PRIMARY KEY (Id)
+);
+/*创建用户角色关联表*/
+create table UserAndRole 
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   UserId               int                            null,    /*用户id*/
+   RoleId               int                            null     /*角色id*/
+   PRIMARY KEY (Id)
+);
+/*创建权限表*/
+create table Jurisdiction 
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   Name                 nvarchar(100)                  null,     /*权限名称*/
+   level                int                            null,     /*权限级别*/
+   Father               int                            null      /*权限的父级id*/
+   PRIMARY KEY (Id)
+);
+/*创建角色权限关联表*/
+create table RoleAndJurisdiction 
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   RoleId               int                            null,     /*角色id*/
+   JurisdictionId       int                            null      /*权限id*/
+   PRIMARY KEY (Id)
+);
+/*                      /RBAC                                */
+
+
+/*                      考生                        */
+/*考生表*/
+create table Candidate 
+(
+   ID                   int                            NOT NULL AUTO_INCREMENT,
+   Name                 nvarchar(100)                   null,      /*考生姓名*/
+   Sex                  nvarchar(100) null,      /*考生性别*/
+   Photo                nvarchar(100)                  null,      /*考生头像*/
+   ExamNumber           nvarchar(10)                   null,      /*准考证号码*/
+   DocumentType         nvarchar(10)                   null,      /*证件类型*/
+   Certificates         nvarchar(20)                   null,      /*证件号*/
+   ExamRoomID           nvarchar(20)                   null,      /*所在考场外键*/
+   Field                nvarchar(100)                            null,      /*当前档次*/
+   SeatNumber           nvarchar(100)                            null,      /*座位号*/
+   TestRoomID           nvarchar(10)                   null,      /*所在试室外键*/
+   CompanyID            nvarchar(10)                   null,      /*所在单位外键*/
+   Enable              nvarchar(100)                            null       /*是否启用*/
+   PRIMARY KEY (Id)
+);
+/*考生所用时间*/
+create table TestTime 
+(
+   ID                   int                            NOT NULL AUTO_INCREMENT,
+   ExamNumberId        nvarchar(100)                           null,      /*准考证号*/
+   LongExam             double                         null,      /*考试总时长*/
+   TimeUsed             double                         null,      /*所用时间*/
+   RemainderLength      double                         null,      /*剩余时间*/
+   ProgressOfAnswer     nvarchar(10)                   null       /*答题进度*/
+   PRIMARY KEY (Id)
+);
+/*考场*/
+create table ExamRoom 
+(
+   ID                   int                            NOT NULL AUTO_INCREMENT,
+   Name                 nvarchar(10)                   null       /*考场名称*/
+   PRIMARY KEY (Id)
+);
+/*考室*/
+create table TestRoom 
+(
+   ID                   int                            NOT NULL AUTO_INCREMENT,
+   Name                 nvarchar(10)                   null       /*考室名称*/
+   PRIMARY KEY (Id)
+);
+/*单位名称*/
+create table Company 
+(
+   ID                   int                            NOT NULL AUTO_INCREMENT,
+   Name                 nvarchar(10)                   null       /*考单位称*/
+   PRIMARY KEY (Id)
+);
+/*                      /考生                        */
+
+
+/*                      题库                        */
+/*题库*/
+create table QuestionBank 
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   Subject              nvarchar(100)(0)               null,      /*题目*/
+   Answer               nvarchar(100)                  null,      /*正确答案*/
+   Phone                nvarchar(100)                  null,      /*附件图片*/
+   TypeOfExam           nvarchar(100)                           null,      /*题类型外键*/
+   Enable               nvarchar(100)                           null       /*是否启用*/
+   PRIMARY KEY (Id)
+);
+/*选项*/
+create table Items
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   QuestionBankId       int                            null,      /*题目外键*/
+   AnswerA              nvarchar(10)                   null,      /*答案A*/
+   AnswerB              nvarchar(10)                   null,      /*答案B*/
+   AnswerC              nvarchar(10)                   null,      /*答案C*/
+   AnswerD              nvarchar(10)                   null,      /*答案D*/
+   AnswerE              nvarchar(10)                   null       /*答案E*/
+   PRIMARY KEY (Id)
+);
+/*题型*/
+create table TextType 
+(
+   ID                   int                            NOT NULL AUTO_INCREMENT,
+   ExamType             nvarchar(10)                   null,      /*题型*/
+   Enable               nvarchar(100)                            null       /*是否启用*/
+   PRIMARY KEY (Id)
+);
+/*考室情况*/
+create table ExaminationSituation 
+(
+   Id                   int                            NOT NULL AUTO_INCREMENT,
+   ExamNumber           nvarchar(100)                  null,      /*准考证号码*/
+   QuestionBankId       nvarchar(100)                            null,      /*题目id*/
+   Answer               nvarchar(100)                  null       /*作答选项*/
+   PRIMARY KEY (Id)
+);
+/*                      题库                        */
+
+
+
+
+
+
+
+
+
+
