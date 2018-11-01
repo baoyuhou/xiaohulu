@@ -35,6 +35,5 @@ namespace Models.Examination
         /// 是否启用
         /// </summary>
         public int Enable { get; set; }
-);
     }
 }
