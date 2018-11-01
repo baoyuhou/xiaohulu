@@ -4,7 +4,8 @@ using System.Text;
 
 namespace IServices.IAuthority
 {
-    interface IAuthorityServices
+   public interface IAuthorityServices
     {
+
     }
 }

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Models;
+using Models.Authority;
 namespace IServices.IAuthority
 {
-    class I
+   public interface IUserServices
     {
+        
     }
 }
