@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Models
+{
+    /// <summary>
+    /// 说明表
+    /// </summary>
+    public class Explain
+    {
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 说明内容
+        /// </summary>
+        public int Description { get; set; }
+
+        /// <summary>
+        /// 说明地址
+        /// </summary>
+        public int Address { get; set; }
+    }
+}
