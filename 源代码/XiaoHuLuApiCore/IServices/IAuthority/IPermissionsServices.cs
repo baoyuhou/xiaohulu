@@ -17,28 +17,28 @@ namespace IServices.IAuthority
         /// <param name="name"></param>
         /// <param name="pwd"></param>
         /// <returns></returns>
-        User Login(string name, string pwd);
+        Users Login(string name, string pwd);
 
         /// <summary>
         /// 获取权限列表
         /// </summary>
         /// <param name="YHID"></param>
         /// <returns></returns>
-        List<Permissions> GetPermissions(int YHID = -1);
+        List<Jurisdiction> GetPermissions(int YHID = -1);
 
         /// <summary>
         /// 权限添加
         /// </summary>
         /// <param name="permissions"></param>
         /// <returns></returns>
-        int Add(Permissions permissions);
+        int Add(Jurisdiction permissions);
 
         /// <summary>
         /// 权限修改
         /// </summary>
         /// <param name="permissions"></param>
         /// <returns></returns>
-        int UpdateById(Permissions permissions);
+        int UpdateById(Jurisdiction permissions);
 
         /// <summary>
         /// 权限删除
@@ -52,6 +52,6 @@ namespace IServices.IAuthority
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Permissions EditById(int id);
+        Jurisdiction EditById(int id);
     }
 }

@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Models;
+using Models.Authority;
+using IServices.IAuthority;
+using SqlSugar;
+
 namespace Services.Authority
 {
-    class RoleServices
+    public class RoleServices : IRoleServices
     {
+        
     }
 }
