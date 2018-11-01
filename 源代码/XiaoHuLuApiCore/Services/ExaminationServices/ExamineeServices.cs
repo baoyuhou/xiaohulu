@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 
 using IServices.IExaminationServices;
+using Models;
 using Models.Examination;
-
+using SqlSugar;
 namespace Services.ExaminationServices
-{
-    public class ExamineeServices : IExamineeServices
+{    public class ExamineeServices : IExamineeServices
     {
+        public SimpleClient<Candidate> sdb = new SimpleClient<Candidate>(Educationcontext.GetClient());
         /// <summary>
         /// 单条数据添加考生
         /// </summary>
@@ -16,7 +17,7 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public int ADD(Candidate candidate)
         {
-            throw new NotImplementedException();
+            return sdb
         }
 
         /// <summary>
