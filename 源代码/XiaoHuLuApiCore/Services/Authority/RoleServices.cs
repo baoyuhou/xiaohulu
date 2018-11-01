@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IServices.IAuthority
+namespace Services.Authority
 {
-   public interface IAuthorityServices
+    class RoleServices
     {
-
     }
 }

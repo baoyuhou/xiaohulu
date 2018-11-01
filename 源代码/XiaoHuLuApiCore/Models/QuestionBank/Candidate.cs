@@ -70,7 +70,6 @@ namespace Models.QuestionBank
         /// 是否启用
         /// </summary>
         public int Enable { get; set; }
-);
 
     }
 }

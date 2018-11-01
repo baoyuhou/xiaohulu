@@ -5,23 +5,23 @@ using System.Text;
 namespace Models.Authority
 {
     /// <summary>
-    /// 用户表
+    /// 用户角色表
     /// </summary>
-   public class User
+   public class UserandRole
     {
         /// <summary>
-        /// 主键ID
+        /// 主键id
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// 用户名
+        /// 用户id
         /// </summary>
-        public string UserName { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
-        /// 用户密码
+        /// 角色id
         /// </summary>
-        public int UserPwd { get; set; }
+        public int RoleId { get; set; }
     }
 }

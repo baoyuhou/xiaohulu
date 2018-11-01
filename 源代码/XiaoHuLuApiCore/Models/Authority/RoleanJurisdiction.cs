@@ -7,7 +7,7 @@ namespace Models
     /// <summary>
     /// 角色权限表
     /// </summary>
-    public class RolePermissions
+    public class RoleanJurisdiction
     {
         /// <summary>
         /// 主键id
@@ -22,6 +22,6 @@ namespace Models
         /// <summary>
         /// 权限id
         /// </summary>
-        public int PermId { get; set; }
+        public int  JurisdictionId{ get; set; }
     }
 }
