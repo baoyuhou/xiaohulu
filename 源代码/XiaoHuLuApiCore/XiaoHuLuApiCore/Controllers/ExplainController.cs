@@ -9,8 +9,6 @@ using IServices;
 
 namespace XiaoHuLuApiCore.Controllers
 {
-    
-
     [Route("api/[controller]")]
     [ApiController]
     public class ExplainController : ControllerBase

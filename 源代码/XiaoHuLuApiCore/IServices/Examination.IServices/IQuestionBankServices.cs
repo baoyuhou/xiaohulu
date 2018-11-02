@@ -40,7 +40,7 @@ namespace IServices.IExaminationServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        int UpdateById(int id);
+        QuestionBank UpdateById(int id);
 
         /// <summary>
         /// 修改题库的题

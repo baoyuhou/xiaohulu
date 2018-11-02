@@ -62,11 +62,12 @@ namespace Services.Examination.Services
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        public List<Candidate> GetCandidatesByExamNumber(string examNumber)
+        public Candidate GetCandidatesByExamNumber(string examNumber)
         {
-            throw new NotImplementedException();
+            var result = CandidateDB.GetSingle(m => m.ExamNumber == examNumber);
+            return result;
         }
-
+        
         /// <summary>
         /// 修改考生
         /// </summary>

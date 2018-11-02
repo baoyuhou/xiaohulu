@@ -3,20 +3,56 @@ using System.Collections.Generic;
 using System.Text;
 
 using IServices.IExaminationServices;
+using Models;
 using Models.Examination;
+using SqlSugar;
 
 namespace Services.ExaminationServices
 {
     public class QuestionBankServices : IQuestionBankServices
     {
+        public SimpleClient<QuestionBank> QuestionBankDB = new SimpleClient<QuestionBank>(Educationcontext.GetClient());
+        public SimpleClient<Option> OptionDB = new SimpleClient<Option>(Educationcontext.GetClient());
+
         /// <summary>
         /// 单条添加题
         /// </summary>
         /// <param name="questionBank"></param>
         /// <returns></returns>
-        public int ADD(QuestionBank questionBank)
+        public int ADD(QuestionBankinherit questionBankinherit)
         {
-            throw new NotImplementedException();
+            //添加到题库
+            QuestionBank questionBank = new QuestionBank();
+            questionBank.Subject = questionBankinherit.Subject;
+            questionBank.Answer = questionBankinherit.Answer;
+            questionBank.Phone = questionBankinherit.Phone;
+            questionBank.TypeOfExam = questionBankinherit.TypeOfExam;
+            questionBank.Enable = questionBankinherit.Enable;
+            var resultquestionBank = QuestionBankDB.Insert(questionBank);
+            if (resultquestionBank)
+            {
+                //获取最后一个Id
+                using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+                {
+                    questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
+                }
+                var resultQuestionBankId = questionBank.Id;
+                //添加到选项
+                Option option = new Option();
+                option.QuestionBankId = resultQuestionBankId;
+                option.AnswerA = questionBankinherit.AnswerA;
+                option.AnswerB = questionBankinherit.AnswerB;
+                option.AnswerC = questionBankinherit.AnswerC;
+                option.AnswerD = questionBankinherit.AnswerD;
+                option.AnswerE = questionBankinherit.AnswerE;
+                var resultoption = OptionDB.Insert(option);
+                if(resultoption)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+            return 0;
         }
 
         /// <summary>
@@ -26,7 +62,8 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public int ADDList(List<QuestionBank> questionBanks)
         {
-            throw new NotImplementedException();
+            var result = Convert.ToInt32(QuestionBankDB.InsertRange(questionBanks.ToArray()));
+            return result;
         }
 
         /// <summary>
@@ -35,7 +72,8 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public List<QuestionBank> GetQuestionBanks()
         {
-            throw new NotImplementedException();
+            var result = QuestionBankDB.GetList();
+            return result;
         }
 
         /// <summary>
@@ -45,7 +83,8 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public List<QuestionBank> GetQuestionBanksByTypeOfExam(int TypeOfExamId)
         {
-            throw new NotImplementedException();
+            var result = QuestionBankDB.GetList(m => m.TypeOfExam == TypeOfExamId);
+            return result;
         }
 
         /// <summary>
@@ -55,7 +94,8 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public int Update(QuestionBank questionBank)
         {
-            throw new NotImplementedException();
+            var result = Convert.ToInt32(QuestionBankDB.Update(questionBank));
+            return result;
         }
 
         /// <summary>
@@ -63,9 +103,10 @@ namespace Services.ExaminationServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public int UpdateById(int id)
+        public QuestionBank UpdateById(int id)
         {
-            throw new NotImplementedException();
+            var result = QuestionBankDB.GetSingle(m => m.Id == id);
+            return result;
         }
     }
 }

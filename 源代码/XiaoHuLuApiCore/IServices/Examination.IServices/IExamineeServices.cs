@@ -54,6 +54,6 @@ namespace IServices.Examination.IServices
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        List<Candidate> GetCandidatesByExamNumber(string examNumber);
+        Candidate GetCandidatesByExamNumber(string examNumber);
     }
 }
