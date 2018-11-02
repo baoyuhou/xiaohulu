@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-using IServices.IExaminationServices;
+using IServices.Examination.IServices;
 using Models;
 using Models.Examination;
 using SqlSugar;
-namespace Services.ExaminationServices
+
+namespace Services.Examination.Services
 {    public class ExamineeServices : IExamineeServices
     {
         public SimpleClient<Candidate> sdb = new SimpleClient<Candidate>(Educationcontext.GetClient());
@@ -17,7 +18,8 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public int ADD(Candidate candidate)
         {
-            throw new NotImplementedException();
+            var result = Convert.ToInt32(sdb.Insert(candidate));
+            return result;
         }
 
         /// <summary>
@@ -27,7 +29,12 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public int ADDList(List<Candidate> candidates)
         {
-            throw new NotImplementedException();
+            List<Candidate> candidateList = new List<Candidate> ();
+            foreach (var item in candidates)
+            {
+                candidateList.Add(item);
+            }
+            return 1;
         }
 
         /// <summary>

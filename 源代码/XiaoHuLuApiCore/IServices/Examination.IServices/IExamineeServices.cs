@@ -4,7 +4,7 @@ using System.Text;
 
 using Models.Examination;
 
-namespace IServices.IExaminationServices
+namespace IServices.Examination.IServices
 {
     public interface IExamineeServices
     {

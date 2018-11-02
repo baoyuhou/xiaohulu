@@ -28,6 +28,8 @@ namespace XiaoHuLuApiCore
         {
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<IServices.ExplainsIServices,Services.ExplainsServices>();
         }
 
 

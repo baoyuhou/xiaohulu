@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading.Tasks;
 using Models;
 using Models.Authority;
 namespace IServices.IAuthority
@@ -11,11 +11,6 @@ namespace IServices.IAuthority
     /// </summary>
    public interface IUserServices
     {
-        /// <summary>
-        /// 删除用户
-        /// </summary>
-        /// <param name="roleid"></param>
-        /// <returns></returns>
-        int DeleteById(int roleid);
+        
     }
 }
