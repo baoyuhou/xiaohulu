@@ -8,6 +8,6 @@ namespace IServices.IAuthority
 {
    public interface IRoleServices
     {
-        
+        List<Role>
     }
 }
