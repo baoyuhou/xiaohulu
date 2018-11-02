@@ -16,6 +16,13 @@ namespace IServices.Examination.IServices
         int ADD(Candidate candidate);
 
         /// <summary>
+        /// 等待考生考完试,添加考试所用的时间
+        /// </summary>
+        /// <param name="testTime"></param>
+        /// <returns></returns>
+        int ADDTime(TestTime testTime);
+
+        /// <summary>
         /// 多条数据添加考生
         /// </summary>
         /// <param name="candidates"></param>
@@ -27,7 +34,7 @@ namespace IServices.Examination.IServices
         /// </summary>
         /// <param name="candidate"></param>
         /// <returns></returns>
-        int UpdateById(int candidateId);
+        Candidate UpdateById(int candidateId);
 
         /// <summary>
         /// 修改考生

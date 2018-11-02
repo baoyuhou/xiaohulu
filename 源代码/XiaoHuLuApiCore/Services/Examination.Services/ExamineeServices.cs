@@ -8,9 +8,12 @@ using Models.Examination;
 using SqlSugar;
 
 namespace Services.Examination.Services
-{    public class ExamineeServices : IExamineeServices
+{
+    public class ExamineeServices : IExamineeServices
     {
-        public SimpleClient<Candidate> sdb = new SimpleClient<Candidate>(Educationcontext.GetClient());
+        //实例化
+        public SimpleClient<Candidate> CandidateDB = new SimpleClient<Candidate>(Educationcontext.GetClient());
+        public SimpleClient<TestTime> TestTimeDB = new SimpleClient<TestTime>(Educationcontext.GetClient());
         /// <summary>
         /// 单条数据添加考生
         /// </summary>
@@ -18,7 +21,7 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public int ADD(Candidate candidate)
         {
-            var result = Convert.ToInt32(sdb.Insert(candidate));
+            var result = Convert.ToInt32(CandidateDB.Insert(candidate));
             return result;
         }
 
@@ -29,12 +32,19 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public int ADDList(List<Candidate> candidates)
         {
-            List<Candidate> candidateList = new List<Candidate> ();
-            foreach (var item in candidates)
-            {
-                candidateList.Add(item);
-            }
-            return 1;
+            var result = Convert.ToInt16(CandidateDB.InsertRange(candidates.ToArray()));
+            return result;
+        }
+
+        /// <summary>
+        /// 等待考生考完试,添加考试所用的时间
+        /// </summary>
+        /// <param name="testTime"></param>
+        /// <returns></returns>
+        public int ADDTime(TestTime testTime)
+        {
+            var result = Convert.ToInt32(TestTimeDB.Insert(testTime));
+            return result;
         }
 
         /// <summary>
@@ -43,7 +53,8 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public List<Candidate> GetCandidates()
         {
-            throw new NotImplementedException();
+            var result = CandidateDB.GetList();
+            return result;
         }
 
         /// <summary>
@@ -63,17 +74,19 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public int Update(Candidate candidate)
         {
-            throw new NotImplementedException();
+            var result = Convert.ToInt32(CandidateDB.Update(candidate));
+            return result;
         }
 
         /// <summary>
-        /// 根据ID返填需要修改的考生
+        /// 根据返填需要修改的考生
         /// </summary>
         /// <param name="candidate"></param>
         /// <returns></returns>
-        public int UpdateById(int candidateId)
+        public Candidate UpdateById(int candidateId)
         {
-            throw new NotImplementedException();
+            var result = CandidateDB.GetSingle(m => m.ID == candidateId);
+            return result;
         }
     }
 }
