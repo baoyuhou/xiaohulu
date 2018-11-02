@@ -5,28 +5,23 @@ using System.Text;
 namespace Models.Authority
 {
     /// <summary>
-    /// 权限表
+    /// 用户表
     /// </summary>
-   public class Permissions
+   public class Users
     {
         /// <summary>
-        /// 主键id
+        /// 主键ID
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// 权限名称
+        /// 用户名
         /// </summary>
-        public string PermName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// 权限级别
+        /// 用户密码
         /// </summary>
-        public int Level { get; set; }
-
-        /// <summary>
-        /// 父级权限
-        /// </summary>
-        public int parentId { get; set; }
+        public int Password { get; set; }
     }
 }

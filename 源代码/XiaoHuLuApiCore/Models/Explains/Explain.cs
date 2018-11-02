@@ -5,23 +5,20 @@ using System.Text;
 namespace Models
 {
     /// <summary>
-    /// 角色权限表
+    /// 说明表
     /// </summary>
-    public class RolePermissions
+    public class Explain
     {
-        /// <summary>
-        /// 主键id
-        /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// 角色id
+        /// 说明内容
         /// </summary>
-        public int RoleId { get; set; }
+        public int Description { get; set; }
 
         /// <summary>
-        /// 权限id
+        /// 说明地址
         /// </summary>
-        public int PermId { get; set; }
+        public int Address { get; set; }
     }
 }
