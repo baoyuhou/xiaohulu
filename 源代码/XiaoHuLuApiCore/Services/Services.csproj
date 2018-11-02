@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="QuestionBankServices\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\IServices\IServices.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>

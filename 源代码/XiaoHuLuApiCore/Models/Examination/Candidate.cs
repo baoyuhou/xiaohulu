@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Models.QuestionBank
+namespace Models.Examination
 {
     public class Candidate
     {

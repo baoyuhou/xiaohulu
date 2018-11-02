@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Models.QuestionBank
+namespace Models.Examination
 {
     public class TestTime
     {
@@ -14,26 +14,26 @@ namespace Models.QuestionBank
         /// <summary>
         /// 准考证号码
         /// </summary>
-        public int ExamNumberId { get; set; }
+        public string ExamNumberId { get; set; }
 
         /// <summary>
         /// 考试总时长
         /// </summary>
-        public int LongExam { get; set; }
+        public double LongExam { get; set; }
 
         /// <summary>
         /// 所用时长
         /// </summary>
-        public int TimeUsed { get; set; }
+        public double TimeUsed { get; set; }
 
         /// <summary>
         /// 剩余时长
         /// </summary>
-        public int RemainderLength { get; set; }
+        public double RemainderLength { get; set; }
 
         /// <summary>
         /// 答题进度
         /// </summary>
-        public int ProgressOfAnswer { get; set; }
+        public string ProgressOfAnswer { get; set; }
     }
 }
