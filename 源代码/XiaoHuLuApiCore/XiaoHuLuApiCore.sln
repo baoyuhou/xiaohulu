@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaoHuLuApiCore", "XiaoHuLuApiCore\XiaoHuLuApiCore.csproj", "{725FDE4D-6971-4DBA-BA0C-15F63B7560A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XiaoHuLuApiCore", "XiaoHuLuApiCore\XiaoHuLuApiCore.csproj", "{725FDE4D-6971-4DBA-BA0C-15F63B7560A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{5B9B718F-16E0-44F4-9C64-ED7D3F626892}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{5B9B718F-16E0-44F4-9C64-ED7D3F626892}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IServices", "IServices\IServices.csproj", "{D3007576-0B9A-48A3-8CE0-2432A9C8A087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IServices", "IServices\IServices.csproj", "{D3007576-0B9A-48A3-8CE0-2432A9C8A087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{A784F7E6-1346-46FA-AD0A-042E349195D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{A784F7E6-1346-46FA-AD0A-042E349195D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unititly", "Unititly\Unititly.csproj", "{8656F83C-79F8-4EB7-9AA3-A6C486181926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unititly", "Unititly\Unititly.csproj", "{8656F83C-79F8-4EB7-9AA3-A6C486181926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

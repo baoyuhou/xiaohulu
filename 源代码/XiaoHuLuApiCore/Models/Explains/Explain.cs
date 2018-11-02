@@ -14,11 +14,11 @@ namespace Models
         /// <summary>
         /// 说明内容
         /// </summary>
-        public int Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// 说明地址
         /// </summary>
-        public int Address { get; set; }
+        public string Address { get; set; }
     }
 }
