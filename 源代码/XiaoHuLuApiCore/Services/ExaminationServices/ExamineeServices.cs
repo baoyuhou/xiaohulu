@@ -17,7 +17,7 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public int ADD(Candidate candidate)
         {
-            return sdb
+            throw new NotImplementedException();
         }
 
         /// <summary>
