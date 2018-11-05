@@ -31,6 +31,8 @@ namespace XiaoHuLuApiCore
 
             services.AddSingleton<IServices.ExplainsIServices,Services.ExplainsServices>();
             services.AddSingleton<IServices.IAuthority.IUserServices,Services.Authority.Services.UsersServices>();
+            services.AddSingleton<IServices.IAuthority.IPermissionsServices, Services.Authority.Services.PermissionsServices>();
+            services.AddSingleton<IServices.Examination.IServices.IExamineeServices, Services.Examination.Services.ExamineeServices>();
         }
 
 

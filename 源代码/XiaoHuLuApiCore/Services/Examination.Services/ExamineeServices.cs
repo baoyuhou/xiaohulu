@@ -53,8 +53,11 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public List<Candidate> GetCandidates()
         {
-            var result = CandidateDB.GetList();
-            return result;
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var InfoList = db.Queryable<Candidate>().ToList();
+                return InfoList as List<Candidate>;
+            }
         }
 
         /// <summary>
