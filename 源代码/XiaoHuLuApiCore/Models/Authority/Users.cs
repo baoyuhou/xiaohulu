@@ -23,5 +23,7 @@ namespace Models.Authority
         /// 用户密码
         /// </summary>
         public int Password { get; set; }
+        public int RoleId { get; set; }
+
     }
 }
