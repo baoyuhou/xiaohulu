@@ -13,14 +13,14 @@ namespace IServices.IExaminationServices
         /// </summary>
         /// <param name="questionBank"></param>
         /// <returns></returns>
-        int ADD(QuestionBank questionBank);
+        int ADD(QuestionBankinherit questionBankinherit);
 
         /// <summary>
         /// 多条添加题
         /// </summary>
         /// <param name="questionBanks"></param>
         /// <returns></returns>
-        int ADDList(List<QuestionBank> questionBanks);
+        int ADDList(List<QuestionBankinherit> questionBankinherits);
 
         /// <summary>
         /// 查询全部题库

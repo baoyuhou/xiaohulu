@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using IServices.IExaminationServices;
 using Models;
 using Models.Examination;
@@ -46,7 +45,7 @@ namespace Services.ExaminationServices
                 option.AnswerD = questionBankinherit.AnswerD;
                 option.AnswerE = questionBankinherit.AnswerE;
                 var resultoption = OptionDB.Insert(option);
-                if(resultoption)
+                if (resultoption)
                 {
                     return 1;
                 }
@@ -60,10 +59,46 @@ namespace Services.ExaminationServices
         /// </summary>
         /// <param name="questionBanks"></param>
         /// <returns></returns>
-        public int ADDList(List<QuestionBank> questionBanks)
+        public int ADDList(List<QuestionBankinherit> questionBankinherits)
         {
-            var result = Convert.ToInt32(QuestionBankDB.InsertRange(questionBanks.ToArray()));
-            return result;
+            //var result = Convert.ToInt32(QuestionBankDB.InsertRange(questionBanks.ToArray()));
+            //return result;
+            foreach (var item in questionBankinherits)
+            {
+                //添加到题库
+                QuestionBank questionBank = new QuestionBank();
+                questionBank.Subject = item.Subject;
+                questionBank.Answer = item.Answer;
+                questionBank.Phone = item.Phone;
+                questionBank.TypeOfExam = item.TypeOfExam;
+                questionBank.Enable = item.Enable;
+                var resultquestionBank = QuestionBankDB.Insert(questionBank);
+                if (resultquestionBank)
+                {
+                    //获取最后一个Id
+                    using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+                    {
+                        questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
+                    }
+                    var resultQuestionBankId = questionBank.Id;
+                    //添加到选项
+                    Option option = new Option();
+                    option.QuestionBankId = resultQuestionBankId;
+                    option.AnswerA = item.AnswerA;
+                    option.AnswerB = item.AnswerB;
+                    option.AnswerC = item.AnswerC;
+                    option.AnswerD = item.AnswerD;
+                    option.AnswerE = item.AnswerE;
+                    var resultoption = OptionDB.Insert(option);
+                    if (resultoption)
+                    {
+                        return 1;
+                    }
+                    return 0;
+                }
+                return 0;
+            }
+            return 0;
         }
 
         /// <summary>
