@@ -9,7 +9,7 @@ namespace Models.Examination
         /// <summary>
         /// 题库主键
         /// </summary>
-        //public int Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 题目
@@ -65,5 +65,10 @@ namespace Models.Examination
         /// 答案E
         /// </summary>
         public string AnswerE { get; set; }
+
+        /// <summary>
+        /// 题型名称
+        /// </summary>
+        public string ExamType { get; set; }
     }
 }

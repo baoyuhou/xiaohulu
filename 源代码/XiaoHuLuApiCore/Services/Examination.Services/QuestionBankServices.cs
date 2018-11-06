@@ -76,10 +76,9 @@ namespace Services.ExaminationServices
                 if (resultquestionBank)
                 {
                     //获取最后一个Id
-                    using (SqlSugarClient sugarClient = Educationcontext.GetClient())
-                    {
-                        questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
-                    }
+                    SqlSugarClient sugarClient = Educationcontext.GetClient();
+                    questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
+
                     var resultQuestionBankId = questionBank.Id;
                     //添加到选项
                     Option option = new Option();
@@ -105,10 +104,14 @@ namespace Services.ExaminationServices
         /// 查询全部题库
         /// </summary>
         /// <returns></returns>
-        public List<QuestionBank> GetQuestionBanks()
+        public List<QuestionBankinherit> GetQuestionBanks()
         {
-            var result = QuestionBankDB.GetList();
-            return result;
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
+            List<QuestionBankinherit> questionBankinherits = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, Op, TT) => new object[] {
+                QB.Id == Op.QuestionBankId,
+                QB.TypeOfExam == TT.ID
+            }).Select((QB, Op, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = Op.AnswerA, AnswerB = Op.AnswerB, AnswerC = Op.AnswerC, AnswerD = Op.AnswerD, AnswerE = Op.AnswerE, Subject = QB.Subject, Enable = QB.Enable, ExamType = TT.ExamType, Phone = QB.Phone }).ToPageList(1, 3);
+            return questionBankinherits;
         }
 
         /// <summary>
@@ -116,10 +119,13 @@ namespace Services.ExaminationServices
         /// </summary>
         /// <param name="TypeOfExamId"></param>
         /// <returns></returns>
-        public List<QuestionBank> GetQuestionBanksByTypeOfExam(int TypeOfExamId)
+        public List<QuestionBankinherit> GetQuestionBanksByTypeOfExam(int TypeOfExamId)
         {
-            var result = QuestionBankDB.GetList(m => m.TypeOfExam == TypeOfExamId);
-            return result;
+            //var result = QuestionBankDB.GetList(m => m.TypeOfExam == TypeOfExamId);
+            //return result;
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
+            List<QuestionBankinherit> questionBankinherits = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, Op,TT) => QB.Id == Op.QuestionBankId).Select((QB, Op,TT)=> new QuestionBankinherit { Answer = QB.Answer, AnswerA = Op.AnswerA, AnswerB = Op.AnswerB, AnswerC = Op.AnswerC, AnswerD = Op.AnswerD, AnswerE = Op.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Phone = QB.Phone, ExamType = TT.ExamType }).Where(m => m.TypeOfExam == TypeOfExamId).ToPageList(1, 3);
+            return questionBankinherits;
         }
 
         /// <summary>
@@ -127,10 +133,39 @@ namespace Services.ExaminationServices
         /// </summary>
         /// <param name="questionBank"></param>
         /// <returns></returns>
-        public int Update(QuestionBank questionBank)
+        public int Update(QuestionBankinherit questionBankinherit)
         {
-            var result = Convert.ToInt32(QuestionBankDB.Update(questionBank));
-            return result;
+            //var result = Convert.ToInt32(QuestionBankDB.Update(questionBank));
+            //return result;
+
+            //修改题库
+            QuestionBank questionBank = new QuestionBank();
+            questionBank.Subject = questionBankinherit.Subject;
+            questionBank.Answer = questionBankinherit.Answer;
+            questionBank.Phone = questionBankinherit.Phone;
+            questionBank.TypeOfExam = questionBankinherit.TypeOfExam;
+            questionBank.Enable = questionBankinherit.Enable;
+            questionBank.Id = questionBankinherit.Id;
+            var questionBankId = questionBankinherit.Id;
+            var resultquestionBank = QuestionBankDB.Update(questionBank);
+            if (resultquestionBank)
+            {
+                //修改选项
+                SqlSugarClient sugarClient = Educationcontext.GetClient();
+                Option option = sugarClient.SqlQueryable<Option>("select * from Option where QuestionBankId == " + resultquestionBank).First();
+                option.AnswerA = questionBankinherit.AnswerA;
+                option.AnswerB = questionBankinherit.AnswerB;
+                option.AnswerC = questionBankinherit.AnswerC;
+                option.AnswerD = questionBankinherit.AnswerD;
+                option.AnswerE = questionBankinherit.AnswerE;
+                var resultoption = OptionDB.Update(option);
+                if (resultoption)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+            return 0;
         }
 
         /// <summary>
@@ -138,10 +173,14 @@ namespace Services.ExaminationServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public QuestionBank UpdateById(int id)
+        public QuestionBankinherit UpdateById(int id)
         {
-            var result = QuestionBankDB.GetSingle(m => m.Id == id);
-            return result;
+            //var result = QuestionBankDB.GetSingle(m => m.Id == id);
+            //return result;
+
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
+            QuestionBankinherit questionBankinherit = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, OP, TT) => QB.Id == OP.QuestionBankId && QB.TypeOfExam == TT.ID).Select((QB, OP, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = OP.AnswerA, AnswerB = OP.AnswerB, AnswerC = OP.AnswerC, AnswerD = OP.AnswerD, AnswerE = OP.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Phone = QB.Phone, ExamType = TT.ExamType }).Where(m => m.Id == id).First();
+            return questionBankinherit;
         }
     }
 }
