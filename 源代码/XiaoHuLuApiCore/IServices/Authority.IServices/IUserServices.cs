@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
 using Models;
 using Models.Authority;
 namespace IServices.IAuthority
@@ -12,11 +13,11 @@ namespace IServices.IAuthority
    public interface IUserServices
     {
         /// <summary>
-        /// 添加用户
+        /// 单条添加用户
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        int Add(Users user);
+        int Add(UsersInfo usersInfo);
 
         /// <summary>
         /// 查看全部
@@ -29,13 +30,13 @@ namespace IServices.IAuthority
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        int Update(Users user);
+        int Edit(UsersInfo usersInfo);
 
         /// <summary>
         /// 反填用户信息
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        int UpdateById(int id);
+        UsersInfo EditById(int id);
     }
 }

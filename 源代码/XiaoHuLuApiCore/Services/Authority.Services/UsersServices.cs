@@ -11,26 +11,31 @@ namespace Services.Authority.Services
 {
     public class UsersServices : IUserServices
     {
-        public int Add(Users user)
+        public int Add(UsersInfo usersInfo)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 显示全部信息
+        /// </summary>
+        /// <returns></returns>
+        public List<UsersInfo> GetUsersList()
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var result = db.Insertable(user).ExecuteCommand();
-                return result;
+                var InfoList = db.Queryable<UsersInfo>().ToList();
+                return InfoList as List<UsersInfo>;
             }
         }
 
-        public List<UsersInfo> GetUsersList()
+
+        public int Edit(UsersInfo usersInfo)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(Users user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateById(int id)
+        UsersInfo IUserServices.EditById(int id)
         {
             throw new NotImplementedException();
         }

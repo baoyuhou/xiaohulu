@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Models.Authority
+namespace XiaoHuLuMvcCore.Models.Authority
 {
-    /// <summary>
-    /// 用户表
-    /// </summary>
-   public class Users
+    public class UsersInfo
     {
         /// <summary>
         /// 主键ID
@@ -24,5 +22,9 @@ namespace Models.Authority
         /// </summary>
         public int Password { get; set; }
 
+        /// <summary>
+        /// 角色名
+        /// </summary>
+        public string RoleName { get; set; }
     }
 }

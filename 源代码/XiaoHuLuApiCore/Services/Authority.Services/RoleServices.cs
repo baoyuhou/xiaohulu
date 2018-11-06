@@ -11,6 +11,9 @@ namespace Services.Authority
 {
     public class RoleServices : IRoleServices
     {
-        
+        public int Add(Role role)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
