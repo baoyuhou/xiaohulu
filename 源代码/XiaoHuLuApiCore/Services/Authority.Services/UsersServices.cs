@@ -30,12 +30,12 @@ namespace Services.Authority.Services
         }
 
 
-        public int Update(UsersInfo usersInfo)
+        public int Edit(UsersInfo usersInfo)
         {
             throw new NotImplementedException();
         }
 
-        UsersInfo IUserServices.UpdateById(int id)
+        UsersInfo IUserServices.EditById(int id)
         {
             throw new NotImplementedException();
         }

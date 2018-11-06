@@ -11,7 +11,7 @@ namespace Models
             SqlSugarClient db = new SqlSugarClient(
                 new ConnectionConfig()
                 {
-                    ConnectionString = "Database=education;Data Source=169.254.152.246;Port=3306;User Id=root;Password=123456;Charset=utf8;TreatTinyAsBoolean=false;",
+                    ConnectionString = "Database=education;Data Source=169.254.83.207;Port=3306;User Id=root;Password=123456;Charset=utf8;TreatTinyAsBoolean=false;",
                     DbType = DbType.MySql,
                     IsAutoCloseConnection = true
                 }

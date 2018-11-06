@@ -12,6 +12,6 @@ namespace Models.Authority
         /// <summary>
         /// 角色名
         /// </summary>
-        public string Name { get; set; }
+        public string RoleName { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("GetUserList")]
+        [HttpGet]
         public List<UsersInfo> GetUserList()
         {
             var userList = _userServicesl.GetUsersList();
