@@ -11,7 +11,7 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a href="javascript:;" onclick="location.href='/explain/create'">Create New</a>
 </p>
 <table class="table" id="show">
     <thead>
@@ -29,10 +29,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="item in list"  v-bind:key="item.id">
+        <tr v-for="item in list"  v-bind:key="item.id" >
             <td>{{item.id}}</td>
             <td>{{item.description}}</td>
             <td>{{item.address}}</td>
+        </tr>
+        <tr v-else>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
     </tbody>
 </table>
@@ -40,7 +45,8 @@
     var va = new Vue({
         el: '#show',
         data: {
-            list: null
+            list: null,
+            flag:1
         },
         mounted: function () {
             axios
@@ -48,7 +54,9 @@
                 .then(response => (this.list = response.data))
         },
         methods: {
-
+            create: function () {
+                location.href = '/axplain/Create'
+            }
         },
     })
 

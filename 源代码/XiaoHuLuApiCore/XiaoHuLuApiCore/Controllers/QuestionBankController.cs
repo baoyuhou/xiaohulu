@@ -10,9 +10,6 @@ namespace XiaoHuLuApiCore.Controllers
     [ApiController]
     public class QuestionBankController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+      
     }
 }
