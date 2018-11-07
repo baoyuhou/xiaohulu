@@ -25,6 +25,19 @@ namespace IServices.IAuthority
         /// <param name="YHID"></param>
         /// <returns></returns>
         List<Jurisdiction> GetPermissions();
+        /// <summary>
+        /// 修改权限
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        int Edit(Jurisdiction jurisdiction);
+
+        /// <summary>
+        /// 反填权限信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Jurisdiction EditById(int id);
 
     }
 }

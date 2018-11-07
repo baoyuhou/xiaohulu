@@ -21,7 +21,7 @@ namespace XiaoHuLuApiCore.Controllers
         }
 
         /// <summary>
-        /// 获取用户角色信息
+        /// 获取考生信息
         /// </summary>
         /// <returns></returns>
         [Route("GetCandidateList")]

@@ -11,9 +11,27 @@ namespace Services.Authority.Services
 {
     public class UsersServices : IUserServices
     {
+        //实例化
+        public SimpleClient<UsersInfo> UsersInfoDB = new SimpleClient<UsersInfo>(Educationcontext.GetClient());
+        public SimpleClient<Users> UsersDB = new SimpleClient<Users>(Educationcontext.GetClient());
+        /// <summary>
+        /// 单条添加用户
+        /// </summary>
+        /// <param name="usersInfo"></param>
+        /// <returns></returns>
         public int Add(UsersInfo usersInfo)
         {
-            throw new NotImplementedException();
+            Users users = new Users();
+            users.Name = usersInfo.Name;
+            users.Password = usersInfo.Password;
+            var result = Convert.ToInt32(UsersDB.Insert(users));
+            SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
+
+            var db = sqlSugarClient.SqlQueryable<Users>("select Id from Users order by Id DESC limit 1").First();
+            var userid = db.Id;
+            UserandRole userandRole = new UserandRole();
+            userandRole.UserId=
+            return result;
         }
 
         /// <summary>
@@ -29,15 +47,21 @@ namespace Services.Authority.Services
             }
         }
 
-
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="usersInfo"></param>
+        /// <returns></returns>
         public int Edit(UsersInfo usersInfo)
         {
-            throw new NotImplementedException();
+            var result = Convert.ToInt32(UsersInfoDB.Update(usersInfo));
+            return result;
         }
 
-        UsersInfo IUserServices.EditById(int id)
+        public Users EditById(int id)
         {
-            throw new NotImplementedException();
+            var result = UsersDB.GetSingle(m => m.Id == id);
+            return result;
         }
     }
 }
