@@ -10,7 +10,7 @@ using Models.Examination;
 using IServices.Examination.IServices;
 namespace XiaoHuLuApiCore.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ExaminationController : ControllerBase
     {
@@ -38,7 +38,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// </summary>
         /// <param name="examNumber">准考证号码</param>
         /// <returns></returns>
-        [Route("GetCandidateList")]
+        [Route("GetCandidate")]
         [HttpGet]
         public Candidateinherit GetCandidate(string examNumber)
         {
