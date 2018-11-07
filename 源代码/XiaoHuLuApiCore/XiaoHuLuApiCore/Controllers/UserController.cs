@@ -14,10 +14,10 @@ namespace XiaoHuLuApiCore.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserServices _userServicesl;
+        private readonly IUserServices _userServices;
         public UserController(IUserServices userServices)
         {
-            _userServicesl = userServices;
+            _userServices = userServices;
         }
 
         /// <summary>
@@ -28,9 +28,21 @@ namespace XiaoHuLuApiCore.Controllers
         [HttpGet]
         public List<UsersInfo> GetUserList()
         {
-            var userList = _userServicesl.GetUsersList();
+            var userList = _userServices.GetUsersList();
             return userList;
         }
 
+        /// <summary>
+        /// 单条添加用户信息
+        /// </summary>
+        /// <param name="usersInfo"></param>
+        /// <returns></returns>
+        [Route("UsersAdd")]
+        [HttpPost]
+        public int UsersAdd(UsersInfo usersInfo)
+        {
+            var useradd = _userServices.Add(usersInfo);
+            return useradd;
+        }
     }
 }

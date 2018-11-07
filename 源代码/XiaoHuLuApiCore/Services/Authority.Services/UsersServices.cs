@@ -23,8 +23,7 @@ namespace Services.Authority.Services
         {
             Users users = new Users();
             users.Name = usersInfo.Name;
-            users.Password = usersInfo.Password; 
-            var result = UsersDB.Insert(users);
+             var result = UsersDB.Insert(users);
             if (result)
             {
                 SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
