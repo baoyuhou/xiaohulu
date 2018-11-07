@@ -53,9 +53,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("CandidateAdd")]
         [HttpPost]
-        public int CandidateAdd(Candidateinherit candidateinherit)
+        public int CandidateAdd(Candidate candidate)
         {
-            var candidateAdd = _examineeServices.ADD(candidateinherit);
+            var candidateAdd = _examineeServices.ADD(candidate);
             return candidateAdd;
         }
     }
