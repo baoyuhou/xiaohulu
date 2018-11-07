@@ -21,7 +21,7 @@ namespace XiaoHuLuApiCore.Controllers
         }
 
         /// <summary>
-        /// 获取用户角色信息
+        /// 获取全部考生信息
         /// </summary>
         /// <returns></returns>
         [Route("GetCandidateList")]
@@ -30,6 +30,19 @@ namespace XiaoHuLuApiCore.Controllers
         {
             var CandidateList = _examineeServices.GetCandidates();
             return CandidateList;
+        }
+
+        /// <summary>
+        /// 根据准考证号码进行查询
+        /// </summary>
+        /// <param name="examNumber">准考证号码</param>
+        /// <returns></returns>
+        [Route("GetCandidateList")]
+        [HttpGet]
+        public Candidateinherit GetCandidate(string examNumber)
+        {
+            var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
+            return candidate;
         }
     }
 }
