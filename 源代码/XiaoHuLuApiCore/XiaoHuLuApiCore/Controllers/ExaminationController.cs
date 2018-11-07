@@ -10,7 +10,7 @@ using Models.Examination;
 using IServices.Examination.IServices;
 namespace XiaoHuLuApiCore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ExaminationController : ControllerBase
     {
