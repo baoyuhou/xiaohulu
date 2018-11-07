@@ -12,7 +12,7 @@ namespace Models.Examination
         public int Id { get; set; }
 
         /// <summary>
-        /// 
+        /// 单位表名称
         /// </summary>
         public string Name { get; set; }
     }

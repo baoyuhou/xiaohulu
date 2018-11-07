@@ -34,7 +34,7 @@ namespace IServices.Examination.IServices
         /// </summary>
         /// <param name="candidate"></param>
         /// <returns></returns>
-        Candidate UpdateById(int candidateId);
+        Candidateinherit UpdateById(int candidateId);
 
         /// <summary>
         /// 修改考生
@@ -54,6 +54,6 @@ namespace IServices.Examination.IServices
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        Candidate GetCandidatesByExamNumber(string examNumber);
+        Candidateinherit GetCandidatesByExamNumber(string examNumber);
     }
 }

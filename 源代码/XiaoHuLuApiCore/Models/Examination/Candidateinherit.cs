@@ -95,5 +95,20 @@ namespace Models.Examination
         /// 答题进度
         /// </summary>
         public string ProgressOfAnswer { get; set; }
+
+        /// <summary>
+        /// 试室名称
+        /// </summary>
+        public string TestRoomName { get; set; }
+
+        /// <summary>
+        /// 单位表名称
+        /// </summary>
+        public string CompanyName { get; set; }
+
+        /// <summary>
+        /// 考场名称
+        /// </summary>
+        public string ExamRoomName { get; set; }
     }
 }
