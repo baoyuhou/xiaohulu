@@ -18,8 +18,8 @@ namespace XiaoHuLuApiCore.Controllers
         public ExaminationController(IExamineeServices examineeServices)
         {
             _examineeServices = examineeServices;
-        }
-
+        }   
+        
         /// <summary>
         /// 获取全部考生信息
         /// 获取考生信息
@@ -45,6 +45,18 @@ namespace XiaoHuLuApiCore.Controllers
             var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
         }
-
+        
+        /// <summary>
+        /// 单条数据添加考生信息
+        /// </summary>
+        /// <param name="candidateinherit"></param>
+        /// <returns></returns>
+        [Route("CandidateAdd")]
+        [HttpPost]
+        public int CandidateAdd(Candidateinherit candidateinherit)
+        {
+            var candidateAdd = _examineeServices.ADD(candidateinherit);
+            return candidateAdd;
+        }
     }
 }
