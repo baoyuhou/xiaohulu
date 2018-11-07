@@ -12,12 +12,12 @@ namespace Models
         /// <summary>
         /// 主键id
         /// </summary>
-        public int Id { get; set; }
+        public int RandjId { get; set; }
 
         /// <summary>
         /// 角色id
         /// </summary>
-        public int RoleId { get; set; }
+        public int RolesId { get; set; }
 
         /// <summary>
         /// 权限id

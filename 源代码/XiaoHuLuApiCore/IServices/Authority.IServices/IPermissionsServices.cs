@@ -20,11 +20,11 @@ namespace IServices.IAuthority
         Users Login(string name, string pwd);
 
         /// <summary>
-        /// 获取权限列表
+        /// 根据角色和权限获取列表
         /// </summary>
         /// <param name="YHID"></param>
         /// <returns></returns>
-        List<Jurisdiction> GetPermissions();
+        List<JurisdictionInfo> GetPermissions();
         /// <summary>
         /// 修改权限
         /// </summary>

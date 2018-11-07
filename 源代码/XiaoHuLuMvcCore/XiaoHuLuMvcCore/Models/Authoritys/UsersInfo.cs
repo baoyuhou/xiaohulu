@@ -10,12 +10,12 @@ namespace XiaoHuLuMvcCore.Models.Authority
         /// <summary>
         /// 主键ID
         /// </summary>
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// 用户名
         /// </summary>
-        public string Name { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// 用户密码

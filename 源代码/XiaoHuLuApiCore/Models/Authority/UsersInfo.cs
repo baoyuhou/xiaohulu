@@ -5,14 +5,14 @@ using System.Text;
 namespace Models.Authority
 {
     /// <summary>
-    /// 用户从表
+    /// 用户角色从表
     /// </summary>
     public class UsersInfo
     {
         /// <summary>
         /// 主键ID
         /// </summary>
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// 用户名
@@ -26,7 +26,7 @@ namespace Models.Authority
         /// <summary>
         /// 角色id
         /// </summary>
-        public int RoleId { get; set; }
+        public int RolesId { get; set; }
         /// <summary>
         /// 角色名
         /// </summary>
@@ -34,6 +34,6 @@ namespace Models.Authority
         /// <summary>
         /// 用户id
         /// </summary>
-        public int UserId { get; set; }
+        public int UsersId { get; set; }
     }
 }

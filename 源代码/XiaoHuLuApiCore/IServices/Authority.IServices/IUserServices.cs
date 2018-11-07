@@ -20,7 +20,7 @@ namespace IServices.IAuthority
         int Add(UsersInfo usersInfo);
 
         /// <summary>
-        /// 查看全部
+        /// 根据用户和角色获取列表
         /// </summary>
         /// <returns></returns>
         List<UsersInfo> GetUsersList();

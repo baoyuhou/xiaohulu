@@ -32,7 +32,7 @@ namespace Services.Authority.Services
                 var userid = db.UserId;
                 UserandRole userandRole = new UserandRole();
                 userandRole.UsersId = userid;
-                userandRole.RolesId = usersInfo.RoleId;
+                userandRole.RolesId = usersInfo.RolesId;
                 var a = UsersDB.Insert(users);
                 if (a)
                 {
