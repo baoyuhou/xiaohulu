@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IServices.IAnswerServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Models;
+using Services.AnswerServices;
 
 namespace XiaoHuLuApiCore
 {
@@ -32,10 +34,9 @@ namespace XiaoHuLuApiCore
             services.AddSingleton<IServices.ExplainsIServices,Services.ExplainsServices>();
             services.AddSingleton<IServices.IAuthority.IUserServices,Services.Authority.Services.UsersServices>();
             services.AddSingleton<IServices.IAuthority.IPermissionsServices, Services.Authority.Services.PermissionsServices>();
-            services.AddSingleton<IServices.Examination.IServices.IExamineeServices, Services.Examination.Services.ExamineeServices>();
+            services.AddSingleton<IServices.IExaminationServices.IQuestionBankServices, Services.ExaminationServices.QuestionBankServices>();
+            services.AddSingleton<IAnswer, Answer>();
         }
-
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -70,6 +70,7 @@ namespace Services.Examination.Services
         {
             SqlSugarClient sugarClient = Educationcontext.GetClient();
             Candidateinherit candidateinherit = sugarClient.Queryable<Candidate, TestRoom, ExamRoom, Company, TestTime>((CD, TR, ER, CP, TT) => CD.CompanyID == CP.Id && CD.ExamRoomID == ER.Id && CD.TestRoomID == TR.ID && CD.ExamNumber == TT.ExamNumberId).Select((CD, TR, ER, CP, TT) => new Candidateinherit { Certificates = CD.Certificates, CompanyName = CP.Name, DocumentType = CD.DocumentType, Enable = CD.Enable, ExamNumber = CD.ExamNumber, ExamRoomName = ER.Name, Field = CD.Field, ID = CD.ID, LongExam = TT.LongExam, Name = CD.Name, Photo = CD.Photo, ProgressOfAnswer = TT.ProgressOfAnswer, RemainderLength = TT.RemainderLength, SeatNumber = CD.SeatNumber, Sex = CD.Sex, TestRoomName = TR.Name, TimeUsed = TT.TimeUsed }).Where(m => m.ExamNumber == examNumber).First();
+            
             return candidateinherit;
         }
         

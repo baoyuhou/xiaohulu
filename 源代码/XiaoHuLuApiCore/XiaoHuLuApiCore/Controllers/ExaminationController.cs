@@ -21,6 +21,32 @@ namespace XiaoHuLuApiCore.Controllers
         }
 
         /// <summary>
+        /// 单条数据添加考生信息
+        /// </summary>
+        /// <param name="candidateinherit"></param>
+        /// <returns></returns>
+        [Route("CandidateAdd")]
+        [HttpPost]
+        public int CandidateAdd(Candidateinherit candidateinherit)
+        {
+            var candidateAdd = _examineeServices.ADD(candidateinherit);
+            return candidateAdd;
+        }
+
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="candidates"></param>
+        /// <returns></returns>
+        [Route("ADDList")]
+        [HttpPost]
+        public int ADDList(List<Candidate> candidates)
+        {
+            var result = _examineeServices.ADDList(candidates);
+            return result;
+        }
+
+        /// <summary>
         /// 获取全部考生信息
         /// 获取考生信息
         /// </summary>
@@ -45,11 +71,24 @@ namespace XiaoHuLuApiCore.Controllers
             var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
         }
+        
+        /// <summary>
+        /// 修改考生信息
+        /// </summary>
+        /// <param name="candidate"></param>
+        /// <returns></returns>
+        [Route("Update")]
+        [HttpPut]
+        public int Update(Candidate candidate)
+        {
+            var result = _examineeServices.Update(candidate);
+            return result;
+        }
 
         /// <summary>
-        /// 单条数据添加考生信息
+        /// 根据id返填修改的题
         /// </summary>
-        /// <param name="candidateinherit"></param>
+        /// <param name="candidateId"></param>
         /// <returns></returns>
         [Route("CandidateAdd")]
         [HttpPost]
@@ -57,6 +96,14 @@ namespace XiaoHuLuApiCore.Controllers
         {
             var candidateAdd = _examineeServices.ADD(candidate);
             return candidateAdd;
+        }
+
+        [Route("GetCandidateinheritById")]
+        [HttpPut]
+        public Candidateinherit GetCandidateinheritById(int candidateId)
+        {
+            var result = _examineeServices.UpdateById(candidateId);
+            return result;
         }
     }
 }

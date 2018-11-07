@@ -28,6 +28,42 @@ namespace XiaoHuLuApiCore.Controllers
           var explainList=   _explainsIServices.GetExplainList();
             return explainList;
         }
+
+        /// <summary>
+        /// 添加说明信息
+        /// </summary>
+        /// <param name="explain"></param>
+        /// <returns></returns>
+        [Route("Addexplain")]
+        [HttpPost]
+        public long Addexplain(Explain explain)
+        {
+            return _explainsIServices.AddExplain(explain);
+        }
+
+        /// <summary>
+        /// 反填说明信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("GetExplainById")]
+        [HttpGet]
+        public Explain GetExplainById(int id)
+        {
+            return _explainsIServices.GetExplainById(id);
+        }
+
+        /// <summary>
+        /// 修改说明信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("UpdExplain")]
+        [HttpPost]
+        public int UpdExplain(Explain explain)
+        {
+            return _explainsIServices.UpdExplain(explain);
+        }
     }
 }
 
