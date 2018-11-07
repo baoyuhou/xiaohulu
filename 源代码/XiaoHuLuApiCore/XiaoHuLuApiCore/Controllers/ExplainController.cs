@@ -40,6 +40,30 @@ namespace XiaoHuLuApiCore.Controllers
         {
             return _explainsIServices.AddExplain(explain);
         }
+
+        /// <summary>
+        /// 反填说明信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("GetExplainById")]
+        [HttpGet]
+        public Explain GetExplainById(int id)
+        {
+            return _explainsIServices.GetExplainById(id);
+        }
+
+        /// <summary>
+        /// 修改说明信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("UpdExplain")]
+        [HttpPost]
+        public int UpdExplain(Explain explain)
+        {
+            return _explainsIServices.UpdExplain(explain);
+        }
     }
 }
 
