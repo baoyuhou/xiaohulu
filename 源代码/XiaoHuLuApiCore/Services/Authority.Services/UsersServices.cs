@@ -23,17 +23,25 @@ namespace Services.Authority.Services
         {
             Users users = new Users();
             users.Name = usersInfo.Name;
-            users.Password = usersInfo.Password;
-            var result = Convert.ToInt32(UsersDB.Insert(users));
-            SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
+            users.Password = usersInfo.Password; 
+            var result = UsersDB.Insert(users);
+            if (result)
+            {
+                SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
 
-            var db = sqlSugarClient.SqlQueryable<Users>("select Id from Users order by Id DESC limit 1").First();
-            var userid = db.Id;
-            UserandRole userandRole = new UserandRole();
-            userandRole.UserId=
-            return result;
+                var db = sqlSugarClient.SqlQueryable<Users>("select Id from Users order by Id DESC limit 1").First();
+                var userid = db.Id;
+                UserandRole userandRole = new UserandRole();
+                userandRole.UserId = userid;
+                userandRole.RoleId = usersInfo.RoleId;
+                var a = UsersDB.Insert(users);
+                if (a)
+                {
+                    return 1;
+                }
+            }
         }
-
+   
         /// <summary>
         /// 显示全部信息
         /// </summary>
