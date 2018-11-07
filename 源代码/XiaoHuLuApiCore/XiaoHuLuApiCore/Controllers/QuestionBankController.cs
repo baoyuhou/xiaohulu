@@ -62,7 +62,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <param name="typeOfExamId"></param>
         /// <returns></returns>
         [Route("GetQuestionBankinheritByTypeOfExam")]
-        [HttpPost]
+        [HttpGet]
         public List<QuestionBankinherit> GetQuestionBankinheritByTypeOfExam(int typeOfExamId)
         {
             var result = _questionBankServices.GetQuestionBanksByTypeOfExam(typeOfExamId);
@@ -75,7 +75,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <param name="questionBankinherit"></param>
         /// <returns></returns>
         [Route("Update")]
-        [HttpPost]
+        [HttpPut]
         public int Update(QuestionBankinherit questionBankinherit)
         {
             var result = _questionBankServices.Update(questionBankinherit);
@@ -88,7 +88,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("UpdateById")]
-        [HttpPost]
+        [HttpGet]
         public QuestionBankinherit UpdateById(int id)
         {
             var result = _questionBankServices.UpdateById(id);
