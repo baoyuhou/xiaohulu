@@ -18,7 +18,7 @@ namespace XiaoHuLuMvcCore.Controllers
         public IActionResult Index()
         {
             var result = WebApiHelper.GetApiResult("Get", "Examination", "GetCandidateList");
-            return View(JsonConvert.DeserializeObject<List<Candidateinherit>>(result));
+            return View(JsonConvert.DeserializeObject<List<Candidate>>(result));
         }
     }
 }

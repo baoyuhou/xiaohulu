@@ -51,12 +51,12 @@ namespace Services.Examination.Services
         /// 显示考生信息
         /// </summary>
         /// <returns></returns>
-        public List<Candidateinherit> GetCandidates()
+        public List<Candidate> GetCandidates()
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var CandList = db.Queryable<Candidateinherit>().ToList();
-                return CandList as List<Candidateinherit>;
+                var CandList = db.Queryable<Candidate>().ToList();
+                return CandList as List<Candidate>;
             }
         }
 
@@ -65,10 +65,11 @@ namespace Services.Examination.Services
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        public Candidate GetCandidatesByExamNumber(string examNumber)
+        public Candidateinherit GetCandidatesByExamNumber(string examNumber)
         {
-            var result = CandidateDB.GetSingle(m => m.ExamNumber == examNumber);
-            return result;
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
+            Candidateinherit candidateinherit = sugarClient.Queryable<Candidate, TestRoom, ExamRoom, Company, TestTime>((CD, TR, ER, CP, TT) => CD.CompanyID == CP.Id && CD.ExamRoomID == ER.Id && CD.TestRoomID == TR.ID && CD.ExamNumber == TT.ExamNumberId).Select((CD, TR, ER, CP, TT) => new Candidateinherit { Certificates = CD.Certificates, CompanyName = CP.Name, DocumentType = CD.DocumentType, Enable = CD.Enable, ExamNumber = CD.ExamNumber, ExamRoomName = ER.Name, Field = CD.Field, ID = CD.ID, LongExam = TT.LongExam, Name = CD.Name, Phone = CD.Phone, ProgressOfAnswer = TT.ProgressOfAnswer, RemainderLength = TT.RemainderLength, SeatNumber = CD.SeatNumber, Sex = CD.Sex, TestRoomName = TR.Name, TimeUsed = TT.TimeUsed }).Where(m => m.ExamNumber == examNumber).First();
+            return candidateinherit;
         }
         
         /// <summary>
@@ -87,10 +88,11 @@ namespace Services.Examination.Services
         /// </summary>
         /// <param name="candidate"></param>
         /// <returns></returns>
-        public Candidate UpdateById(int candidateId)
+        public Candidateinherit UpdateById(int candidateId)
         {
-            var result = CandidateDB.GetSingle(m => m.ID == candidateId);
-            return result;
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
+            Candidateinherit candidateinherit = sugarClient.Queryable<Candidate, TestRoom, ExamRoom, Company, TestTime>((CD, TR, ER, CP, TT) => CD.CompanyID == CP.Id && CD.ExamRoomID == ER.Id && CD.TestRoomID == TR.ID && CD.ExamNumber == TT.ExamNumberId).Select((CD, TR, ER, CP, TT) => new Candidateinherit { Certificates = CD.Certificates, CompanyName = CP.Name, DocumentType = CD.DocumentType, Enable = CD.Enable, ExamNumber = CD.ExamNumber, ExamRoomName = ER.Name, Field = CD.Field, ID = CD.ID, LongExam = TT.LongExam, Name = CD.Name, Phone = CD.Phone, ProgressOfAnswer = TT.ProgressOfAnswer, RemainderLength = TT.RemainderLength, SeatNumber = CD.SeatNumber, Sex = CD.Sex, TestRoomName = TR.Name, TimeUsed = TT.TimeUsed }).Where(m => m.ID == candidateId).First();
+            return candidateinherit;
         }
     }
 }

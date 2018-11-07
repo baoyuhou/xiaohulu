@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IServices.IAnswerServices
+namespace Models.Examination
 {
-    public interface IAnswer
+    class CandidateInfo
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Examination.Candidateinherit>
+﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Examination.Candidate>
 
 @{
     ViewData["Title"] = "Index";
@@ -51,30 +51,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Enable)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExamNumberId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LongExam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TimeUsed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RemainderLength)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProgressOfAnswer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TestRoomName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExamRoomName)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -119,30 +95,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Enable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamNumberId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LongExam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeUsed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RemainderLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgressOfAnswer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TestRoomName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamRoomName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
