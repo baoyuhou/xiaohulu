@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models.Examination
 {
-    public class Candidateinherit
+    public class Candidateinherit:Candidate
     {
         /// <summary>
         /// 考生从表主键
