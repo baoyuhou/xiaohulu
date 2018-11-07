@@ -37,6 +37,6 @@ namespace IServices.IAuthority
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        UsersInfo EditById(int id);
+        Users EditById(int id);
     }
 }

@@ -31,5 +31,6 @@ namespace XiaoHuLuApiCore.Controllers
             var userList = _userServicesl.GetUsersList();
             return userList;
         }
+
     }
 }

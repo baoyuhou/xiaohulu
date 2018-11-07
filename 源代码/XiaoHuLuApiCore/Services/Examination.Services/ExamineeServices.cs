@@ -55,8 +55,8 @@ namespace Services.Examination.Services
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var InfoList = db.Queryable<Candidate>().ToList();
-                return InfoList as List<Candidate>;
+                var CandList = db.Queryable<Candidate>().ToList();
+                return CandList as List<Candidate>;
             }
         }
 

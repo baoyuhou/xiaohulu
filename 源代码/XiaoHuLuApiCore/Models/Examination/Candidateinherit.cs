@@ -7,7 +7,7 @@ namespace Models.Examination
     public class Candidateinherit
     {
         /// <summary>
-        /// 考生表主键
+        /// 考生从表主键
         /// </summary>
         public int ID { get; set; }
 

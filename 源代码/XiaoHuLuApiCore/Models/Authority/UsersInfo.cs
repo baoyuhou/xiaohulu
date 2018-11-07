@@ -7,11 +7,11 @@ namespace Models.Authority
     /// <summary>
     /// 用户从表
     /// </summary>
-    public class UsersInfo
+    public class UsersInfo:Users
     {
         /// <summary>
         /// 角色名
         /// </summary>
-        public string RoleName { get; set; }
+        public int RoleId { get; set; }
     }
 }

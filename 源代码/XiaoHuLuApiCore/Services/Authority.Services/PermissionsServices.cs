@@ -10,6 +10,16 @@ namespace Services.Authority.Services
 {
     public class PermissionsServices : IPermissionsServices
     {
+        public int Edit(Jurisdiction jurisdiction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Jurisdiction EditById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 获取角色权限信息
         /// </summary>
