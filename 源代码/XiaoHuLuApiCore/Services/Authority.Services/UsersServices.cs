@@ -40,6 +40,7 @@ namespace Services.Authority.Services
                     return 1;
                 }
             }
+            return 0;
         }
    
         /// <summary>
