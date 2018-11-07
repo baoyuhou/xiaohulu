@@ -25,5 +25,24 @@ namespace XiaoHuLuMvcCore.Controllers
             var result = WebApiHelper.GetApiResult("get", "Explain", "GetExplainList");
             return result;
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Explain explain)
+        {
+            var result = WebApiHelper.GetApiResult("post", "Explain", "Addexplain",explain);
+            if (result!=null||result!="" )
+            {
+                if (int.Parse(result)>0)
+                {
+                    return View("index");
+                }
+            }
+            return View(explain);
+        }
     }
 }
