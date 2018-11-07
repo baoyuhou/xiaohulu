@@ -17,8 +17,13 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public string GetList()
+        {
             var result = WebApiHelper.GetApiResult("get", "Explain", "GetExplainList");
-            return View(JsonConvert.DeserializeObject<List<Explain>>(result));
+            return result;
         }
     }
 }

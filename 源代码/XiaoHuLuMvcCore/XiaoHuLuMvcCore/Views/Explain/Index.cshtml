@@ -1,15 +1,19 @@
-﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Explain>
+﻿@model XiaoHuLuMvcCore.Models.Explain
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="show">
     <thead>
         <tr>
             <th>
@@ -25,23 +29,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+        <tr v-for="item in list"  v-bind:key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.address}}</td>
         </tr>
-}
     </tbody>
 </table>
+<script>
+    var va = new Vue({
+        el: '#show',
+        data: {
+            list: null
+        },
+        mounted: function () {
+            axios
+                .get("/explain/GetList")
+                .then(response => (this.list = response.data))
+        },
+        methods: {
+
+        },
+    })
+
+</script>
