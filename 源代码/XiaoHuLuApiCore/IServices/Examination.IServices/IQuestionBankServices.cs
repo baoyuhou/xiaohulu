@@ -26,28 +26,28 @@ namespace IServices.IExaminationServices
         /// 查询全部题库
         /// </summary>
         /// <returns></returns>
-        List<QuestionBank> GetQuestionBanks();
+        List<QuestionBankinherit> GetQuestionBanks();
 
         /// <summary>
         /// 根据类型查找题库
         /// </summary>
         /// <param name="TypeOfExamId"></param>
         /// <returns></returns>
-        List<QuestionBank> GetQuestionBanksByTypeOfExam(int TypeOfExamId);
+        List<QuestionBankinherit> GetQuestionBanksByTypeOfExam(int TypeOfExamId);
 
         /// <summary>
         /// 根据id返填题
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        QuestionBank UpdateById(int id);
+        QuestionBankinherit UpdateById(int id);
 
         /// <summary>
         /// 修改题库的题
         /// </summary>
         /// <param name="questionBank"></param>
         /// <returns></returns>
-        int Update(QuestionBank questionBank);
+        int Update(QuestionBankinherit questionBank);
         
     }
 }
