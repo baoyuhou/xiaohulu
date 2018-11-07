@@ -7,11 +7,33 @@ namespace Models.Authority
     /// <summary>
     /// 用户从表
     /// </summary>
-    public class UsersInfo:Users
+    public class UsersInfo
     {
+        /// <summary>
+        /// 主键ID
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// 用户密码
+        /// </summary>
+        public string Password { get; set; }
+        /// <summary>
+        /// 角色id
+        /// </summary>
+        public int RoleId { get; set; }
         /// <summary>
         /// 角色名
         /// </summary>
-        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+        /// <summary>
+        /// 用户id
+        /// </summary>
+        public int UserId { get; set; }
     }
 }

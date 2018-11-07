@@ -22,17 +22,17 @@ namespace Services.Authority.Services
         public int Add(UsersInfo usersInfo)
         {
             Users users = new Users();
-            users.Name = usersInfo.Name;
+            users.UserName = usersInfo.UserName;
              var result = UsersDB.Insert(users);
             if (result)
             {
                 SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
 
                 var db = sqlSugarClient.SqlQueryable<Users>("select Id from Users order by Id DESC limit 1").First();
-                var userid = db.Id;
+                var userid = db.UserId;
                 UserandRole userandRole = new UserandRole();
-                userandRole.UserId = userid;
-                userandRole.RoleId = usersInfo.RoleId;
+                userandRole.UsersId = userid;
+                userandRole.RolesId = usersInfo.RoleId;
                 var a = UsersDB.Insert(users);
                 if (a)
                 {
@@ -50,8 +50,8 @@ namespace Services.Authority.Services
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var InfoList = db.Queryable<UsersInfo>().ToList();
-                return InfoList as List<UsersInfo>;
+                var result = db.SqlQueryable<UsersInfo>("select * from Users,Role,UserandRole where Users.UserId=UserandRole.UsersId and Role.RoleId=UserandRole.RolesId");
+                return result.ToList();
             }
         }
 
@@ -68,7 +68,7 @@ namespace Services.Authority.Services
 
         public Users EditById(int id)
         {
-            var result = UsersDB.GetSingle(m => m.Id == id);
+            var result = UsersDB.GetSingle(m => m.UserId == id);
             return result;
         }
     }

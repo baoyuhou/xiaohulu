@@ -12,16 +12,16 @@ namespace Models.Authority
         /// <summary>
         /// 主键id
         /// </summary>
-        public int Id { get; set; }
+        public int AssociatedId { get; set; }
 
         /// <summary>
         /// 用户id
         /// </summary>
-        public int UserId { get; set; }
+        public int UsersId { get; set; }
 
         /// <summary>
         /// 角色id
         /// </summary>
-        public int RoleId { get; set; }
+        public int RolesId { get; set; }
     }
 }

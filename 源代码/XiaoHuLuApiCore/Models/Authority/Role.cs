@@ -12,11 +12,11 @@ namespace Models.Authority
         /// <summary>
         /// 主键ID
         /// </summary>
-        public int Id { get; set; }
+        public int RoleId { get; set; }
 
         /// <summary>
         /// 角色名
         /// </summary>
-        public string Name { get; set; }
+        public string RoleName { get; set; }
     }
 }
