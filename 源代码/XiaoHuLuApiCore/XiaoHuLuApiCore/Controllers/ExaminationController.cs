@@ -45,5 +45,6 @@ namespace XiaoHuLuApiCore.Controllers
             var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
         }
+
     }
 }
