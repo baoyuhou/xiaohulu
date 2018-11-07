@@ -34,6 +34,7 @@ namespace Services.Examination.Services
         {
             var result = Convert.ToInt16(CandidateDB.InsertRange(candidates.ToArray()));
             return result;
+
         }
 
         /// <summary>

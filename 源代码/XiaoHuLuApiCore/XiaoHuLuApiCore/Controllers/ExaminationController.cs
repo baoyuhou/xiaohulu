@@ -45,5 +45,18 @@ namespace XiaoHuLuApiCore.Controllers
             var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
         }
+
+        /// <summary>
+        /// 单条数据添加考生信息
+        /// </summary>
+        /// <param name="candidateinherit"></param>
+        /// <returns></returns>
+        [Route("CandidateAdd")]
+        [HttpPost]
+        public int CandidateAdd(Candidateinherit candidateinherit)
+        {
+            var candidateAdd = _examineeServices.ADD(candidateinherit);
+            return candidateAdd;
+        }
     }
 }
