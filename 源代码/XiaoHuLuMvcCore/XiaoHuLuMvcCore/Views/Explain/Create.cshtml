@@ -5,26 +5,36 @@
 }
 
 <h2>Create</h2>
+<script src="~/css/wangEditor.js"></script>
+<script src="~/js/jquery-3.1.1.js"></script>
+
+<script src="~/css/jquery-form.js"></script>
+
+@*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>*@
 
 <h4>Explain</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<div class="row" id="div1">
+    <div class="col-md-4" style="width:800px">
+        <form id="form1"  >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+
+            <div class="form-group" style="width:50%">
                 <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+                <input asp-for="Address" class="form-control"  />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="Description" class="control-label"></label>
+                @*<textarea asp-for="Address" class="form-control" />*@
+                <div id="editor" name="Address" style="width:100%" >
+
+                </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input value="Create" type="button" onclick="create()" class="btn btn-default" id="btn1" />
             </div>
         </form>
     </div>
@@ -33,7 +43,43 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script >
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
 
+
+    function create() {
+     
+        $.ajax({
+            url: '/explain/Create',
+            data: { "Address": $("#Address").val(), "Description": editor.txt.html(), "Id": 0 },
+            type: "post",
+            success: function (data) {
+               
+                if (data > 0) {
+                    alert("添加成功")
+                }
+            }
+        })
+         
+    }
+
+    //var vm = new Vue({
+    //    el: '#div1',
+    //    data: {
+    //        inputtext: {}
+    //    },
+    //    methods: {
+    //        submit: function () {
+    //            this.inputtext.address = editor.txt.html();
+    //            console.log(this.inputtext)
+    //            console.log($("#Address").html())
+    //        }
+    //    },
+    //})
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

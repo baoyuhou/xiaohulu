@@ -5,31 +5,39 @@
 }
 
 <h2>Edit</h2>
-
+<script src="~/js/jquery-3.1.1.js"></script>
+<script src="~/css/wangEditor.js"></script>
 <h4>Explain</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="width:800px">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 @*<label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>*@
-                @Html.HiddenFor(m=>m.Id)
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>*@
+                @Html.Hidden("Id", Model.Id)
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+
+            <div class="form-group" style="width:50%">
+
+
+                <label asp-for="Address" class="control-label"></label><br/>
+                <input type="text" name="Address" value="@Model.Address" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                @Html.Hidden("Description", Model.Description)
+                <label asp-for="Description" class="control-label"></label>
+                @*<input asp-for="Description" class="form-control" />*@
+                <div id="editor" name="Description" style="width:100%">
+
+                </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" onclick="Save()" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
@@ -38,7 +46,33 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script>
 
+     var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create();
+    $(function () {
+        var a = $("#Description").val()
+        editor.txt.html(a)
+    })
+    @*editor.txt.html(@Model.Description);*@
+    function Save() {
+
+        $.ajax({
+            url: '/explain/Edit',
+            data: { "Address": $("[name='Address']").val(), "Description": editor.txt.html(), "Id": $("#Id").val() },
+            type: "post",
+            success: function (data) {
+
+                if (data > 0) {
+                    alert("添加成功")
+                }
+            }
+        })
+    }
+
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
