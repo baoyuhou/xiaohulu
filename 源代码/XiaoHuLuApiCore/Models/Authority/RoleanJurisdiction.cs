@@ -12,7 +12,7 @@ namespace Models
         /// <summary>
         /// 主键id
         /// </summary>
-        public int RandjId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 角色id

@@ -82,7 +82,7 @@
                                                             用户名 / UserName
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="user-name" required
+                                                            <input type="text" id="UserName" required
                                                                    placeholder="用户名 / UserName" name="UserName">
                                                         </div>
                                                     </div>
@@ -91,7 +91,7 @@
                                                             用户密码 / Password
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="user-name" required
+                                                            <input type="text" id="Password" required
                                                                    placeholder="用户密码 / Password" name="Password">
                                                         </div>
                                                     </div>
@@ -100,13 +100,13 @@
                                                             角色名称 / RoleName
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="user-name" required
+                                                            <input type="text" id="RoleName" required
                                                                    placeholder="角色名称 / RoleName" name="RoleName">
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
                                                         <div class="am-u-sm-9 am-u-sm-push-3">
-                                                            <input type="submit" class="am-btn am-btn-success" value="添加用户" />
+                                                            <input type="button" class="am-btn am-btn-success" value="添加用户" onclick="btn_save()" />
                                                         </div>
                                                     </div>
                                                 </form>
@@ -136,7 +136,9 @@
                             });
 
 
-                            var btn_save = function () {
+                            function btn_save() {
+
+                                alert(1)
                                 var pid = $("#RawMaterialsTypePageId  option:selected").val();
                                 var name = $("#RawMaterialsTypeName").val();
                                 var desc = $("#RawMaterialsTypeDescription").val();
@@ -144,7 +146,7 @@
                                 $.ajax({
                                     type: "post",
                                     url: "/Users/UserAdd",
-                                    data: { UserName: UserName, Password: Password, RoleName: RoleName },
+                                    data: { "UserName": $("#UserName").val(), "Password": $("#Password").val(), "RoleName": $("#RoleName").val() },
                                     success: function (data) {
                                         if (data > 0) {
                                             $.jq_Alert({

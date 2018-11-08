@@ -12,7 +12,7 @@ namespace Models.Authority
         /// <summary>
         /// 主键id
         /// </summary>
-        public int JurisId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 权限名称

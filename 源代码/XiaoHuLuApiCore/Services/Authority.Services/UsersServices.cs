@@ -13,7 +13,10 @@ namespace Services.Authority.Services
     {
         //实例化
         public SimpleClient<UsersInfo> UsersInfoDB = new SimpleClient<UsersInfo>(Educationcontext.GetClient());
+
+        //
         public SimpleClient<Users> UsersDB = new SimpleClient<Users>(Educationcontext.GetClient());
+
         /// <summary>
         /// 单条添加用户
         /// </summary>
@@ -23,15 +26,15 @@ namespace Services.Authority.Services
         {
             Users users = new Users();
             users.UserName = usersInfo.UserName;
+            users.Password = usersInfo.Password;
              var result = UsersDB.Insert(users);
             if (result)
             {
                 SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
+               var  db = sqlSugarClient.SqlQueryable<Users>("select UserId from Users order by UserId  ").Max(s=>s.Id);
 
-                var db = sqlSugarClient.SqlQueryable<Users>("select UserId from Users order by UserId DESC limit 1").First();
-                var userid = db.UserId;
                 UserandRole userandRole = new UserandRole();
-                userandRole.UsersId = userid;
+                userandRole.UsersId = db;
                 userandRole.RolesId = usersInfo.RolesId;
                 var a = UsersDB.Insert(users);
                 if (a)
@@ -50,7 +53,7 @@ namespace Services.Authority.Services
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var result = db.SqlQueryable<UsersInfo>("select * from Users,Role,UserandRole where Users.UserId=UserandRole.UsersId and Role.RoleId=UserandRole.RolesId");
+                var result = db.SqlQueryable<UsersInfo>("select a.Id,a.UserName,a.`Password`,b.RoleName,c.UsersId,c.RolesId from Users a,Role b,UserandRole c where a.Id=c.UsersId and b.Id=c.RolesId");
                 return result.ToList();
             }
         }
@@ -68,7 +71,7 @@ namespace Services.Authority.Services
 
         public Users EditById(int id)
         {
-            var result = UsersDB.GetSingle(m => m.UserId == id);
+            var result = UsersDB.GetSingle(m => m.Id == id);
             return result;
         }
     }

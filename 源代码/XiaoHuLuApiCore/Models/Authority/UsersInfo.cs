@@ -12,7 +12,7 @@ namespace Models.Authority
         /// <summary>
         /// 主键ID
         /// </summary>
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 用户名
