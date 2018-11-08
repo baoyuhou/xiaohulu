@@ -53,7 +53,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("GetCandidateList")]
         [HttpGet]
-        public List<Candidate> GetCandidateList()
+        public List<Candidateinherit> GetCandidateList()
         {
             var CandidateList = _examineeServices.GetCandidates();
             return CandidateList;

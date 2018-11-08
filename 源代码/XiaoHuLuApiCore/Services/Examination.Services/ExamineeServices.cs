@@ -52,12 +52,12 @@ namespace Services.Examination.Services
         /// 显示考生信息
         /// </summary>
         /// <returns></returns>
-        public List<Candidate> GetCandidates()
+        public List<Candidateinherit> GetCandidates()
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var CandList = db.Queryable<Candidate>().ToList();
-                return CandList as List<Candidate>;
+                var CandList = db.Queryable<Candidateinherit>().ToList();
+                return CandList as List<Candidateinherit>;
             }
         }
 

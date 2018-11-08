@@ -26,7 +26,7 @@ namespace XiaoHuLuMvcCore.Controllers
         /// </summary>
         /// <param name="usersInfo"></param>
         /// <returns></returns>
-        public IActionResult Add(UsersInfo usersInfo)
+        public IActionResult UserAdd(UsersInfo usersInfo)
         {
             var result = WebApiHelper.GetApiResult("Post", "User", "UsersAdd",usersInfo);
             return View(usersInfo);

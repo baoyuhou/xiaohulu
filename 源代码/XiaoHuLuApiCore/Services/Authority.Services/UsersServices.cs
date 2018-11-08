@@ -28,7 +28,7 @@ namespace Services.Authority.Services
             {
                 SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
 
-                var db = sqlSugarClient.SqlQueryable<Users>("select Id from Users order by Id DESC limit 1").First();
+                var db = sqlSugarClient.SqlQueryable<Users>("select UserId from Users order by UserId DESC limit 1").First();
                 var userid = db.UserId;
                 UserandRole userandRole = new UserandRole();
                 userandRole.UsersId = userid;
