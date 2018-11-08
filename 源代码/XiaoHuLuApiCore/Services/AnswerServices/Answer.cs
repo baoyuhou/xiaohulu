@@ -27,26 +27,26 @@ namespace Services.AnswerServices
                 //    @columns= pageparams.Columns
                 //});
                 var answermodels = db.Queryable<QuestionBank, TextType, Option>((questionbank, texttype, op) => new object[] {
-              JoinType.Inner,questionbank.TypeOfExam==texttype.ID,
-              JoinType.Inner,questionbank.Id==op.QuestionBankId
+            JoinType.Inner,questionbank.TypeOfExam==texttype.ID,
+            JoinType.Inner,questionbank.Id==op.QuestionBankId
             })
-            .Where((questionbank, texttype, op) => questionbank.Id == Id)
-           .Select((questionbank, texttype, op) => new AnswerModel
-           {
-               Id = questionbank.Id,
-               Subject = questionbank.Subject,
-               Answer = questionbank.Answer,
-               Photo = questionbank.Photo,
-               TypeOfExam = questionbank.TypeOfExam,
-               Enable = questionbank.Enable,
-               ExamType = texttype.ExamType,
-               AnswerA = op.AnswerA,
-               AnswerB = op.AnswerB,
-               AnswerC = op.AnswerC,
-               AnswerD = op.AnswerD,
-               AnswerE = op.AnswerE
-           });
-                return answermodels.ToList();
+                .Where((questionbank, texttype, op) => questionbank.Id == Id)
+               .Select((questionbank, texttype, op) => new AnswerModel
+               {
+                   Id = questionbank.Id,
+                   Subject = questionbank.Subject,
+                   Answer = questionbank.Answer,
+                   Photo = questionbank.Photo,
+                   TypeOfExam = questionbank.TypeOfExam,
+                   Enable = questionbank.Enable,
+                   ExamType = texttype.ExamType,
+                   AnswerA = op.AnswerA,
+                   AnswerB = op.AnswerB,
+                   AnswerC = op.AnswerC,
+                   AnswerD = op.AnswerD,
+                   AnswerE = op.AnswerE
+               }).ToPageList(pageIndex, pageSize, ref totalCount); ;
+                return answermodels;
             }
         }
     }
