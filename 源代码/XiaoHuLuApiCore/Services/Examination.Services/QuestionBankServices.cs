@@ -120,7 +120,7 @@ namespace Services.ExaminationServices
         public List<QuestionBankinherit> GetQuestionBanksByTypeOfExam(int TypeOfExamId)
         {
             SqlSugarClient sugarClient = Educationcontext.GetClient();
-            List<QuestionBankinherit> questionBankinherits = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, Op, TT) => QB.Id == Op.QuestionBankId).Where((QB, Op, TT) => QB.TypeOfExam == TypeOfExamId).Select((QB, Op, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = Op.AnswerA, AnswerB = Op.AnswerB, AnswerC = Op.AnswerC, AnswerD = Op.AnswerD, AnswerE = Op.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Photo = QB.Photo, ExamType = TT.ExamType }).ToList();
+            List<QuestionBankinherit> questionBankinherits = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, Op, TT) => QB.Id == Op.QuestionBankId && QB.Id==Op.QuestionBankId).Where((QB, Op, TT) => QB.TypeOfExam == TypeOfExamId).Select((QB, Op, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = Op.AnswerA, AnswerB = Op.AnswerB, AnswerC = Op.AnswerC, AnswerD = Op.AnswerD, AnswerE = Op.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Photo = QB.Photo, ExamType = TT.ExamType }).ToList();
             return questionBankinherits;
         }
 
