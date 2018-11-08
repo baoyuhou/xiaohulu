@@ -2,91 +2,342 @@
 @{
     Layout = null;
 }
-
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="Bookmark" href="/favicon.ico">
-    <link rel="Shortcut Icon" href="/favicon.ico" />
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="lib/html5shiv.js"></script>
-    <script type="text/javascript" src="lib/respond.min.js"></script>
-    <![endif]-->
-    <link href="~/css/H-ui.min.css" rel="stylesheet" />
-    <link href="~/css/H-ui.admin.css" rel="stylesheet" />
-    <link href="~/css/iconfont.css" rel="stylesheet" />
-    <link href="~/css/skin.css" rel="stylesheet" />
-    <link href="~/css/style.css" rel="stylesheet" />
-    <!--[if IE 6]>
-    <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-    <script>DD_belatedPNG.fix('*');</script>
-    <![endif]-->
-    <title>管理员列表</title>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" />
+    <link rel="stylesheet" href="css/Site.css" />
+    <link rel="stylesheet" href="css/zy.all.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/amazeui.min.css" />
+    <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
-    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-    <div id="div" class="page-container">
-        <div class="text-c">
-            <input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">
-            <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-        </div>
-        <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="javascript:;" onclick="admin_add('添加管理员','admin-add.html','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
-        <table class="table table-border table-bordered table-bg">
-            <thead>
-                <tr>
-                    <th scope="col" colspan="9">题库管理</th>
-                </tr>
-                <tr class="text-c">
-                    <th width="40">ID</th>
-                    <th width="150">登录名</th>
-                    <th width="90">手机</th>
-                    <th width="150">邮箱</th>
-                    <th>角色</th>
-                    <th width="130">加入时间</th>
-                    <th width="100">是否已启用</th>
-                    <th width="100">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-c">
-                    <td>1</td>
-                    <td>admin</td>
-                    <td>13000000000</td>
-                    <td>admin@mail.com</td>
-                    <td>超级管理员</td>
-                    <td>2014-6-11 11:11:42</td>
-                    <td class="td-status"><span class="label label-success radius">已启用</span></td>
-                    <td class="td-manage"><a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!--_footer 作为公共模版分离出去-->
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/js/layer.js"></script>
-    <script src="~/js/H-ui.min.js"></script>
-    <script src="~/js/H-ui.admin.js"></script>
-    <!--/_footer 作为公共模版分离出去-->
-    <!--请在下方写此页面业务相关的脚本-->
-    <script src="~/js/WdatePicker.js"></script>
-    <script src="~/js/jquery.dataTables.min.js"></script>
-    <script src="~/js/laypage.js"></script>
-    <script type="text/javascript">
-        var vm = new Vue({
-            el: 'div',
-            path:'/QuestionBank/text',
-            date: {
+    <div class="dvcontent">
 
-            },
+        <div>
+            <!--tab start-->
+            <div class="tabs">
+                <div class="hd">
+                    <ul>
+                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">查看用户</li>
+                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">添加用户</li>
+                    </ul>
+                </div>
+                <div class="bd">
+                    <ul style="display: block;padding: 20px;">
+                        <li>
+                            <!--分页显示角色信息 start-->
+                            <div id="dv1">
+                                <table class="table" id="tbRecord">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>用户名 </th>
+                                            <th>姓名</th>
+                                            <th>性别</th>
+                                            <th>修改</th>
+                                            <th>删除</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td>admin</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="delete"><button onclick="btn_delete(1)"><i class="icon-trash bigger-120"></i>删除</button></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!--分页显示角色信息 end-->
+                        </li>
+                    </ul>
+                    <ul class="theme-popbod dform" style="display: none;">
+                        <div class="am-cf admin-main" style="padding-top: 0px;">
+                            <!-- content start -->
+
+                            <div class="am-cf admin-main" style="padding-top: 0px;">
+                                <!-- content start -->
+                                <div class="admin-content">
+                                    <div class="admin-content-body">
+
+                                        <div class="am-g">
+                                            <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+                                            </div>
+                                            <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
+                                                 style="padding-top: 30px;">
+                                                <form class="am-form am-form-horizontal"
+                                                      action="user/addUser1Submit.action" method="post">
+
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            姓名 / Name
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="user-name" required
+                                                                   placeholder="姓名 / Name" name="name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            用户名 / username
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="user-name" required
+                                                                   placeholder="用户名 / username" name="username">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            性别 / sex
+                                                        </label>
+                                                        <div class="am-u-sm-9" style="line-height: 30px;">
+                                                            <input type="radio" id="man" name="sex" value="1"
+                                                                   ${user.sex= =1? "checked=checked " :""} /> <label for="man">
+                                                                男
+                                                            </label> &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="woman"
+                                                                                                     name="sex" value="0" ${user.sex= =0? "checked=checked " :""} />
+                                                            <label for="woman"> 女 </label> <br /> <small>性别...</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-email" class="am-u-sm-3 am-form-label">
+                                                            联系电话 / phone
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="tel" id="user-phone" required
+                                                                   placeholder="请输入联系电话" name="phone" /> <small>联系电话...</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-email" class="am-u-sm-3 am-form-label">
+                                                            籍贯 / place
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="user-email" required placeholder="请输入籍贯"
+                                                                   name="place" /> <small>籍贯...</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-email" class="am-u-sm-3 am-form-label">
+                                                            电子邮件 / Email
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="email" id="user-email" required
+                                                                   placeholder="输入你的电子邮件 / Email" name="email" /> <small>邮箱你懂得...</small>
+                                                        </div>
+                                                    </div>
 
 
 
-        })
-    </script>
+                                                    <div class="am-form-group">
+                                                        <label for="user-intro" class="am-u-sm-3 am-form-label">
+                                                            备注/ Introg
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <textarea class="" rows="5" id="user-intro" name="remark"
+                                                                      placeholder="输入备注"></textarea>
+                                                            <small>250字以内...</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <div class="am-u-sm-9 am-u-sm-push-3">
+                                                            <input type="submit" class="am-btn am-btn-success" value="添加用户" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- content end -->
+                            </div>
+                            <!--添加角色 end--
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--tab end-->
+
+                        </div>
+
+
+                        <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+                        <script src="js/plugs/Jqueryplugs.js" type="text/javascript"></script>
+                        <script src="js/_layout.js"></script>
+                        <script src="js/plugs/jquery.SuperSlide.source.js"></script>
+                        <script>
+                            var num = 1;
+                            $(function () {
+
+                                $(".tabs").slide({ trigger: "click" });
+
+                            });
+
+
+                            var btn_save = function () {
+                                var pid = $("#RawMaterialsTypePageId  option:selected").val();
+                                var name = $("#RawMaterialsTypeName").val();
+                                var desc = $("#RawMaterialsTypeDescription").val();
+                                var ramark = $("#Ramark").val();
+                                $.ajax({
+                                    type: "post",
+                                    url: "/RawMaterialsType/AddRawMaterialsType",
+                                    data: { name: name, pid: pid, desc: desc, ramark: ramark },
+                                    success: function (data) {
+                                        if (data > 0) {
+                                            $.jq_Alert({
+                                                message: "添加成功",
+                                                btnOktext: "确认",
+                                                dialogModal: true,
+                                                btnOkClick: function () {
+                                                    //$("#RawMaterialsTypeName").val("");
+                                                    //$("#RawMaterialsTypeDescription").val("");
+                                                    //$("#Ramark").val("");
+                                                    //page1();
+                                                    location.reload();
+
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                                alert(t);
+                            }
+
+                            var btn_edit = function (id) {
+                                $.jq_Panel({
+                                    url: "/RawMaterialsType/EditRawMaterialsType?id=" + id,
+                                    title: "编辑分类",
+                                    dialogModal: true,
+                                    iframeWidth: 500,
+                                    iframeHeight: 400
+                                });
+                            }
+                            var btn_delete = function (id) {
+                                $.jq_Confirm({
+                                    message: "您确定要删除吗?",
+                                    btnOkClick: function () {
+                                        $.ajax({
+                                            type: "post",
+                                            url: "/RawMaterialsType/DeleteRawMaterialsType",
+                                            data: { id: id },
+                                            success: function (data) {
+                                                if (data > 0) {
+                                                    $.jq_Alert({
+                                                        message: "删除成功",
+                                                        btnOkClick: function () {
+                                                            page1();
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        </script>
+
+                </div>
 </body>
+
 </html>
