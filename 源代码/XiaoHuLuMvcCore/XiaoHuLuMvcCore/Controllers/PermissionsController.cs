@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models;
 namespace XiaoHuLuMvcCore.Controllers
 {
-    public class PermissionsController : Controller
+    public class nController : Controller
     {
         /// <summary>
         /// 显示全部信息

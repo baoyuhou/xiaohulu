@@ -47,7 +47,7 @@ namespace IServices.Examination.IServices
         /// 显示考生信息
         /// </summary>
         /// <returns></returns>
-        List<Candidate> GetCandidates();
+        List<Candidateinherit> GetCandidates();
 
         /// <summary>
         /// 根据准考证号显示考生信息

@@ -21,6 +21,11 @@ namespace XiaoHuLuMvcCore.Controllers
             return View(JsonConvert.DeserializeObject<List<UsersInfo>>(result));
         }
 
+        /// <summary>
+        /// 单条添加用户信息
+        /// </summary>
+        /// <param name="usersInfo"></param>
+        /// <returns></returns>
         public IActionResult Add(UsersInfo usersInfo)
         {
             var result = WebApiHelper.GetApiResult("Post", "User", "UsersAdd",usersInfo);
