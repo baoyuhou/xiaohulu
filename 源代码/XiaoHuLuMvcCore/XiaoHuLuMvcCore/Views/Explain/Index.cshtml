@@ -4,24 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
+<h2>说明管理</h2>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <p>
     <a asp-action="Create">添加一个新的</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+<table class="table  table-striped" style="text-align:center;width:100%">
+    <thead >
+        <tr >
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
+            <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.Address)
             </th>
-            <th></th>
+            <th style="text-align:center">操作</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +31,16 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
+                @if (item.Description.Length > 10)
+                {
+                    var str = item.Description.Substring(0, 10);
+                   <span>@str  *******</span>
+                }
+                else
+                {
                 @Html.DisplayFor(modelItem => item.Description)
+                }
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)

@@ -3,7 +3,20 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<script src="~/js/jquery-3.1.1.js"></script>
+<script src="~/css/wangEditor.js"></script>
+<style>
+    dt {
+   margin:0 auto;
+   margin-bottom:10px
+       
+    }
+    dd {
+    margin: 0 auto;
+    margin-bottom:10px
+    
+    }
+</style>
 <h2>Details</h2>
 
 <div>
@@ -20,7 +33,10 @@
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.Hidden("Description", Model.Description)
+            <div id="div12">
+
+            </div>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Address)
@@ -31,6 +47,20 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    var E = window.wangEditor
+    var editor = new E('#div12')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
+    $(function () {
+        var a = $("#Description").val()
+        editor.txt.html(a)
+    })
+
+
+
+</script>

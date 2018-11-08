@@ -27,8 +27,8 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public IActionResult Details(int id)
         {
-            var result = WebApiHelper.GetApiResult("get","explain", "GetExplainList?id="+id);
-            return View(JsonConvert.DeserializeObject<Explain>(result));
+            var result = WebApiHelper.GetApiResult("get","explain", "GetExplainById?id=" + id);
+            return View(JsonConvert.DeserializeObject< Explain>(result));
         }
 
         /// <summary>
@@ -40,14 +40,10 @@ namespace XiaoHuLuMvcCore.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Explain explain)
+        public int Create(Explain explain)
         {
             var result = WebApiHelper.GetApiResult("post","explain", "Addexplain",explain);
-            if (int.Parse(result)>0)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(explain);
+            return int.Parse(result);
         }
 
         /// <summary>
@@ -61,14 +57,10 @@ namespace XiaoHuLuMvcCore.Controllers
             return View(JsonConvert.DeserializeObject<Explain>(result));
         }
         [HttpPost]
-        public IActionResult Edit(Explain explain)
+        public int Edit(Explain explain)
         {
             var result = WebApiHelper.GetApiResult("post","explain", "UpdExplain", explain);
-            if (int.Parse(result)>0)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(explain);
+            return int.Parse(result);
         }
 
     }

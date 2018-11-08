@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Models;
+using Newtonsoft.Json.Serialization;
 using Services.AnswerServices;
 
 namespace XiaoHuLuApiCore
@@ -30,7 +31,7 @@ namespace XiaoHuLuApiCore
         {
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddMvc().AddJsonOptions(Options => { Options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
             services.AddSingleton<IServices.ExplainsIServices,Services.ExplainsServices>();
             services.AddSingleton<IServices.IAuthority.IUserServices,Services.Authority.Services.UsersServices>();
             services.AddSingleton<IServices.IAuthority.IPermissionsServices, Services.Authority.Services.PermissionsServices>();

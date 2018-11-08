@@ -14,7 +14,7 @@ namespace XiaoHuLuApiCore.Controllers
     public class ExplainController : ControllerBase
     {
         private readonly ExplainsIServices _explainsIServices;
-        public ExplainController(ExplainsIServices explainsIServices)
+         public ExplainController(ExplainsIServices explainsIServices)
         {
             _explainsIServices = explainsIServices; 
         }
