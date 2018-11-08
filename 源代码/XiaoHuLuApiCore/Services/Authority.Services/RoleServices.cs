@@ -26,7 +26,7 @@ namespace Services.Authority
 
         public Role EditById(int id)
         {
-            var result = RoleDB.GetSingle(m => m.Id == id);
+            var result = RoleDB.GetSingle(m => m.RoleId == id);
             return result;
         }
     }

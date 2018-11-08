@@ -24,12 +24,12 @@ namespace Services.Authority.Services
         /// 获取角色权限信息
         /// </summary>
         /// <returns></returns>
-        public List<Jurisdiction> GetPermissions()
+        public List<JurisdictionInfo> GetPermissions()
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var JurisList = db.Queryable<Jurisdiction>().ToList();
-                return JurisList as List<Jurisdiction>;
+                var result = db.SqlQueryable<JurisdictionInfo>("select * from role,jurisdiction,roleandjurisdiction where role.RoleId=roleandjurisdiction.RolesId and jurisdiction.JurisId=roleandjurisdiction.JurisdictionId ");
+                return result.ToList();
             }
         }
 

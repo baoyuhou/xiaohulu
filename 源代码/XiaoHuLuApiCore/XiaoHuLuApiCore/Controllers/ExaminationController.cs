@@ -90,6 +90,14 @@ namespace XiaoHuLuApiCore.Controllers
         /// </summary>
         /// <param name="candidateId"></param>
         /// <returns></returns>
+        [Route("CandidateAdd")]
+        [HttpPost]
+        public int CandidateAdd(Candidate candidate)
+        {
+            var candidateAdd = _examineeServices.ADD(candidate);
+            return candidateAdd;
+        }
+
         [Route("GetCandidateinheritById")]
         [HttpPut]
         public Candidateinherit GetCandidateinheritById(int candidateId)

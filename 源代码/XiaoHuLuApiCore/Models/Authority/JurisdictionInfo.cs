@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace XiaoHuLuMvcCore.Models.Authoritys
+namespace Models.Authority
 {
-    public class Jurisdictions
+    /// <summary>
+    /// 角色权限从表
+    /// </summary>
+    public class JurisdictionInfo
     {
         /// <summary>
         /// 主键ID

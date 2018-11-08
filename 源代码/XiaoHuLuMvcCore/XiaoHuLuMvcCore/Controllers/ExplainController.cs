@@ -3,46 +3,73 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using XiaoHuLuMvcCore.Models;
 using Newtonsoft.Json;
-
+using XiaoHuLuMvcCore.Models;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
     public class ExplainController : Controller
     {
         /// <summary>
-        /// 所有说明信息列表
+        /// 显示所有说明信息
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-            return View();
+            var result = WebApiHelper.GetApiResult("get","explain", "GetExplainList");
+            return View(JsonConvert.DeserializeObject<List<Explain>>(result));
         }
 
-        public string GetList()
+        /// <summary>
+        /// 详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Details(int id)
         {
-            var result = WebApiHelper.GetApiResult("get", "Explain", "GetExplainList");
-            return result;
+            var result = WebApiHelper.GetApiResult("get","explain", "GetExplainList?id="+id);
+            return View(JsonConvert.DeserializeObject<Explain>(result));
         }
 
+        /// <summary>
+        /// 添加一个新的说明信息
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(Explain explain)
         {
-            var result = WebApiHelper.GetApiResult("post", "Explain", "Addexplain",explain);
-            if (result!=null||result!="" )
+            var result = WebApiHelper.GetApiResult("post","explain", "Addexplain",explain);
+            if (int.Parse(result)>0)
             {
-                if (int.Parse(result)>0)
-                {
-                    return View("index");
-                }
+                return RedirectToAction("Index");
             }
             return View(explain);
         }
+
+        /// <summary>
+        /// 反填要修改的信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Edit(int id)
+        {
+            var result = WebApiHelper.GetApiResult("get","explain", "GetExplainById?id="+id);
+            return View(JsonConvert.DeserializeObject<Explain>(result));
+        }
+        [HttpPost]
+        public IActionResult Edit(Explain explain)
+        {
+            var result = WebApiHelper.GetApiResult("post","explain", "UpdExplain", explain);
+            if (int.Parse(result)>0)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(explain);
+        }
+
     }
 }

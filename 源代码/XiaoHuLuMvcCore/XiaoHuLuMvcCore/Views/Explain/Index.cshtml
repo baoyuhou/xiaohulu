@@ -1,19 +1,15 @@
-﻿@model XiaoHuLuMvcCore.Models.Explain
+﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Explain>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <p>
-    <a href="javascript:;" onclick="location.href='/explain/create'">Create New</a>
+    <a asp-action="Create">添加一个新的</a>
 </p>
-<table class="table" id="show">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -29,35 +25,23 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="item in list"  v-bind:key="item.id" >
-            <td>{{item.id}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.address}}</td>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.ActionLink("修改", "Edit", new {  id=item.Id }) |
+                @Html.ActionLink("详情", "Details", new { id = item.Id }) 
+               
+            </td>
         </tr>
-        <tr v-else>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+}
     </tbody>
 </table>
-<script>
-    var va = new Vue({
-        el: '#show',
-        data: {
-            list: null,
-            flag:1
-        },
-        mounted: function () {
-            axios
-                .get("/explain/GetList")
-                .then(response => (this.list = response.data))
-        },
-        methods: {
-            create: function () {
-                location.href = '/axplain/Create'
-            }
-        },
-    })
-
-</script>

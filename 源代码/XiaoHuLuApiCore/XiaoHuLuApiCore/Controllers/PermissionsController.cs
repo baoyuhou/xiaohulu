@@ -26,7 +26,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("GetJurisList")]
         [HttpGet]
-        public List<Jurisdiction> GetJurisList()
+        public List<JurisdictionInfo> GetJurisList()
         {
             var jurisList = _permissionsServices.GetPermissions();
             return jurisList;
