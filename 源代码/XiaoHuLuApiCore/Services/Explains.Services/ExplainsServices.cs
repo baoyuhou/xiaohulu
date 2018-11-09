@@ -6,6 +6,9 @@ using SqlSugar;
 
 namespace Services
 {
+    /// <summary>
+    /// 说明管理
+    /// </summary>
     public class ExplainsServices : IServices.ExplainsIServices
     {
         /// <summary>
