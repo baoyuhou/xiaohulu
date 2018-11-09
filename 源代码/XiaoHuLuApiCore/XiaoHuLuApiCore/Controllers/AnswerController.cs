@@ -25,9 +25,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <param name="Id">查询编号</param>
         /// <returns></returns>
         [HttpGet]
-        public List<AnswerModel> GetAnswerModelList(int Id)
+        public List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0)
         {
-            var answermodellist = answer.GetAnswerModelList(Id);
+            var answermodellist = answer.GetAnswerModelList(Id, totalCount);
             return answermodellist;
         }
     }

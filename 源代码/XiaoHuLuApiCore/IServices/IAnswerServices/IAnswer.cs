@@ -12,6 +12,6 @@ namespace IServices.IAnswerServices
         /// 显示题型
         /// </summary>
         /// <returns></returns>
-        List<AnswerModel> GetAnswerModelList(int Id);
+        List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0);
     }
 }

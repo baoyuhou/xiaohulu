@@ -1665,7 +1665,7 @@ namespace BasicProduct.DB
             cmd.CommandType = CommandType.StoredProcedure;
 
             connection.Open();
-            SqlCommandBuilder.DeriveParameters(cmd);
+            //SqlCommandBuilder.DeriveParameters(cmd);
             connection.Close();
 
             if (!includeReturnValueParameter)
