@@ -19,6 +19,8 @@ namespace IServices.IAuthority
         /// <returns></returns>
         Users Login(string name, string pwd);
 
+        int JurisAdd(JurisdictionInfo jurisdictionInfo);
+
         /// <summary>
         /// 根据角色和权限获取列表
         /// </summary>
