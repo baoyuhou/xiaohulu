@@ -43,6 +43,7 @@ namespace XiaoHuLuMvcCore.Controllers
         public int Create(Explain explain)
         {
             var result = WebApiHelper.GetApiResult("post","explain", "Addexplain",explain);
+       
             return int.Parse(result);
         }
 

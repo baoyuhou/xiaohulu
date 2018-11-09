@@ -5,9 +5,11 @@
 }
 
 <h2>说明管理</h2>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <p>
-    <a asp-action="Create">添加一个新的</a>
+    <a asp-action="Create" >添加一个新的</a>
+    <button onclick="create()">添加</button>
 </p>
 <table class="table  table-striped" style="text-align:center;width:100%">
     <thead >
@@ -54,3 +56,10 @@
 }
     </tbody>
 </table>
+<script>    
+    function create() {
+        document.location.href = '/explain/create';
+
+    }
+ 
+</script>
