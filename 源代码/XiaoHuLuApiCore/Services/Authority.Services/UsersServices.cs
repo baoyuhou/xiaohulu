@@ -37,9 +37,15 @@ namespace Services.Authority.Services
                 //实例化用户角色表
                 UserandRole userandRole = new UserandRole();
                 userandRole.UsersId = db;
-                userandRole.RolesId = usersInfo.RolesId;
-                var a = UsersDB.Insert(users);
-                if (a)
+                var num = usersInfo.RoleName.Substring(0, usersInfo.RoleName.LastIndexOf(',')).Split(',');
+             
+                var usersdb = 0;
+                foreach (var item in num)
+                {
+                    userandRole.RolesId = int.Parse(item);
+                    usersdb += sqlSugarClient.Insertable<UserandRole>(userandRole).ExecuteCommand();
+                }
+                if (usersdb== num.Length)
                 {
                     return 1;
                 }

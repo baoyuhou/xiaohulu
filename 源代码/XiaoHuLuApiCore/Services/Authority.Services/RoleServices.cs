@@ -29,5 +29,14 @@ namespace Services.Authority
             var result = RoleDB.GetSingle(m => m.Id == id);
             return result;
         }
+
+        public List<Role> GetRoles()
+        {
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var result = db.SqlQueryable<Role>("select * from Role");
+                return result.ToList();
+            }
+        }
     }
 }

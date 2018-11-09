@@ -1,4 +1,4 @@
-﻿<reference path="../jquery-1.7.2.min.js" />
+﻿//<reference path="../jquery-1.7.2.min.js" />
 $.extend({
     notifationTime: undefined,
     longpresstm: undefined,

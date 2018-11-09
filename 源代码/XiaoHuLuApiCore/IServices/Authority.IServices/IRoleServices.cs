@@ -31,5 +31,6 @@ namespace IServices.IAuthority
         /// <param name="id"></param>
         /// <returns></returns>
         Role EditById(int id);
+        List<Role> GetRoles(); 
     }
 }

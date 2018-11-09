@@ -23,7 +23,7 @@ namespace XiaoHuLuMvcCore.Models.Authority
         public int Password { get; set; }
 
         /// <summary>
-        /// 角色名
+        /// 角色Id
         /// </summary>
         public string RoleName { get; set; }
     }
