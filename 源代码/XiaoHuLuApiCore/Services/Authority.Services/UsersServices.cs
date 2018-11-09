@@ -11,10 +11,10 @@ namespace Services.Authority.Services
 {
     public class UsersServices : IUserServices
     {
-        //实例化
+        //实例化用户从表
         public SimpleClient<UsersInfo> UsersInfoDB = new SimpleClient<UsersInfo>(Educationcontext.GetClient());
 
-        //
+        //实例化用户表
         public SimpleClient<Users> UsersDB = new SimpleClient<Users>(Educationcontext.GetClient());
 
         /// <summary>
@@ -24,15 +24,17 @@ namespace Services.Authority.Services
         /// <returns></returns>
         public int Add(UsersInfo usersInfo)
         {
+            //实例化用户表
             Users users = new Users();
             users.UserName = usersInfo.UserName;
             users.Password = usersInfo.Password;
-             var result = UsersDB.Insert(users);
+            var result = UsersDB.Insert(users);
+            //如果result为true
             if (result)
             {
                 SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
-               var  db = sqlSugarClient.SqlQueryable<Users>("select UserId from Users order by UserId  ").Max(s=>s.Id);
-
+               var  db = sqlSugarClient.SqlQueryable<Users>("select Id from Users order by Id  ").Max(s=>s.Id);
+                //实例化用户角色表
                 UserandRole userandRole = new UserandRole();
                 userandRole.UsersId = db;
                 userandRole.RolesId = usersInfo.RolesId;
@@ -53,6 +55,7 @@ namespace Services.Authority.Services
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
+                //三表联查
                 var result = db.SqlQueryable<UsersInfo>("select a.Id,a.UserName,a.`Password`,b.RoleName,c.UsersId,c.RolesId from Users a,Role b,UserandRole c where a.Id=c.UsersId and b.Id=c.RolesId");
                 return result.ToList();
             }
