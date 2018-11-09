@@ -172,5 +172,15 @@ namespace Services.ExaminationServices
             QuestionBankinherit questionBankinherit = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, OP, TT) => QB.Id == OP.QuestionBankId && QB.TypeOfExam == TT.ID).Select((QB, OP, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = OP.AnswerA, AnswerB = OP.AnswerB, AnswerC = OP.AnswerC, AnswerD = OP.AnswerD, AnswerE = OP.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Photo = QB.Photo, ExamType = TT.ExamType }).Where(m => m.Id == id).First();
             return questionBankinherit;
         }
+
+        /// <summary>
+        /// 显示全部题型
+        /// </summary>
+        public List<TextType> GetTextType()
+        {
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
+            List<TextType> textTypes = sugarClient.SqlQueryable<TextType>("select * from TextType where Enable = 1").ToList();
+            return textTypes;
+        }
     }
 }
