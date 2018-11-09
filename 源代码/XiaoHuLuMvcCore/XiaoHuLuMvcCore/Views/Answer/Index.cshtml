@@ -1,17 +1,21 @@
-﻿@model XiaoHuLuMvcCore.Models.Examination.AnswerModel
+﻿
+@{
+    Layout = null;
+}
+@model List<XiaoHuLuMvcCore.Models.Examination.AnswerModel>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>仓井野结衣护士模考</h2>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>小葫芦程远护士模考</title>
-    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/main.css" rel="stylesheet" />
     <link href="iconfont.css" rel="stylesheet" type="text/css" />
-    <link href="test.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/test.css" rel="stylesheet" />
 
     <style>
         .hasBeenAnswer {
@@ -45,47 +49,51 @@
                         <div class="test_content_nr">
                             <ul>
                                 <li id="qu_0_0">
-                                    <div class="test_content_nr_tt">
-                                        <i>1</i><span>(1分)</span><font>在生产管理信息系统中，下列操作步骤能正确将工单推进流程的是（  ）</font><b class="icon iconfont">&#xe881;</b>
-                                    </div>
-                                    <div class="test_content_nr_main">
-                                        <ul>
-                                            <li class="option">
-                                                <input type="radio" class="radioOrCheck" name="answer1"
-                                                       id="0_answer_1_option_1" />
-                                                <label for="0_answer_1_option_1">
-                                                    A.
-                                                    <p class="ue" style="display: inline;">在工具栏中点击“workflow”标签</p>
-                                                </label>
-                                            </li>
-                                            <li class="option">
-                                                <input type="radio" class="radioOrCheck" name="answer1"
-                                                       id="0_answer_1_option_2" />
-                                                <label for="0_answer_1_option_2">
-                                                    B.
-                                                    <p class="ue" style="display: inline;">在缺陷单界面中点击“推进流程”按钮</p>
-                                                </label>
-                                            </li>
-                                            <li class="option">
-                                                <input type="radio" class="radioOrCheck" name="answer1"
-                                                       id="0_answer_1_option_3" />
-                                                <label for="0_answer_1_option_3">
-                                                    C.
-                                                    <p class="ue" style="display: inline;">在缺陷单界面中点击“提交”按钮</p>
-                                                </label>
-                                            </li>
-                                            <li class="option">
-                                                <input type="radio" class="radioOrCheck" name="answer1"
-                                                       id="0_answer_1_option_4" />
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="test_content_nr_tt">
+                                            <i>1</i><span>(1分)</span><font>@item.Subject</font><b class="icon iconfont">&#xe881;</b>
+                                        </div>
 
-                                                <label for="0_answer_1_option_4">
-                                                    D.
-                                                    <p class="ue" style="display: inline;">后台启动流程推进</p>
-                                                </label>
-                                            </li>
+                                        <div class="test_content_nr_main">
+                                            <ul>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer1"
+                                                           id="0_answer_1_option_1" />
+                                                    <label for="0_answer_1_option_1">
+                                                        A.
+                                                        <p class="ue" style="display: inline;">@item.AnswerA</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer1"
+                                                           id="0_answer_1_option_2" />
+                                                    <label for="0_answer_1_option_2">
+                                                        B.
+                                                        <p class="ue" style="display: inline;">@item.AnswerB</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer1"
+                                                           id="0_answer_1_option_3" />
+                                                    <label for="0_answer_1_option_3">
+                                                        C.
+                                                        <p class="ue" style="display: inline;">@item.AnswerC</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer1"
+                                                           id="0_answer_1_option_4" />
 
-                                        </ul>
-                                    </div>
+                                                    <label for="0_answer_1_option_4">
+                                                        D.
+                                                        <p class="ue" style="display: inline;">@item.AnswerD</p>
+                                                    </label>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    }
                                 </li>
                             </ul>
                         </div>
@@ -194,10 +202,10 @@
         <div class="foot"></div>
     </div>
 
-    <script src="jquery-1.11.3.min.js"></script>
-    <script src="jquery.easy-pie-chart.js"></script>
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script src="~/js/jquery.easy-pie-chart.js"></script>
     <!--时间js-->
-    <script src="time/jquery.countdown.js"></script>
+    <script src="~/js/jquery.countdown.js"></script>
     <script>
         window.jQuery(function ($) {
             "use strict";
@@ -228,9 +236,6 @@
             });
         });
     </script>
-    <div style="text-align:center;">
-        <p><a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
-    </div>
 
 </body>
 

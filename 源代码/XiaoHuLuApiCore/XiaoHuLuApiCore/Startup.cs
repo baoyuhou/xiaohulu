@@ -31,11 +31,23 @@ namespace XiaoHuLuApiCore
         {
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            ///设置返回的json字符串字母开头为大写
             services.AddMvc().AddJsonOptions(Options => { Options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
+
+            //说明
             services.AddSingleton<IServices.ExplainsIServices,Services.ExplainsServices>();
+
+            //用户
             services.AddSingleton<IServices.IAuthority.IUserServices,Services.Authority.Services.UsersServices>();
+
+            //权限
             services.AddSingleton<IServices.IAuthority.IPermissionsServices, Services.Authority.Services.PermissionsServices>();
+
+            //题库
             services.AddSingleton<IServices.IExaminationServices.IQuestionBankServices, Services.ExaminationServices.QuestionBankServices>();
+
+            //前台题库
             services.AddSingleton<IAnswer, Answer>();
             services.AddSingleton<IServices.IAuthority.IRoleServices, Services.Authority.RoleServices>();
         }

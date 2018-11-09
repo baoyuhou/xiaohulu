@@ -13,5 +13,11 @@ namespace IServices.IAnswerServices
         /// </summary>
         /// <returns></returns>
         List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0);
+
+        /// <summary>
+        /// 查询一共多少题
+        /// </summary>
+        /// <returns></returns>
+        List<QuestionBank> QuestionNumber();
     }
 }

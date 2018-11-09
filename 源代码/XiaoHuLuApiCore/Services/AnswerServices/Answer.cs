@@ -50,5 +50,10 @@ namespace Services.AnswerServices
                 return answermodels;
             }
         }
+
+        public List<QuestionBank> QuestionNumber()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

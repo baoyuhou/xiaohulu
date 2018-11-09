@@ -16,9 +16,9 @@ namespace XiaoHuLuApiCore.Controllers
         private readonly IQuestionBankServices _questionBankServices;
         public QuestionBankController(IQuestionBankServices questionBankServices)
         {
-            _questionBankServices = questionBankServices;   
+            _questionBankServices = questionBankServices;
         }
-        
+
         /// <summary>
         /// 单挑 添加题
         /// </summary>
@@ -92,6 +92,18 @@ namespace XiaoHuLuApiCore.Controllers
         public QuestionBankinherit UpdateById(int id)
         {
             var result = _questionBankServices.UpdateById(id);
+            return result;
+        }
+
+        /// <summary>
+        /// 显示全部题类型
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetTextType")]
+        [HttpGet]
+        public List<TextType> GetTextType()
+        {
+            var result = _questionBankServices.GetTextType();
             return result;
         }
     }
