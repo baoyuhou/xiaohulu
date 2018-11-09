@@ -45,7 +45,7 @@ namespace Services.AnswerServices
                    AnswerC = op.AnswerC,
                    AnswerD = op.AnswerD,
                    AnswerE = op.AnswerE
-               }).ToPageList(pageIndex, pageSize, ref totalCount); ;
+               }).ToPageList(pageIndex, pageSize, ref totalCount); 
                 return answermodels;
             }
         }
