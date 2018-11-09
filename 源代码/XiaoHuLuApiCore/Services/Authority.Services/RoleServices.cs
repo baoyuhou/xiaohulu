@@ -11,7 +11,10 @@ namespace Services.Authority
 {
     public class RoleServices : IRoleServices
     {
+        //角色表
         public SimpleClient<Role> RoleDB = new SimpleClient<Role>(Educationcontext.GetClient());
+        //角色从表
+        public SimpleClient<JurisdictionInfo> SimpleClient = new SimpleClient<JurisdictionInfo>(Educationcontext.GetClient());
         public int Add(Role role)
         {
             var result = Convert.ToInt32(RoleDB.Insert(role));
@@ -30,11 +33,28 @@ namespace Services.Authority
             return result;
         }
 
-        public List<Role> GetRoles()
+        /// <summary>
+        /// 获取权限信息
+        /// </summary>
+        /// <returns></returns>
+        public List<Jurisdiction> GetJurisdictions()
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var result = db.SqlQueryable<Role>("select * from Role");
+                var result = db.SqlQueryable<Jurisdiction>("select * from Jurisdiction");
+                return result.ToList(); ;
+            }
+        }
+
+        /// <summary>
+        /// 获取角色信息
+        /// </summary>
+        /// <returns></returns>
+        public List<JurisdictionInfo> GetRoles()
+        {
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var result = db.SqlQueryable<JurisdictionInfo>("SELECT a.Id,a.RoleName,b.`Name`,b.`level`,b.Url,c.RolesId,c.JurisdictionId FROM role a,jurisdiction b,roleandjurisdiction c WHERE a.Id=c.RolesId AND b.Id=c.JurisdictionId");
                 return result.ToList();
             }
         }
