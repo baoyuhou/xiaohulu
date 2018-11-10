@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using XiaoHuLuMvcCore.Models.Authority;
+using XiaoHuLuMvcCore.Models.Authoritys;
 using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models;
 namespace XiaoHuLuMvcCore.Controllers
@@ -18,6 +19,9 @@ namespace XiaoHuLuMvcCore.Controllers
         public IActionResult Index()
         {
             var result = WebApiHelper.GetApiResult("Get", "User", "GetUserList");
+
+            var roleResult = WebApiHelper.GetApiResult("Get", "Role", "GetRoleList");
+            ViewBag.roleResult =JsonConvert.DeserializeObject<List<Role>>(roleResult) ;
             return View(JsonConvert.DeserializeObject<List<UsersInfo>>(result));
         }
 
@@ -31,5 +35,6 @@ namespace XiaoHuLuMvcCore.Controllers
             var result = WebApiHelper.GetApiResult("Post", "User", "UsersAdd",usersInfo);
             return result;
         }
+
     }
 }

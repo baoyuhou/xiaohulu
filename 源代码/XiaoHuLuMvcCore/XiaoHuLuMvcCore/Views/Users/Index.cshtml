@@ -42,9 +42,10 @@
                                             <th>修改</th>
                                         </tr>
                                     </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tbody>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+
                                             <tr>
                                                 <td>@item.UserId</td>
                                                 <td>@item.UserName</td>
@@ -52,9 +53,10 @@
                                                 <td>@item.RoleName</td>
                                                 <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
                                             </tr>
+
+                                        }
                                         </tbody>
-                                    }
-                                </table>
+</table>
                             </div>
                             <!--分页显示角色信息 end-->
                         </li>
@@ -100,8 +102,11 @@
                                                             角色名称 / RoleName
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="RoleName" required
-                                                                   placeholder="角色名称 / RoleName" name="RoleName">
+                                                            @foreach (var item in ViewBag.roleResult as List<XiaoHuLuMvcCore.Models.Authoritys.Role>)
+                                                            {
+                                                                <input name="CheckRole" type="checkbox" value="@item.Id"/> @item.RoleName
+                                                            }
+
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
@@ -137,8 +142,11 @@
 
 
                             function btn_save() {
-
-                                alert(1)
+                                var strnum = [];
+                                $("[name='CheckRole']:checked").each(function () {
+                                    strnum += $(this).val()+","
+                                })
+                               
                                 var pid = $("#RawMaterialsTypePageId  option:selected").val();
                                 var name = $("#RawMaterialsTypeName").val();
                                 var desc = $("#RawMaterialsTypeDescription").val();
@@ -146,7 +154,7 @@
                                 $.ajax({
                                     type: "post",
                                     url: "/Users/UserAdd",
-                                    data: { "UserName": $("#UserName").val(), "Password": $("#Password").val(), "RoleName": $("#RoleName").val() },
+                                    data: { "UserName": $("#UserName").val(), "Password": $("#Password").val(), "RoleName": strnum.toString() },
                                     success: function (data) {
                                         if (data > 0) {
                                             $.jq_Alert({
