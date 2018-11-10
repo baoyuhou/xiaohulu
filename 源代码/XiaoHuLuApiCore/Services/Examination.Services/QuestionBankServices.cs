@@ -176,5 +176,35 @@ namespace Services.ExaminationServices
             List<TextType> textTypes = sugarClient.SqlQueryable<TextType>("select * from TextType where Enable = 1").ToList();
             return textTypes;
         }
+
+        /// <summary>
+        /// 显示题类型显示题数
+        /// </summary>
+        /// <returns></returns>
+        public List<TextTypeNum> TextTypeNums()
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                List<TextTypeNum>  textTypeNums = sugarClient.SqlQueryable<TextTypeNum>("select * from TextTypeNum").ToList();
+                return textTypeNums;
+            }
+        }
+
+        /// <summary>
+        /// 修改题量
+        /// </summary>
+        /// <returns></returns>
+        public int UpdateTextTypeNum(TextTypeNum textTypeNum)
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.Updateable<TextTypeNum>(textTypeNum);
+                if (result!=null)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+        }
     }
 }

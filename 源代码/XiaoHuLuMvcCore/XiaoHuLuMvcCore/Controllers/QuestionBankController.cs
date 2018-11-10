@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models.Examination;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -34,40 +36,41 @@ namespace XiaoHuLuMvcCore.Controllers
             return questionBankList;
         }
 
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public QuestionBankController(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
         /// <summary>
         /// 添加数据
         /// </summary>
         /// <param name="questionBank"></param>
         /// <returns></returns>
-        public int ADDQuestionBank(QuestionBankinherit questionBankinherit)
+        public void ADDQuestionBank(QuestionBankinherit questionBankinherit)
         {
-            //long size = files.Sum(f => f.Length);
-            //var fileFolder = Path.Combine("Photo");
-            //if (!Directory.Exists(fileFolder))
-            //    Directory.CreateDirectory(fileFolder);
-            //foreach (var formFile in files)
-            //{
-            //    if (formFile.Length > 0)
-            //    {
-            //        var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") +
-            //                       Path.GetExtension(formFile.FileName);
-            //        var filePath = Path.Combine(fileFolder, fileName);
-
-            //        using (var stream = new FileStream(filePath, FileMode.Create))
-            //        {
-            //            formFile.CopyToAsync(stream);
-            //        }
-            //    }
-            //}
-
-            var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADD", questionBankinherit);
-            if (result!=null)
+            long size = 0;
+            var files = Request.Form.Files;
+            foreach (var file in files)
             {
-                return 1;
+                //var fileName = file.FileName;
+                var fileName = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                fileName = _hostingEnvironment.WebRootPath + $@"\{fileName}";
+                size += file.Length;
+                using (FileStream fs = System.IO.File.Create(fileName))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+                questionBankinherit.Photo = fileName;
+                var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADD", questionBankinherit);
             }
-            return 0;
         }
-
+        
         /// <summary>
         /// 绑定题类型下拉框
         /// </summary>
@@ -78,5 +81,27 @@ namespace XiaoHuLuMvcCore.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 显示题型所显示题量
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetTextTypeNum()
+        {
+            var result = WebApiHelper.GetApiResult("get", "QuestionBank", "TextTypeNums");
+            return View(result);
+        }
+
+        /// <summary>
+        /// 显示题型所显示题量
+        /// </summary>
+        /// <returns></returns>
+        public void UpdateTextType()
+        {
+            var result = WebApiHelper.GetApiResult("get", "QuestionBank", "UpdateTextTypeNum");
+            if (result != null)
+            {
+                Response.WriteAsync("<script>alert('修改成功!')</script>");
+            }
+        }
     }
 }
