@@ -27,14 +27,15 @@ namespace Services.ExaminationServices
             questionBank.Photo = questionBankinherit.Photo;
             questionBank.TypeOfExam = questionBankinherit.TypeOfExam;
             questionBank.Enable = questionBankinherit.Enable;
-            var resultquestionBank = QuestionBankDB.Insert(questionBank);
-            if (resultquestionBank)
-            {
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
+            var resultquestionBank = sugarClient.Insertable<QuestionBank>(questionBank);
+            //if (resultquestionBank)
+            //{
                 //获取最后一个Id
-                using (SqlSugarClient sugarClient = Educationcontext.GetClient())
-                {
+                //using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+                //{
                     questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
-                }
+                //}
                 var resultQuestionBankId = questionBank.Id;
                 //添加到选项
                 Option option = new Option();
@@ -44,14 +45,14 @@ namespace Services.ExaminationServices
                 option.AnswerC = questionBankinherit.AnswerC;
                 option.AnswerD = questionBankinherit.AnswerD;
                 option.AnswerE = questionBankinherit.AnswerE;
-                var resultoption = OptionDB.Insert(option);
-                if (resultoption)
-                {
+                var resultoption = sugarClient.Insertable<Option>(option);
+            //if (resultoption)
+                //{
                     return 1;
-                }
-                return 0;
-            }
-            return 0;
+                //}
+                //return 0;
+            //}
+            //return 0;
         }
 
         /// <summary>
