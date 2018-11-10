@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.Examination;
 using IServices.Examination.IServices;
+using Models.Authority;
+
 namespace XiaoHuLuApiCore.Controllers
 {
     [Route("api/[controller]")]
@@ -66,7 +68,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("GetCandidate")]
         [HttpGet]
-        public Candidateinherit GetCandidate(string examNumber)
+        public Candidate GetCandidate(string examNumber)
         {
             var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
@@ -104,6 +106,13 @@ namespace XiaoHuLuApiCore.Controllers
         {
             var result = _examineeServices.UpdateById(candidateId);
             return result;
+        }
+
+        [Route("GetUsersByNameAndPwd")]
+        [HttpGet]
+        public Users GetUsersByNameAndPwd(string name,string pwd)
+        {
+            return _examineeServices.GetUsersByNameAndPwd(name,pwd);
         }
     }
 }

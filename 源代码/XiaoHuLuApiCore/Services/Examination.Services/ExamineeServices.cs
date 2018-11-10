@@ -4,6 +4,7 @@ using System.Text;
 
 using IServices.Examination.IServices;
 using Models;
+using Models.Authority;
 using Models.Examination;
 using SqlSugar;
 
@@ -66,14 +67,29 @@ namespace Services.Examination.Services
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        public Candidateinherit GetCandidatesByExamNumber(string examNumber)
+        public Candidate GetCandidatesByExamNumber(string examNumber)
         {
             SqlSugarClient sugarClient = Educationcontext.GetClient();
-            Candidateinherit candidateinherit = sugarClient.Queryable<Candidate, TestRoom, ExamRoom, Company, TestTime>((CD, TR, ER, CP, TT) => CD.CompanyID == CP.Id && CD.ExamRoomID == ER.Id && CD.TestRoomID == TR.ID && CD.ExamNumber == TT.ExamNumberId).Select((CD, TR, ER, CP, TT) => new Candidateinherit { Certificates = CD.Certificates, CompanyName = CP.Name, DocumentType = CD.DocumentType, Enable = CD.Enable, ExamNumber = CD.ExamNumber, ExamRoomName = ER.Name, Field = CD.Field, ID = CD.ID, LongExam = TT.LongExam, Name = CD.Name, Photo = CD.Photo, ProgressOfAnswer = TT.ProgressOfAnswer, RemainderLength = TT.RemainderLength, SeatNumber = CD.SeatNumber, Sex = CD.Sex, TestRoomName = TR.Name, TimeUsed = TT.TimeUsed }).Where(m => m.ExamNumber == examNumber).First();
+           var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
             
-            return candidateinherit;
+            return candidate;
         }
-        
+
+        /// <summary>
+        /// 获取后台登陆人的信息
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public Users GetUsersByNameAndPwd(string name, string pwd)
+        {
+            using (SqlSugarClient  sqlsc =Educationcontext.GetClient())
+            {
+              var user=  sqlsc.Queryable<Users>().First(s=>(s.UserName==name)&&(s.Password==pwd));
+                return user;
+            }
+        }
+
         /// <summary>
         /// 修改考生
         /// </summary>

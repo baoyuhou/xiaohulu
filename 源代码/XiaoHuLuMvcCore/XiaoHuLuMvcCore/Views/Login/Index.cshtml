@@ -1,0 +1,81 @@
+﻿@{
+
+    Layout = null;
+ } 
+
+
+
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小葫芦程远教育</title>
+    <script src="~/logincs/js/jquery-2.1.1.min.js"></script>
+    <link href="~/logincs/css/styles.css" rel="stylesheet" />
+</head>
+<body style="width:100%;height:1000px">
+    <div  style="width:80%;height:80%;margin:0 auto">
+        <img src="~/img/chaoneng.jpg"  style="width:100%;height:20%"/>
+
+    </div>
+    <div class="htmleaf-container">
+        <div class="wrapper">
+            <div class="container">
+                <h1>Welcome</h1>
+
+                <form class="form" id="form1">
+                    <input type="text" placeholder="Username或准考证号" id="name">
+                    <input type="password" placeholder="Password（考生不用密码）" id="pwd">
+                    <button type="button" id="login-button">Login</button>
+                </form>
+            </div>
+
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script src="~/logincs/js/jquery-2.1.1.min.js"></script>
+    <script>
+        $('#login-button').click(function (event) {
+            event.preventDefault();
+            $('form').fadeOut(500);
+            $('.wrapper').addClass('form-success');
+            var name = $("#name").val();
+            var pwd = $("#pwd").val();
+
+            $.ajax({
+                url: '/login/index',
+                type: "post",
+                data: { "name": name, "pwd":pwd },
+                success: function (data) {
+                    console.log(data)
+                    if (data == 2) {
+                        //跳转到后台管理
+                        document.location.href = "/explain/index"
+                    } else if (data == 1) {
+                        ///跳转到前端考试
+                        document.location.href = "/Answer/Index"
+                    }
+                    else {
+                        alert("登陆失败，请检查用户名和密码")
+                    }
+
+                }
+            })
+        });
+    </script>
+
+</body>
+</html>

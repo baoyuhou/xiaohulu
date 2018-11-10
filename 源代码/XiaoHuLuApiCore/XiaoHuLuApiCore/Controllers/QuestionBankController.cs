@@ -106,5 +106,29 @@ namespace XiaoHuLuApiCore.Controllers
             var result = _questionBankServices.GetTextType();
             return result;
         }
+
+        /// <summary>
+        /// 显示题类型显示题数
+        /// </summary>
+        /// <returns></returns>
+        [Route("TextTypeNums")]
+        [HttpGet]
+        public List<TextTypeNum> TextTypeNums()
+        {
+            var result = _questionBankServices.TextTypeNums();
+            return result;
+        }
+
+        /// <summary>
+        /// 修改题量
+        /// </summary>
+        /// <returns></returns>
+        [Route("UpdateTextTypeNum")]
+        [HttpPut]
+        public int UpdateTextTypeNum(TextTypeNum textTypeNum)
+        {
+            var result = _questionBankServices.UpdateTextTypeNum(textTypeNum);
+            return result;
+        }
     }
 }

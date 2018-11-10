@@ -54,5 +54,17 @@ namespace IServices.IExaminationServices
         /// </summary>
         /// <returns></returns>
         List<TextType> GetTextType();
+
+        /// <summary>
+        /// 显示题类型显示题数
+        /// </summary>
+        /// <returns></returns>
+        List<TextTypeNum> TextTypeNums();
+
+        /// <summary>
+        /// 修改题量
+        /// </summary>
+        /// <returns></returns>
+        int UpdateTextTypeNum(TextTypeNum textTypeNum);
     }
 }
