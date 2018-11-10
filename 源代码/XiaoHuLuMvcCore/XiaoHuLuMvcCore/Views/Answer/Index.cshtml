@@ -37,16 +37,18 @@
                             </p>
                             <font><input type="button" name="test_jiaojuan" value="交卷"></font>
                         </div>
+
                         @foreach (var item in Model)
                         {
                             <div class="test_content">
                                 <div class="test_content_title">
-                                    <h2>单选题</h2>
+                                    <h2>@item.ExamType[0]</h2>
                                     <p>
                                         <span>共</span><i class="content_lit">60</i><span>题，</span><span>合计</span><i class="content_fs">60</i><span>分</span>
                                     </p>
                                 </div>
                             </div>
+
                             if (@item.TypeOfExam == 1)
                             {
                                 <div class="test_content_nr">
@@ -99,14 +101,14 @@
                                     </ul>
                                 </div>
                             }
-                            <div class="test_content">
-                                <div class="test_content_title">
-                                    <h2>多选题</h2>
-                                    <p>
-                                        <span>共</span><i class="content_lit">30</i><span>题，</span><span>合计</span><i class="content_fs">30</i><span>分</span>
-                                    </p>
-                                </div>
-                            </div>
+                            @*<div class="test_content">
+                <div class="test_content_title">
+                    <h2>多选题</h2>
+                    <p>
+                        <span>共</span><i class="content_lit">30</i><span>题，</span><span>合计</span><i class="content_fs">30</i><span>分</span>
+                    </p>
+                </div>
+            </div>*@
 
                             if (@item.TypeOfExam == 2)
                             {
