@@ -26,12 +26,12 @@ namespace Services.AnswerServices
                 //    @where= pageparams.StrWhere,
                 //    @columns= pageparams.Columns
                 //});
-                
+
                 var answermodels = db.Queryable<QuestionBank, TextType, Option>((questionbank, texttype, op) => new object[] {
             JoinType.Inner,questionbank.TypeOfExam==texttype.ID,
             JoinType.Inner,questionbank.Id==op.QuestionBankId
             })
-            //    .Where((questionbank, texttype, op) => questionbank.Id == Id)
+               //    .Where((questionbank, texttype, op) => questionbank.Id == Id)
                .Select((questionbank, texttype, op) => new AnswerModel
                {
                    Id = questionbank.Id,
@@ -46,7 +46,7 @@ namespace Services.AnswerServices
                    AnswerC = op.AnswerC,
                    AnswerD = op.AnswerD,
                    AnswerE = op.AnswerE
-               }).ToPageList(Id, 1, ref totalCount); ;
+               }).ToList();
                 return answermodels;
             }
         }
