@@ -31,26 +31,26 @@ namespace Services.ExaminationServices
             var resultquestionBank = sugarClient.Insertable<QuestionBank>(questionBank);
             //if (resultquestionBank)
             //{
-                //获取最后一个Id
-                //using (SqlSugarClient sugarClient = Educationcontext.GetClient())
-                //{
-                    questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
-                //}
-                var resultQuestionBankId = questionBank.Id;
-                //添加到选项
-                Option option = new Option();
-                option.QuestionBankId = resultQuestionBankId;
-                option.AnswerA = questionBankinherit.AnswerA;
-                option.AnswerB = questionBankinherit.AnswerB;
-                option.AnswerC = questionBankinherit.AnswerC;
-                option.AnswerD = questionBankinherit.AnswerD;
-                option.AnswerE = questionBankinherit.AnswerE;
-                var resultoption = sugarClient.Insertable<Option>(option);
+            //获取最后一个Id
+            //using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            //{
+            questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
+            //}
+            var resultQuestionBankId = questionBank.Id;
+            //添加到选项
+            Option option = new Option();
+            option.QuestionBankId = resultQuestionBankId;
+            option.AnswerA = questionBankinherit.AnswerA;
+            option.AnswerB = questionBankinherit.AnswerB;
+            option.AnswerC = questionBankinherit.AnswerC;
+            option.AnswerD = questionBankinherit.AnswerD;
+            option.AnswerE = questionBankinherit.AnswerE;
+            var resultoption = sugarClient.Insertable<Option>(option);
             //if (resultoption)
-                //{
-                    return 1;
-                //}
-                //return 0;
+            //{
+            return 1;
+            //}
+            //return 0;
             //}
             //return 0;
         }
@@ -78,23 +78,16 @@ namespace Services.ExaminationServices
                     SqlSugarClient sugarClient = Educationcontext.GetClient();
                     questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
 
-                    var resultQuestionBankId = questionBank.Id;
                     //添加到选项
                     Option option = new Option();
-                    option.QuestionBankId = resultQuestionBankId;
+                    option.QuestionBankId = questionBank.Id;
                     option.AnswerA = item.AnswerA;
                     option.AnswerB = item.AnswerB;
                     option.AnswerC = item.AnswerC;
                     option.AnswerD = item.AnswerD;
                     option.AnswerE = item.AnswerE;
-                    var resultoption = OptionDB.Insert(option);
-                    if (resultoption)
-                    {
-                        return 1;
-                    }
-                    return 0;
+                    OptionDB.Insert(option);
                 }
-                return 0;
             }
             return 0;
         }
@@ -121,7 +114,7 @@ namespace Services.ExaminationServices
         public List<QuestionBankinherit> GetQuestionBanksByTypeOfExam(int TypeOfExamId)
         {
             SqlSugarClient sugarClient = Educationcontext.GetClient();
-            List<QuestionBankinherit> questionBankinherits = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, Op, TT) => QB.Id == Op.QuestionBankId && QB.Id==Op.QuestionBankId).Where((QB, Op, TT) => QB.TypeOfExam == TypeOfExamId).Select((QB, Op, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = Op.AnswerA, AnswerB = Op.AnswerB, AnswerC = Op.AnswerC, AnswerD = Op.AnswerD, AnswerE = Op.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Photo = QB.Photo, ExamType = TT.ExamType }).ToList();
+            List<QuestionBankinherit> questionBankinherits = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, Op, TT) => QB.Id == Op.QuestionBankId && QB.Id == Op.QuestionBankId).Where((QB, Op, TT) => QB.TypeOfExam == TypeOfExamId).Select((QB, Op, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = Op.AnswerA, AnswerB = Op.AnswerB, AnswerC = Op.AnswerC, AnswerD = Op.AnswerD, AnswerE = Op.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Photo = QB.Photo, ExamType = TT.ExamType }).ToList();
             return questionBankinherits;
         }
 

@@ -39,6 +39,7 @@ namespace XiaoHuLuMvcCore.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public int Create(Explain explain)
         {
@@ -57,6 +58,7 @@ namespace XiaoHuLuMvcCore.Controllers
             var result = WebApiHelper.GetApiResult("get","explain", "GetExplainById?id="+id);
             return View(JsonConvert.DeserializeObject<Explain>(result));
         }
+
         [HttpPost]
         public int Edit(Explain explain)
         {
