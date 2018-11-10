@@ -7,8 +7,7 @@ namespace Models
     /// <summary>
     /// 角色权限表
     /// </summary>
-    public class RoleanJurisdiction
-    {
+    public class RoleanJurisdiction   {
         /// <summary>
         /// 主键id
         /// </summary>

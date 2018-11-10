@@ -41,6 +41,9 @@ namespace XiaoHuLuApiCore
             //用户
             services.AddSingleton<IServices.IAuthority.IUserServices,Services.Authority.Services.UsersServices>();
 
+            //角色
+            services.AddSingleton<IServices.IAuthority.IRoleServices, Services.Authority.RoleServices>();
+
             //题库
             services.AddSingleton<IServices.IExaminationServices.IQuestionBankServices, Services.ExaminationServices.QuestionBankServices>();
 
