@@ -13,7 +13,7 @@ namespace IServices.IAuthority
    public interface IUserServices
     {
         /// <summary>
-        /// 单条添加用户
+        /// 单条添加用户角色信息
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -24,19 +24,5 @@ namespace IServices.IAuthority
         /// </summary>
         /// <returns></returns>
         List<UsersInfo> GetUsersList();
-
-        /// <summary>
-        /// 修改用户
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        int Edit(UsersInfo usersInfo);
-
-        /// <summary>
-        /// 反填用户信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Users EditById(int id);
     }
 }

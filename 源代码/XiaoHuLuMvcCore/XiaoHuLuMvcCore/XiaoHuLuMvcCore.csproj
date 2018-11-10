@@ -16,6 +16,10 @@
 
   <ItemGroup>
     <Folder Include="Models\QuestionBank\" />
+    <Folder Include="wwwroot\Content\Resources\files\" />
+    <Folder Include="wwwroot\Content\Resources\icons\" />
+    <Folder Include="wwwroot\Content\Resources\swf\" />
+    <Folder Include="wwwroot\Content\Resources\video\" />
   </ItemGroup>
 
 </Project>

@@ -21,15 +21,40 @@ namespace XiaoHuLuApiCore.Controllers
         }
 
         /// <summary>
-        /// 获取用户角色信息
+        /// 获取角色信息
         /// </summary>
         /// <returns></returns>
         [Route("GetRoleList")]
         [HttpGet]
-        public List<JurisdictionInfo> GetRoleList()
+        public List<Role> GetRoleList()
         {
             var roleList = _roleServices.GetRoles();
             return roleList;
+        }
+
+        /// <summary>
+        /// 获取角色和权限信息
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetRoleList")]
+        [HttpGet]
+        public List<JurisdictionInfo> GetJurisdictionInfos()
+        {
+            var roleList = _roleServices.GetJurisdictionInfos();
+            return roleList;
+        }
+
+        /// <summary>
+        /// 单条添加角色和权限
+        /// </summary>
+        /// <param name="jurisdictionInfo"></param>
+        /// <returns></returns>
+        [Route("RoleAdd")]
+        [HttpPost]
+        public int RoleAdd(JurisdictionInfo jurisdictionInfo)
+        {
+            var roleAdd = _roleServices.Add(jurisdictionInfo);
+            return roleAdd;
         }
     }
 }

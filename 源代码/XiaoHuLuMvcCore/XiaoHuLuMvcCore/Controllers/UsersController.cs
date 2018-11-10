@@ -13,7 +13,7 @@ namespace XiaoHuLuMvcCore.Controllers
     public class UsersController : Controller
     {
         /// <summary>
-        /// 显示全部信息
+        /// 显示用户和角色信息
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
@@ -26,7 +26,7 @@ namespace XiaoHuLuMvcCore.Controllers
         }
 
         /// <summary>
-        /// 单条添加用户信息
+        /// 单条添加用户和角色信息
         /// </summary>
         /// <param name="usersInfo"></param>
         /// <returns></returns>
@@ -34,6 +34,15 @@ namespace XiaoHuLuMvcCore.Controllers
         {
             var result = WebApiHelper.GetApiResult("Post", "User", "UsersAdd",usersInfo);
             return result;
+        }
+
+        /// <summary>
+        /// 首页
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Login()
+        {
+            return View();
         }
 
     }
