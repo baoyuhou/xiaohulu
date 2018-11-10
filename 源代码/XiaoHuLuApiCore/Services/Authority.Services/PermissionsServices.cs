@@ -19,7 +19,8 @@ namespace Services.Authority.Services
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
                 var result = db.SqlQueryable<Jurisdiction>("select * from Jurisdiction where Level=0");
-                return result.ToList();
+                var list = result.ToList();
+                return list;
             }
         }
     }
