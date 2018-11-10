@@ -12,7 +12,7 @@
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/css/amazeui.min.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
-   
+
 </head>
 <body>
     <div id="divapp" class="dvcontent">
@@ -83,8 +83,7 @@
                                             </div>
                                             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
                                                  style="padding-top: 30px;">
-                                                <form class="am-form am-form-horizontal"
-                                                      action="user/addUser1Submit.action" method="post">
+                                                <form class="am-form am-form-horizontal" method="post">
 
                                                     <div class="am-form-group">
                                                         <label for="user-name" class="am-u-sm-3 am-form-label">
@@ -100,11 +99,10 @@
                                                             题型 / TypeOfExam
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="" id="TypeOfExam" required
-                                                                   placeholder="题型 / TypeOfExam" name="TypeOfExam">
-                                                            <select id="Select1" v-for="item in select">
-                                                                <option></option>
-
+                                                            @*<input type="" id="TypeOfExam" required
+                                                                placeholder="题型 / TypeOfExam" name="TypeOfExam">*@
+                                                            <select id="TypeOfExam">
+                                                                <option v-for="item in textType" value="{{item.ID}}">{{item.ExamType}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -113,7 +111,7 @@
                                                             图片 / Photo
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="Photo" required
+                                                            <input type="file" id="Photo"
                                                                    placeholder="图片 / Photo" name="Photo">
                                                         </div>
                                                     </div>
@@ -140,7 +138,7 @@
                                                             答案C / AnswerC
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerC" 
+                                                            <input type="text" id="AnswerC"
                                                                    placeholder="答案C / AnswerC" name="AnswerC">
                                                         </div>
                                                     </div>
@@ -149,7 +147,7 @@
                                                             答案D / AnswerD
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerD" 
+                                                            <input type="text" id="AnswerD"
                                                                    placeholder="答案D / AnswerD" name="AnswerD">
                                                         </div>
                                                     </div>
@@ -158,8 +156,17 @@
                                                             答案E / AnswerE
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerE" required
+                                                            <input type="text" id="AnswerE"
                                                                    placeholder="答案E / AnswerE" name="AnswerE">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            正确答案 / Answer
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Answer"
+                                                                   placeholder="正确答案 / Answer" name="Answer">
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
@@ -167,8 +174,8 @@
                                                             是否启用 / Enable
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="Enable" required
-                                                                   placeholder="是否启用 / Enable" name="Enable">
+                                                            <input id="Radio1" type="radio" name="Enable" value="1" />启用
+                                                            <input id="Radio1" type="radio" name="Enable" value="0" />禁用
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
@@ -190,13 +197,10 @@
             </div>
         </div>
     </div>
-    @*<script src="~/js/jquery-3.1.1.js"></script>*@
-    @*<script src="~/js/jquery-3.1.1.js"></script>*@
+
     <script src="~/js/jquery-1.7.2.min.js"></script>
-    @*<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>*@
     <script src="~/js/axios.js"></script>
     <script src="~/js/vue.js"></script>
-    @*<script src="https://unpkg.com/axios/dist/axios.min.js"></script>*@
     <script src="~/js/Jqueryplugs.js"></script>
     <script src="~/js/_layout.js"></script>
     <script src="~/js/jquery.SuperSlide.source.js"></script>
@@ -206,17 +210,6 @@
             $(".tabs").slide({ trigger: "click" });
         });
 
-        $("#btnadd").click(function () {
-            $.ajax({
-                url: '/QuestionBank/ADDQuestionBank',
-                date: {},
-                type: 'post',
-                success: function (date) {
-
-                }
-            })
-        })
-
         var btn_save = function () {
             var pid = $("#RawMaterialsTypePageId  option:selected").val();
             var name = $("#RawMaterialsTypeName").val();
@@ -224,8 +217,10 @@
             var ramark = $("#Ramark").val();
             $.ajax({
                 type: "post",
-                url: "/QuestionBank/",
-                data: { name: name, pid: pid, desc: desc, ramark: ramark },
+                url: "/QuestionBank/ADDQuestionBank",
+                data: {
+                    "Subject": $("#Subject").val(), "TypeOfExam": $("#TypeOfExam").val(), "AnswerA": $("#AnswerA").val(), "AnswerB": $("AnswerB").val(), "AnswerC": $("AnswerC").val(), "AnswerD": $("AnswerD").val(), "AnswerE": $("AnswerE").val(), "Answer": $("Answer").val()
+                },
                 success: function (data) {
                     if (data > 0) {
                         $.jq_Alert({
@@ -238,6 +233,7 @@
                                 //$("#Ramark").val("");
                                 //page1();
                                 location.reload();
+
                             }
                         });
                     }
@@ -261,7 +257,8 @@
         var divapp = new Vue({
             el: '#divapp',
             data: {
-                info: null
+                info: null,
+                textType: null
             },
             mounted: function () {
                 var that = this;
@@ -270,7 +267,13 @@
                     method: "get"
                 }).then(function (res) {
                     that.info = res.data;
-                })
+                }),
+                    axios({
+                        url: "/QuestionBank/GetTextType",
+                        method: "get"
+                    }).then(function (res) {
+                        that.textType = res.data;
+                    })
             },
         })
     </script>

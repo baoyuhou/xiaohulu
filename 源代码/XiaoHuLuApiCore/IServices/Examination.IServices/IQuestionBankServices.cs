@@ -48,6 +48,11 @@ namespace IServices.IExaminationServices
         /// <param name="questionBank"></param>
         /// <returns></returns>
         int Update(QuestionBankinherit questionBank);
-        
+
+        /// <summary>
+        /// 显示全部题类型
+        /// </summary>
+        /// <returns></returns>
+        List<TextType> GetTextType();
     }
 }
