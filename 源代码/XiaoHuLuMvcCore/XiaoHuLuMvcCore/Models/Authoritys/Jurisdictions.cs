@@ -24,7 +24,7 @@ namespace XiaoHuLuMvcCore.Models.Authoritys
         /// <summary>
         /// 权限路径
         /// </summary>
-        public int Url { get; set; }
+        public string Url { get; set; }
 
     }
 }

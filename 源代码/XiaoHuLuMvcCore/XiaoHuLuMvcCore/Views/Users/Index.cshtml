@@ -3,7 +3,6 @@
     Layout = null;
 }
 @model IEnumerable<XiaoHuLuMvcCore.Models.Authority.UsersInfo>
-<html>
 
 <head>
     <meta charset="UTF-8">
@@ -55,8 +54,8 @@
                                             </tr>
 
                                         }
-                                        </tbody>
-</table>
+                                    </tbody>
+                                </table>
                             </div>
                             <!--分页显示角色信息 end-->
                         </li>
@@ -104,7 +103,7 @@
                                                         <div class="am-u-sm-9">
                                                             @foreach (var item in ViewBag.roleResult as List<XiaoHuLuMvcCore.Models.Authoritys.Role>)
                                                             {
-                                                                <input name="CheckRole" type="checkbox" value="@item.Id"/> @item.RoleName
+                                                                <input name="CheckRole" type="checkbox" value="@item.Id" /> @item.RoleName
                                                             }
 
                                                         </div>
@@ -123,70 +122,69 @@
                                 <!-- content end -->
                             </div>
                             <!--添加角色 end-->
-                </ul>
-            </div>
-        </div>
-
                         </div>
-                        <script src="~/js/jquery-1.7.2.min.js"></script>
-                        <script src="~/js/Jqueryplugs.js"></script>
-                        <script src="~/js/_layout.js"></script>
-                        <script src="~/js/jquery.SuperSlide.source.js"></script>
-                        <script>
-                            var num = 1;
-                            $(function () {
-
-                                $(".tabs").slide({ trigger: "click" });
-
-                            });
-
-
-                            function btn_save() {
-                                var strnum = [];
-                                $("[name='CheckRole']:checked").each(function () {
-                                    strnum += $(this).val()+","
-                                })
-                               
-                                var pid = $("#RawMaterialsTypePageId  option:selected").val();
-                                var name = $("#RawMaterialsTypeName").val();
-                                var desc = $("#RawMaterialsTypeDescription").val();
-                                var ramark = $("#Ramark").val();
-                                $.ajax({
-                                    type: "post",
-                                    url: "/Users/UserAdd",
-                                    data: { "UserName": $("#UserName").val(), "Password": $("#Password").val(), "RoleName": strnum.toString() },
-                                    success: function (data) {
-                                        if (data > 0) {
-                                            $.jq_Alert({
-                                                message: "添加成功",
-                                                btnOktext: "确认",
-                                                dialogModal: true,
-                                                btnOkClick: function () {
-                                                    //$("#RawMaterialsTypeName").val("");
-                                                    //$("#RawMaterialsTypeDescription").val("");
-                                                    //page1();
-                                                    location.reload();
-
-                                                }
-                                            });
-                                        }
-                                    }
-                                });
-                                alert(t);
-                            }
-
-                            var btn_edit = function (id) {
-                                $.jq_Panel({
-                                    url: "/RawMaterialsType/EditRawMaterialsType?id=" + id,
-                                    title: "编辑分类",
-                                    dialogModal: true,
-                                    iframeWidth: 500,
-                                    iframeHeight: 400
-                                });
-                            }
-                        </script>
-
-</div>
+                    </ul>
+                </div>
             </div>
         </div>
+    </div>
+    <script src="~/js/jquery-1.7.2.min.js"></script>
+    <script src="~/js/Jqueryplugs.js"></script>
+    <script src="~/js/_layout.js"></script>
+    <script src="~/js/jquery.SuperSlide.source.js"></script>
+    <script>
+        var num = 1;
+        $(function () {
+
+            $(".tabs").slide({ trigger: "click" });
+
+        });
+
+
+        function btn_save() {
+            var strnum = [];
+            $("[name='CheckRole']:checked").each(function () {
+                strnum += $(this).val() + ","
+            })
+
+            var pid = $("#RawMaterialsTypePageId  option:selected").val();
+            var name = $("#RawMaterialsTypeName").val();
+            var desc = $("#RawMaterialsTypeDescription").val();
+            var ramark = $("#Ramark").val();
+            $.ajax({
+                type: "post",
+                url: "/Users/UserAdd",
+                data: { "UserName": $("#UserName").val(), "Password": $("#Password").val(), "RoleName": strnum.toString() },
+                success: function (data) {
+                    if (data > 0) {
+                        $.jq_Alert({
+                            message: "添加成功",
+                            btnOktext: "确认",
+                            dialogModal: true,
+                            btnOkClick: function () {
+                                //$("#RawMaterialsTypeName").val("");
+                                //$("#RawMaterialsTypeDescription").val("");
+                                //page1();
+                                location.reload();
+
+                            }
+                        });
+                    }
+                }
+            });
+            alert(t);
+        }
+
+        var btn_edit = function (id) {
+            $.jq_Panel({
+                url: "/RawMaterialsType/EditRawMaterialsType?id=" + id,
+                title: "编辑分类",
+                dialogModal: true,
+                iframeWidth: 500,
+                iframeHeight: 400
+            });
+        }
+    </script>
+
+    </div>
 </body>

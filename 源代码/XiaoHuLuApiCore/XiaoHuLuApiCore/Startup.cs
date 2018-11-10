@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IServices.Authority.IServices;
 using IServices.IAnswerServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Options;
 using Models;
 using Newtonsoft.Json.Serialization;
 using Services.AnswerServices;
+using Services.Authority.Services;
 
 namespace XiaoHuLuApiCore
 {
@@ -55,6 +57,9 @@ namespace XiaoHuLuApiCore
 
             //考生操作
             services.AddSingleton<IServices.Examination.IServices.IExamineeServices, Services.Examination.Services.ExamineeServices>();
+
+            //权限操作
+            services.AddSingleton<IPermissionsServices, PermissionsServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
