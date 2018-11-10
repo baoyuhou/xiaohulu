@@ -13,12 +13,32 @@ namespace Services.Authority
     {
         //角色表
         public SimpleClient<Role> RoleDB = new SimpleClient<Role>(Educationcontext.GetClient());
-        //角色从表
+        //角色、权限从表
         public SimpleClient<JurisdictionInfo> SimpleClient = new SimpleClient<JurisdictionInfo>(Educationcontext.GetClient());
-        public int Add(Role role)
+        public int Add(JurisdictionInfo jurisdictionInfo)
         {
-            var result = Convert.ToInt32(RoleDB.Insert(role));
-            return result;
+            Role role = new Role();
+            role.RoleName = jurisdictionInfo.RoleName;
+            var result = RoleDB.Insert(role);
+            if (result)
+            {
+                SqlSugarClient sqlSugarClient = Educationcontext.GetClient();
+                var db = sqlSugarClient.SqlQueryable<Role>("select Id from Role order by Id").Max(s => s.Id);
+                RoleanJurisdiction roleanJurisdiction = new RoleanJurisdiction();
+                roleanJurisdiction.RolesId = db;
+                var num = jurisdictionInfo.Name.Substring(0, jurisdictionInfo.Name.LastIndexOf(',')).Split(',');
+                var roledb = 0;
+                foreach (var item in num)
+                {
+                    roleanJurisdiction.JurisdictionId = int.Parse(item);
+                    roledb += sqlSugarClient.Insertable<RoleanJurisdiction>(roleanJurisdiction).ExecuteCommand();
+                }
+                if (roledb == num.Length)
+                {
+                    return 1;
+                }
+            }
+            return 0;
         }
 
         public int Edit(Role role)
