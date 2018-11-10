@@ -33,7 +33,7 @@ namespace XiaoHuLuApiCore.Controllers
         }
 
         /// <summary>
-        /// 单条添加用户信息
+        /// 单条添加用户和角色信息
         /// </summary>
         /// <param name="usersInfo"></param>
         /// <returns></returns>

@@ -18,7 +18,7 @@ namespace Services.Authority.Services
         public SimpleClient<Users> UsersDB = new SimpleClient<Users>(Educationcontext.GetClient());
 
         /// <summary>
-        /// 单条添加用户
+        /// 单条添加用户角色信息
         /// </summary>
         /// <param name="usersInfo"></param>
         /// <returns></returns>
@@ -54,7 +54,7 @@ namespace Services.Authority.Services
         }
    
         /// <summary>
-        /// 显示全部信息
+        /// 获取用户角色信息
         /// </summary>
         /// <returns></returns>
         public List<UsersInfo> GetUsersList()
@@ -65,23 +65,6 @@ namespace Services.Authority.Services
                 var result = db.SqlQueryable<UsersInfo>("select a.Id,a.UserName,a.`Password`,b.RoleName,c.UsersId,c.RolesId from Users a,Role b,UserandRole c where a.Id=c.UsersId and b.Id=c.RolesId");
                 return result.ToList();
             }
-        }
-
-        /// <summary>
-        /// 修改用户信息
-        /// </summary>
-        /// <param name="usersInfo"></param>
-        /// <returns></returns>
-        public int Edit(UsersInfo usersInfo)
-        {
-            var result = Convert.ToInt32(UsersInfoDB.Update(usersInfo));
-            return result;
-        }
-
-        public Users EditById(int id)
-        {
-            var result = UsersDB.GetSingle(m => m.Id == id);
-            return result;
         }
     }
 }
