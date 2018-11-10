@@ -12,9 +12,13 @@ namespace Services.Authority
     public class RoleServices : IRoleServices
     {
         //角色表
+        /// <summary>
+        /// 
+        /// </summary>
         public SimpleClient<Role> RoleDB = new SimpleClient<Role>(Educationcontext.GetClient());
 
-        //角色、权限从表
+
+        ///角色、权限从表
         public SimpleClient<JurisdictionInfo> SimpleClient = new SimpleClient<JurisdictionInfo>(Educationcontext.GetClient());
 
         /// <summary>

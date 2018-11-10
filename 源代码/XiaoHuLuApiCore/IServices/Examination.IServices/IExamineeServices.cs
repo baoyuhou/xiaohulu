@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Models.Authority;
 using Models.Examination;
 
 namespace IServices.Examination.IServices
@@ -54,6 +54,14 @@ namespace IServices.Examination.IServices
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        Candidateinherit GetCandidatesByExamNumber(string examNumber);
+        Candidate GetCandidatesByExamNumber(string examNumber);
+
+        /// <summary>
+        /// 获取后台登陆人的信息
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        Users GetUsersByNameAndPwd(string name,string pwd);
     }
 }

@@ -78,23 +78,16 @@ namespace Services.ExaminationServices
                     SqlSugarClient sugarClient = Educationcontext.GetClient();
                     questionBank = sugarClient.SqlQueryable<QuestionBank>("select id from QuestionBank order by id DESC limit 1").First();
 
-                    var resultQuestionBankId = questionBank.Id;
                     //添加到选项
                     Option option = new Option();
-                    option.QuestionBankId = resultQuestionBankId;
+                    option.QuestionBankId = questionBank.Id;
                     option.AnswerA = item.AnswerA;
                     option.AnswerB = item.AnswerB;
                     option.AnswerC = item.AnswerC;
                     option.AnswerD = item.AnswerD;
                     option.AnswerE = item.AnswerE;
-                    var resultoption = OptionDB.Insert(option);
-                    if (resultoption)
-                    {
-                        return 1;
-                    }
-                    return 0;
+                    OptionDB.Insert(option);
                 }
-                return 0;
             }
             return 0;
         }
