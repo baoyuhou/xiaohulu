@@ -16,7 +16,13 @@ namespace IServices.IAuthority
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
-        int Add(Role role);
+        int Add(JurisdictionInfo jurisdictionInfo);
+        
+        /// <summary>
+        /// 获取角色列表
+        /// </summary>
+        /// <returns></returns>
+        List<JurisdictionInfo> GetRoles();
 
         /// <summary>
         /// 修改角色
@@ -31,5 +37,11 @@ namespace IServices.IAuthority
         /// <param name="id"></param>
         /// <returns></returns>
         Role EditById(int id);
+
+        /// <summary>
+        /// 获取权限信息
+        /// </summary>
+        /// <returns></returns>
+        List<Jurisdiction> GetJurisdictions(); 
     }
 }

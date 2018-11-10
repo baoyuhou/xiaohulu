@@ -49,6 +49,7 @@ namespace XiaoHuLuApiCore
 
             //前台题库
             services.AddSingleton<IAnswer, Answer>();
+            services.AddSingleton<IServices.IAuthority.IRoleServices, Services.Authority.RoleServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

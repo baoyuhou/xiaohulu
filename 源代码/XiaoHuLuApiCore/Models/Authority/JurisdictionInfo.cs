@@ -29,13 +29,10 @@ namespace Models.Authority
         public int Level { get; set; }
 
         /// <summary>
-        /// 父级权限
+        /// 权限路径
         /// </summary>
-        public int Father { get; set; }
-        /// <summary>
-        /// 子级权限
-        /// </summary>
-        public int Child { get; set; }
+        public string Url { get; set; }
+
         /// <summary>
         /// 角色id
         /// </summary>
