@@ -39,7 +39,7 @@ namespace XiaoHuLuMvcCore.Controllers
         /// </summary>
         /// <param name="questionBank"></param>
         /// <returns></returns>
-        public int ADDQuestionBank(QuestionBank questionBank)
+        public int ADDQuestionBank(QuestionBankinherit questionBankinherit)
         {
             //long size = files.Sum(f => f.Length);
             //var fileFolder = Path.Combine("Photo");
@@ -60,7 +60,7 @@ namespace XiaoHuLuMvcCore.Controllers
             //    }
             //}
 
-            var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADD", questionBank);
+            var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADD", questionBankinherit);
             if (result!=null)
             {
                 return 1;

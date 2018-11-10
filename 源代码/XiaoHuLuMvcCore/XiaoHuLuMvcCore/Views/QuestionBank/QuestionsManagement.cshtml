@@ -12,6 +12,7 @@
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/css/amazeui.min.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
+    <script src="~/js/jquery-1.7.2.min.js"></script>
 
 </head>
 <body>
@@ -83,8 +84,7 @@
                                             </div>
                                             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
                                                  style="padding-top: 30px;">
-                                                <form class="am-form am-form-horizontal" method="post">
-
+                                                <form class="am-form am-form-horizontal" action="/QuestionBank/ADDQuestionBank" method="post">
                                                     <div class="am-form-group">
                                                         <label for="user-name" class="am-u-sm-3 am-form-label">
                                                             题目 / Subject
@@ -102,7 +102,7 @@
                                                             @*<input type="" id="TypeOfExam" required
                                                                 placeholder="题型 / TypeOfExam" name="TypeOfExam">*@
                                                             <select id="TypeOfExam">
-                                                                <option v-for="item in textType" value="{{item.ID}}">{{item.ExamType}}</option>
+                                                                <option v-for="item in textType" v-bind:value="item.ID" >{{item.ExamType}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -164,8 +164,8 @@
                                                         <label for="user-name" class="am-u-sm-3 am-form-label">
                                                             正确答案 / Answer
                                                         </label>
-                                                        <div class="am-u-sm-9">
-                                                            <input type="text" id="Answer"
+                                                        <div class="am-u-sm-9">required
+                                                            <input type="text" id="Answer"required
                                                                    placeholder="正确答案 / Answer" name="Answer">
                                                         </div>
                                                     </div>
@@ -173,14 +173,14 @@
                                                         <label for="user-name" class="am-u-sm-3 am-form-label">
                                                             是否启用 / Enable
                                                         </label>
-                                                        <div class="am-u-sm-9">
-                                                            <input id="Radio1" type="radio" name="Enable" value="1" />启用
+                                                        <div class="am-u-sm-9">required
+                                                            <input id="Radio1" type="radio" name="Enable" checked="checked" value="1" />启用
                                                             <input id="Radio1" type="radio" name="Enable" value="0" />禁用
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
                                                         <div class="am-u-sm-9 am-u-sm-push-3">
-                                                            <input id="btnadd" type="submit" class="am-btn am-btn-success" value="添加用户" />
+                                                            <input id="btnadd"  onclick="btn_save()" type="submit" class="am-btn am-btn-success" value="添加用户" />
                                                         </div>
                                                     </div>
                                                 </form>
@@ -198,7 +198,6 @@
         </div>
     </div>
 
-    <script src="~/js/jquery-1.7.2.min.js"></script>
     <script src="~/js/axios.js"></script>
     <script src="~/js/vue.js"></script>
     <script src="~/js/Jqueryplugs.js"></script>
@@ -210,16 +209,20 @@
             $(".tabs").slide({ trigger: "click" });
         });
 
-        var btn_save = function () {
-            var pid = $("#RawMaterialsTypePageId  option:selected").val();
-            var name = $("#RawMaterialsTypeName").val();
-            var desc = $("#RawMaterialsTypeDescription").val();
-            var ramark = $("#Ramark").val();
+        function btn_save() {
+            var Subject = $("#Subject").val();
+            var TypeOfExam = $("#TypeOfExam").val();
+            var AnswerA = $("#AnswerA").val();
+            var AnswerB = $("#AnswerB").val();
+            var AnswerC = $("#AnswerC").val();
+            var AnswerD = $("#AnswerD").val();
+            var AnswerE = $("#AnswerE").val();
+            var Answer = $("#Answer").val();
             $.ajax({
                 type: "post",
                 url: "/QuestionBank/ADDQuestionBank",
                 data: {
-                    "Subject": $("#Subject").val(), "TypeOfExam": $("#TypeOfExam").val(), "AnswerA": $("#AnswerA").val(), "AnswerB": $("AnswerB").val(), "AnswerC": $("AnswerC").val(), "AnswerD": $("AnswerD").val(), "AnswerE": $("AnswerE").val(), "Answer": $("Answer").val()
+                    "Subject": $("#Subject").val(), "TypeOfExam": TypeOfExam, "AnswerA": AnswerA, "AnswerB": AnswerB, "AnswerC": AnswerC, "AnswerD": AnswerD, "AnswerE": AnswerE, "Answer": Answer
                 },
                 success: function (data) {
                     if (data > 0) {
@@ -271,7 +274,8 @@
                     axios({
                         url: "/QuestionBank/GetTextType",
                         method: "get"
-                    }).then(function (res) {
+                }).then(function (res) {
+                    console.log(res.data)
                         that.textType = res.data;
                     })
             },
