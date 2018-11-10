@@ -26,7 +26,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("GetRoleList")]
         [HttpGet]
-        public List<Role> GetRoleList()
+        public List<JurisdictionInfo> GetRoleList()
         {
             var roleList = _roleServices.GetRoles();
             return roleList;
