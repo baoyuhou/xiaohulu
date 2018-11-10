@@ -25,7 +25,7 @@ namespace Models.Examination
         /// 附件图片
         /// </summary>
         public string Photo { get; set; }
-
+        
         /// <summary>
         /// 题类型外键
         /// </summary>
