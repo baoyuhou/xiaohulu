@@ -16,5 +16,7 @@ namespace IServices.Authority.IServices
         /// </summary>
         /// <returns></returns>
         List<Jurisdiction> GetJurisdictions();
+
+        int Add(Jurisdiction jurisdiction);
     }
 }

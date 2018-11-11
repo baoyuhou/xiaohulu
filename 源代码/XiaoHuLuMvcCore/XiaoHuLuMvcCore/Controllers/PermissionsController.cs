@@ -14,28 +14,33 @@ namespace XiaoHuLuMvcCore.Controllers
     public class PermissionsController : Controller
     {
         /// <summary>
-        /// 显示角色和权限信息
+        /// 显示权限信息
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-            var result = WebApiHelper.GetApiResult("Get", "Role", "GetRoleList");
-
-            var jurisResult = WebApiHelper.GetApiResult("Get", "Permissions", "GetJurisdictions");
-            ViewBag.jurisResult = JsonConvert.DeserializeObject<List<Jurisdictions>>(jurisResult);
-            return View(JsonConvert.DeserializeObject<List<JurisdictionInfo>>(result));
+            var result = WebApiHelper.GetApiResult("Get", "Permissions", "GetJurisdictions");
+            return View(JsonConvert.DeserializeObject<List<Jurisdictions>>(result));
         }
 
         /// <summary>
         /// 单条添加角色和权限信息
         /// </summary>
-        /// <param name="jurisdictionInfo"></param>
+        /// <param name="jurisdictions"></param>
         /// <returns></returns>
-        public string RolesAdd(JurisdictionInfo jurisdictionInfo)
+        public IActionResult JurisAdd()
         {
-            var result = WebApiHelper.GetApiResult("Post", "Role", "RoleAdd");
-            return result;
+            return View();
         }
+
+        [HttpPost]
+        public int JurisAdd(Jurisdictions jurisdictions)
+        {
+            var result = WebApiHelper.GetApiResult("Post", "Permissions", "JurisAdd", jurisdictions);
+
+            return int.Parse(result);
+        }
+        
 
         public void GetRoleViewBag()
         {
