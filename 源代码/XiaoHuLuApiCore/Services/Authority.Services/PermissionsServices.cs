@@ -10,6 +10,15 @@ namespace Services.Authority.Services
 {
     public class PermissionsServices : IPermissionsServices
     {
+        public int Add(Jurisdiction jurisdiction)
+        {
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var result = db.Insertable<Jurisdiction>(jurisdiction).ExecuteReturnIdentity();
+                return result;
+            }
+        }
+
         /// <summary>
         /// 获取权限信息
         /// </summary>

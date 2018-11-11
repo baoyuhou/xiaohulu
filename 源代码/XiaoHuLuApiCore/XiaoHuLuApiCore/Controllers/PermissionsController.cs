@@ -31,5 +31,17 @@ namespace XiaoHuLuApiCore.Controllers
             var jurisList = _permissionsServices.GetJurisdictions();
             return jurisList;
         }
+
+        /// <summary>
+        /// 添加权限信息
+        /// </summary>
+        /// <param name="jurisdiction"></param>
+        /// <returns></returns>
+        [Route("JurisAdd")]
+        [HttpPost]
+        public int JurisAdd(Jurisdiction jurisdiction)
+        {
+            return _permissionsServices.Add(jurisdiction);
+        }
     }
 }

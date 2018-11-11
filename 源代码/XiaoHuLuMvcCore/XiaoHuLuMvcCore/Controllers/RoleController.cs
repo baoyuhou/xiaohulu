@@ -35,4 +35,4 @@ namespace XiaoHuLuMvcCore.Controllers
             return result;
         }
     }
-}
+} 

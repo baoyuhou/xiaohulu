@@ -53,6 +53,20 @@ namespace Services
         }
 
         /// <summary>
+        /// 获取今天用户是不是考试过了
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool GetTypeByUid(string id)
+        {
+            using (SqlSugarClient sqlsc=Educationcontext.GetClient())
+            {
+                ExaminationOrPractice result = sqlsc.Queryable<ExaminationOrPractice>().First(s=>s.UId==id);
+                return result.Flag;
+            } 
+        }
+
+        /// <summary>
         /// 修改说明信息
         /// </summary>
         /// <param name="explain"></param>

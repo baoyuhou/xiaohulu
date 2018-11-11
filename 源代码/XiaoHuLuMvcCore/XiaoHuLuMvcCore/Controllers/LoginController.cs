@@ -9,6 +9,10 @@ namespace XiaoHuLuMvcCore.Controllers
 {
     public class LoginController : Controller
     {
+        /// <summary>
+        /// 登陆页
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();

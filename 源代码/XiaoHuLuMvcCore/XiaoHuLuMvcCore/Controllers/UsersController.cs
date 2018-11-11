@@ -39,7 +39,7 @@ namespace XiaoHuLuMvcCore.Controllers
         }
 
         /// <summary>
-        /// 首页
+        /// 后台首页
         /// </summary>
         /// <returns></returns>
         public IActionResult Login()
