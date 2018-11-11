@@ -31,6 +31,13 @@ namespace IServices
         /// <returns></returns>
         int UpdExplain(Explain explain);
 
+        /// <summary>
+        /// 获取今天是不是考试过了
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool GetTypeByUid(string id);
+
 
     }
 }

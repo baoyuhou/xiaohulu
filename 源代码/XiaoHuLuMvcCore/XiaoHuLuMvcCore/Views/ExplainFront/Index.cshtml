@@ -157,12 +157,12 @@
             <div class="w3l-welcome-info">
                 <div class="col-sm-6 welcome-grids">
                     <div class="welcome-img">
-                        <img src="~/showindex/images/lianxi.png" class="img-responsive zoom-img" alt="">
+                        <img src="~/showindex/images/lianxi.png" class="img-responsive zoom-img" alt="" onclick="jump(1)">
                     </div>
                 </div>
                 <div class="col-sm-6 welcome-grids">
                     <div class="welcome-img">
-                        <img src="~/showindex/images/kaoshi.jpg" class="img-responsive zoom-img" alt="">
+                        <img src="~/showindex/images/kaoshi.jpg" class="img-responsive zoom-img" alt="" onclick="jump(2)">
                     </div>
                 </div>
                 <div class="clearfix"> </div>
@@ -662,7 +662,15 @@
 
 			$().UItoTop({ easingType: 'easeOutQuart' });
 
-			});
+        });
+        function jump(id) {
+            if (id == 2) {
+                document.location.href = '/Answer/index'
+            }
+            else {
+                document.location.href ='/explianfront/Practice'
+            }
+        }
     </script>
     <!-- //here ends scrolling icon -->
     <script src="~/showindex/js/owl.carousel.js"></script>
