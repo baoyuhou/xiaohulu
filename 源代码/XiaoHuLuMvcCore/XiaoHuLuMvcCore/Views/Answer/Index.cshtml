@@ -1,4 +1,4 @@
-﻿
+﻿@using XiaoHuLuMvcCore.Models.Examination;
 @{
     Layout = null;
 }
@@ -7,7 +7,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>仓井野结衣护士模考</h2>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -37,139 +36,139 @@
                             </p>
                             <font><input type="button" name="test_jiaojuan" value="交卷"></font>
                         </div>
-                        <div class="test_content">
-                            <div class="test_content_title">
-                                <h2>单选题</h2>
-                                @{
-                                    var num = 0;
-                                    num = Model.Where(s => s.TypeOfExam == 1).Count();
+
+                        @foreach (var item in ViewBag.texttype as List<TextType>)
+                        {
+                            <div class="test_content">
+                                <div class="test_content_title">
+                                    <h2>@item.ExamType</h2>
+                                    @{
+                                        var num1 = 0;
+                                        num1 = Model.Where(s => s.TypeOfExam == item.ID).Count();
+                                    }
+                                    <p>
+                                        <span>共</span><i class="content_lit">@num1</i><span>题，</span><span>合计</span><i class="content_fs">@num1</i><span>分</span>
+                                    </p>
+                                </div>
+                            </div>
+                            var num = 0;
+                            if (item.ID == 1)
+                            {
+                                @foreach (var item1 in Model)
+                                {
+                                    if (@item1.TypeOfExam == 1)
+                                    {
+                                        num++;
+                                        <div class="test_content_nr">
+                                            <ul>
+                                                <li id="@item1.Id">
+                                                    <div class="test_content_nr_tt">
+                                                        <i>@num</i><span>(1分)</span><font>@item1.Subject</font><b class="icon iconfont">&#xe881;</b>
+                                                    </div>
+                                                    <div class="test_content_nr_main">
+                                                        <ul>
+                                                            <li class="option">
+                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                       id="@item1.Id" />
+                                                                <label for="@item1.Id">
+                                                                    A.
+                                                                    <p class="ue" style="display: inline;">@item1.AnswerA</p>
+                                                                </label>
+                                                            </li>
+                                                            <li class="option">
+                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                       id="@item1.Id" />
+                                                                <label for="@item1.Id">
+                                                                    B.
+                                                                    <p class="ue" style="display: inline;">@item1.AnswerB</p>
+                                                                </label>
+                                                            </li>
+                                                            <li class="option">
+                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                       id="@item1.Id" />
+                                                                <label for="@item1.Id">
+                                                                    C.
+                                                                    <p class="ue" style="display: inline;">@item1.AnswerC</p>
+                                                                </label>
+                                                            </li>
+                                                            <li class="option">
+                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                       id="@item1.Id" />
+
+                                                                <label for="@item1.Id">
+                                                                    D.
+                                                                    <p class="ue" style="display: inline;">@item1.AnswerD</p>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
                                 }
-                                <p>
-                                    <span>共</span><i class="content_lit">@num</i><span>题，</span><span>合计</span><i class="content_fs">@num</i><span>分</span>
-                                </p>
-                            </div>
-                        </div>
-                        @foreach (var item in Model)
-                        {
-                            if (@item.TypeOfExam == 1)
+                            }
+                            if (item.ID == 2)
                             {
-                                <div class="test_content_nr">
-                                    <ul>
-                                        <li id="qu_0_0">
+                                @foreach (var item2 in Model)
+                                {
+                                    if (@item2.TypeOfExam == 2)
+                                    {
+                                        num++;
+                                        <div class="test_content_nr">
+                                            <ul>
+                                                <li id="@item2.Id">
+                                                    <div class="test_content_nr_tt">
+                                                        <i>1</i><span>(1分)</span><font>@item2.Subject</font><b class="icon iconfont">&#xe881;</b>
+                                                    </div>
+                                                    <div class="test_content_nr_main">
+                                                        <ul>
+                                                            <li class="option">
+                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                       id="1_answer_1_option_1" />
 
-                                            <div class="test_content_nr_tt">
-                                                <i>1</i><span>(1分)</span><font>@item.Subject</font><b class="icon iconfont">&#xe881;</b>
-                                            </div>
+                                                                <label for="1_answer_1_option_1">
+                                                                    A.
+                                                                    <p class="ue" style="display: inline;">@item2.AnswerA</p>
+                                                                </label>
+                                                            </li>
+                                                            <li class="option">
+                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                       id="1_answer_1_option_2" />
 
-                                            <div class="test_content_nr_main">
-                                                <ul>
-                                                    <li class="option">
-                                                        <input type="radio" class="radioOrCheck" name="@item.Id"
-                                                               id="0_answer_1_option_1" />
-                                                        <label for="0_answer_1_option_1">
-                                                            A.
-                                                            <p class="ue" style="display: inline;">@item.AnswerA</p>
-                                                        </label>
-                                                    </li>
-                                                    <li class="option">
-                                                        <input type="radio" class="radioOrCheck" name="@item.Id"
-                                                               id="0_answer_1_option_2" />
-                                                        <label for="0_answer_1_option_2">
-                                                            B.
-                                                            <p class="ue" style="display: inline;">@item.AnswerB</p>
-                                                        </label>
-                                                    </li>
-                                                    <li class="option">
-                                                        <input type="radio" class="radioOrCheck" name="@item.Id"
-                                                               id="0_answer_1_option_3" />
-                                                        <label for="0_answer_1_option_3">
-                                                            C.
-                                                            <p class="ue" style="display: inline;">@item.AnswerC</p>
-                                                        </label>
-                                                    </li>
-                                                    <li class="option">
-                                                        <input type="radio" class="radioOrCheck" name="@item.Id"
-                                                               id="0_answer_1_option_4" />
+                                                                <label for="1_answer_1_option_2">
+                                                                    B.
+                                                                    <p class="ue" style="display: inline;">@item2.AnswerB</p>
+                                                                </label>
 
-                                                        <label for="0_answer_1_option_4">
-                                                            D.
-                                                            <p class="ue" style="display: inline;">@item.AnswerD</p>
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                                            </li>
+                                                            <li class="option">
+                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                       id="1_answer_1_option_3" />
+
+                                                                <label for="1_answer_1_option_3">
+                                                                    C.
+                                                                    <p class="ue" style="display: inline;">@item2.AnswerC</p>
+                                                                </label>
+                                                            </li>
+                                                            <li class="option">
+                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                       id="1_answer_1_option_4" />
+
+                                                                <label for="1_answer_1_option_4">
+                                                                    D.
+                                                                    <p class="ue" style="display: inline;">@item2.AnswerD</p>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
                             }
                         }
-                        @{
-                            var num1 = 0;
-                            num1 = Model.Where(s => s.TypeOfExam == 2).Count();
-
-                        }
-                        <div class="test_content">
-                            <div class="test_content_title">
-                                <h2>多选题</h2>
-                                <p>
-                                    <span>共</span><i class="content_lit">@num1</i><span>题，</span><span>合计</span><i class="content_fs">@num1</i><span>分</span>
-                                </p>
-                            </div>
-                        </div>
-                        @foreach (var item in Model)
-                        {
-                            if (@item.TypeOfExam == 2)
-                            {
-                                <div class="test_content_nr">
-                                    <ul>
-                                        <li id="qu_1_0">
-                                            <div class="test_content_nr_tt">
-                                                <i>1</i><span>(1分)</span><font>@item.Subject</font><b class="icon iconfont">&#xe881;</b>
-                                            </div>
-                                            <div class="test_content_nr_main">
-                                                <ul>
-                                                    <li class="option">
-                                                        <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                               id="1_answer_1_option_1" />
-
-                                                        <label for="1_answer_1_option_1">
-                                                            A.
-                                                            <p class="ue" style="display: inline;">@item.AnswerA</p>
-                                                        </label>
-                                                    </li>
-                                                    <li class="option">
-                                                        <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                               id="1_answer_1_option_2" />
-
-                                                        <label for="1_answer_1_option_2">
-                                                            B.
-                                                            <p class="ue" style="display: inline;">@item.AnswerB</p>
-                                                        </label>
-                                                    </li>
-                                                    <li class="option">
-                                                        <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                               id="1_answer_1_option_3" />
-
-                                                        <label for="1_answer_1_option_3">
-                                                            C.
-                                                            <p class="ue" style="display: inline;">@item.AnswerC</p>
-                                                        </label>
-                                                    </li>
-                                                    <li class="option">
-                                                        <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                               id="1_answer_1_option_4" />
-
-                                                        <label for="1_answer_1_option_4">
-                                                            D.
-                                                            <p class="ue" style="display: inline;">@item.AnswerD</p>
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            }
                         }
                     </form>
                 </div>
@@ -185,32 +184,49 @@
                                 <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">01:40</b>
                             </p>
                         </div>
-                        <div class="rt_content">
-                            <div class="rt_content_tt">
-                                <h2>单选题</h2>
-                                <p>
-                                    <span>共</span><i class="content_lit">60</i><span>题</span>
-                                </p>
+                        @foreach (var item7 in ViewBag.texttype as List<TextType>)
+                        {
+                            <div class="rt_content">
+                                <div class="rt_content_tt">
+                                    <h2>@item7.ExamType</h2>
+                                    @{
+                                        var num3 = 0;
+                                        num3 = Model.Where(s => s.TypeOfExam == item7.ID).Count();
+                                    }
+
+                                    <p>
+                                        <span>共</span><i class="content_lit">@num3</i><span>题</span>
+                                    </p>
+                                </div>
+                                <div class="rt_content_nr answerSheet">
+                                    <ul>
+                                        @{ var num444 = 0;}
+                                        @if (item7.ID == 1)
+                                        {
+                                            @foreach (var item71 in Model)
+                                            {
+                                                if (@item71.TypeOfExam == 1)
+                                                {
+                                                    num444++;
+                                                    <li><a href="#@item71.Id">@num444</a></li>
+                                                }
+                                            }
+                                        }
+                                        @if (item7.ID == 2)
+                                        {
+                                            @foreach (var item72 in Model)
+                                            {
+                                                if (@item72.TypeOfExam == 2)
+                                                {
+                                                    num444++;
+                                                    <li><a href="#@item72.Id">@num444</a></li>
+                                                }
+                                            }
+                                        }
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="rt_content_nr answerSheet">
-                                <ul>
-                                    <li><a href="#qu_0_0">1</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="rt_content">
-                            <div class="rt_content_tt">
-                                <h2>多选题</h2>
-                                <p>
-                                    <span>共</span><i class="content_lit">30</i><span>题</span>
-                                </p>
-                            </div>
-                            <div class="rt_content_nr answerSheet">
-                                <ul>
-                                    <li><a href="#qu_1_0">1</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -236,9 +252,7 @@
             $('.alt-2').countDown({
                 css_class: 'countdown-alt-2'
             });
-
         });
-
         $(function () {
             $('li.option label').click(function () {
                 debugger;
@@ -248,7 +262,6 @@
                 if (!cardLi.hasClass('hasBeenAnswer')) {
                     cardLi.addClass('hasBeenAnswer');
                 }
-
             });
         });
     </script>

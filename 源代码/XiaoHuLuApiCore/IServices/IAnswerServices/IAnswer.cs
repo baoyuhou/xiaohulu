@@ -15,9 +15,9 @@ namespace IServices.IAnswerServices
         List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0);
 
         /// <summary>
-        /// 查询一共多少题
+        /// 查询题的类型
         /// </summary>
         /// <returns></returns>
-        List<QuestionBank> QuestionNumber();
+        List<TextType> GetTextTypeList();
     }
 }

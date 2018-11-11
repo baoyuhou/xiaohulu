@@ -18,6 +18,8 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
+            var texttypelist = WebApiHelper.GetApiResult("Get", "Answer", "GetTextTypeList");
+            ViewBag.texttype = JsonConvert.DeserializeObject<List<TextType>>(texttypelist);
             var result = WebApiHelper.GetApiResult("Get", "Answer", "GetAnswerModelList");
             return View(JsonConvert.DeserializeObject<List<AnswerModel>>(result));
         }

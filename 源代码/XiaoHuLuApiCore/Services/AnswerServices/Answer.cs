@@ -11,7 +11,13 @@ namespace Services.AnswerServices
 {
     public class Answer : IAnswer
     {
-        public List<AnswerModel> GetAnswerModelList(int Id,int totalCount=0)
+        /// <summary>
+        /// 查询可用题型
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="totalCount"></param>
+        /// <returns></returns>
+        public List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0)
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
@@ -51,9 +57,17 @@ namespace Services.AnswerServices
             }
         }
 
-        public List<QuestionBank> QuestionNumber()
+        /// <summary>
+        /// 显示多少题型  禁用不显示
+        /// </summary>
+        /// <returns></returns>
+        public List<TextType> GetTextTypeList()
         {
-            throw new NotImplementedException();
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var texttypelist = db.Ado.SqlQuery<TextType>("select * from texttype where `Enable`=1");
+                return texttypelist;
+            }
         }
     }
 }

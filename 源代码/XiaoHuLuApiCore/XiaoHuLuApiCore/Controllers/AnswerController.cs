@@ -30,5 +30,12 @@ namespace XiaoHuLuApiCore.Controllers
             var answermodellist = answer.GetAnswerModelList(Id, totalCount);
             return answermodellist;
         }
+
+        [HttpGet]
+        public List<TextType> GetTextTypeList()
+        {
+            var texttypelist = answer.GetTextTypeList();
+            return texttypelist;
+        }
     }
 }
