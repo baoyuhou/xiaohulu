@@ -50,7 +50,7 @@ namespace XiaoHuLuMvcCore.Controllers
         public void OutLogin()
         {
             HttpContext.Session.Clear();
-            RedirectToAction("/login/index");
+            
         }
     }
 }
