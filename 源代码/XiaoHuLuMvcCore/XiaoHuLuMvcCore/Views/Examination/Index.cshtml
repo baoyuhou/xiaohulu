@@ -1,155 +1,273 @@
-﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Examination.Candidateinherit>
-
+﻿<!DOCTYPE html>
 @{
-    ViewData["Title"] = "Index";
+    Layout = null;
 }
+@model IEnumerable<XiaoHuLuMvcCore.Models.Examination.Candidateinherit>
 
-<h2>Index</h2>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/zy.all.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/amazeui.min.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="dvcontent">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table table-bordered ">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExamNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DocumentType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Certificates)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExamRoomID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Field)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SeatNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TestRoomID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Enable)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExamNumberId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LongExam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TimeUsed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RemainderLength)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProgressOfAnswer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TestRoomName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExamRoomName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Photo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DocumentType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Certificates)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamRoomID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Field)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SeatNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TestRoomID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Enable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamNumberId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LongExam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeUsed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RemainderLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgressOfAnswer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TestRoomName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamRoomName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <div>
+            <!--tab start-->
+            <div class="tabs">
+                <div class="hd">
+                    <ul>
+                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">查看考生</li>
+                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">添加考生</li>
+                    </ul>
+                </div>
+                <div class="bd">
+                    <ul style="display: block;padding: 20px;">
+                        <li>
+                            <!--分页显示考生信息 start-->
+                            <div id="dv1">
+                                <table class="table" id="tbRecord">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>姓名</th>
+                                            <th>性别</th>
+                                            <th>头像</th>
+                                            <th>准考证号</th>
+                                            <th>证件类型</th>
+                                            <th>证件号</th>
+                                            <th>所在考场</th>
+                                            <th>当前场次</th>
+                                            <th>座位号</th>
+                                            <th>所在试室</th>
+                                            <th>所在单位</th>
+                                            <th>是否启用</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+
+                                        <tr>
+                                            <td>@item.ID</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Sex</td>
+                                            <td>@item.Photo</td>
+                                            <td>@item.ExamNumber</td>
+                                            <td>@item.DocumentType</td>
+                                            <td>@item.Certificates</td>
+                                            <td>@item.ExamRoomName </td>
+                                            <td>@item.Field </td>
+                                            <td>@item.SeatNumber </td>
+                                            <td>@item.TestRoomName </td>
+                                            <td>@item.CompanyName  </td>
+                                            <td>@item.Enable </td>
+                                            <td class="edit">
+                                                @Html.ActionLink("修改", "Edit", new { id = item.ID })
+                                            </td>
+                                        </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--分页显示考生信息 end-->
+                        </li>
+                    </ul>
+                    <ul class="theme-popbod dform" style="display: none;">
+                        <div class="am-cf admin-main" style="padding-top: 0px;">
+                            <!-- content start -->
+
+                            <div class="am-cf admin-main" style="padding-top: 0px;">
+                                <!-- content start -->
+                                <div class="admin-content">
+                                    <div class="admin-content-body">
+
+                                        <div class="am-g">
+                                            <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+                                            </div>
+                                            <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
+                                                 style="padding-top: 30px;">
+                                                <form class="am-form am-form-horizontal"
+                                                      action="index" method="post">
+
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            姓名 / Name
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Name" required
+                                                                   placeholder="姓名 / Name" name="Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            性别 / Sex
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Sex" required
+                                                                   placeholder="性别 / Sex" name="Sex">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            准考证号 / ExamNumber
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="ExamNumber " required
+                                                                   placeholder="准考证号 / ExamNumber" name="ExamNumber ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            证件类型 / DocumentType
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="DocumentType  " required
+                                                                   placeholder="证件类型 / DocumentType " name="DocumentType  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            证件号 / Certificates
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Certificates  " required
+                                                                   placeholder="证件号 / Certificates " name="Certificates  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            当前场次 / Field
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Field  " required
+                                                                   placeholder="当前场次 / Field " name="Field  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            座位号 / SeatNumber
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="SeatNumber  " required
+                                                                   placeholder="座位号 / SeatNumber " name="SeatNumber  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            所在考场 / ExamRoomName
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="ExamRoomName  " required
+                                                                   placeholder="所在考场 / ExamRoomName " name="ExamRoomName  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            所在试室 / TestRoomName
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="TestRoomName  " required
+                                                                   placeholder="所在试室 / TestRoomName " name="TestRoomName  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            所在单位 / CompanyName
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="CompanyName  " required
+                                                                   placeholder="所在单位 / CompanyName " name="CompanyName  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            是否启用 / Enable
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Enable  " required
+                                                                   placeholder="是否启用 / Enable " name="Enable  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <div class="am-u-sm-9 am-u-sm-push-3">
+                                                            <input type="button" class="am-btn am-btn-success" value="添加考生" onclick="btn_save()" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- content end -->
+                            </div>
+                            <!--添加考生 end-->
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery-1.7.2.min.js"></script>
+    <script src="~/js/Jqueryplugs.js"></script>
+    <script src="~/js/_layout.js"></script>
+    <script src="~/js/jquery.SuperSlide.source.js"></script>
+    <script>
+        var num = 1;
+        $(function () {
+
+            $(".tabs").slide({ trigger: "click" });
+
+        });
+
+
+        function btn_save() {
+            var pid = $("#RawMaterialsTypePageId  option:selected").val();
+            var name = $("#RawMaterialsTypeName").val();
+            var desc = $("#RawMaterialsTypeDescription").val();
+            var ramark = $("#Ramark").val();
+            $.ajax({
+                type: "post",
+                url: "/Users/UserAdd",
+                data: { "Name ": $("#Name ").val(), "Sex ": $("#Sex ").val(), "ExamNumber  ": $("#ExamNumber  ").val(), "DocumentType  ": $("#DocumentType  ").val(), "Certificates  ": $("#Certificates  ").val(), "Field  ": $("#Field  ").val(), "SeatNumber  ": $("#SeatNumber  ").val(), "ExamRoomName  ": $("#ExamRoomName  ").val(), "TestRoomName  ": $("#TestRoomName  ").val(), "CompanyName  ": $("#CompanyName  ").val(), "Enable  ": $("#Enable  ").val(), "Sex ": $("#Sex ").val()},
+                success: function (data) {
+                    if (data > 0) {
+                        $.jq_Alert({
+                            message: "添加成功",
+                            btnOktext: "确认",
+                            dialogModal: true,
+                            btnOkClick: function () {
+                                //$("#RawMaterialsTypeName").val("");
+                                //$("#RawMaterialsTypeDescription").val("");
+                                //page1();
+                                location.reload();
+
+                            }
+                        });
+                    }
+                }
+            });
+            alert(t);
+        }
+
+        var btn_edit = function (id) {
+            $.jq_Panel({
+                url: "/RawMaterialsType/EditRawMaterialsType?id=" + id,
+                title: "编辑分类",
+                dialogModal: true,
+                iframeWidth: 500,
+                iframeHeight: 400
+            });
+        }
+    </script>
+
+</body>
