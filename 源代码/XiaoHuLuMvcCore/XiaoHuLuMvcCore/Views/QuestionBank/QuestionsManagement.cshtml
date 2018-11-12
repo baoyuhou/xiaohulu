@@ -23,8 +23,9 @@
             <div class="tabs">
                 <div class="hd">
                     <ul>
-                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">查看用户</li>
-                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">添加用户</li>
+                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">查看考题</li>
+                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">添加用题</li>
+                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">Excel导入</li>
                     </ul>
                 </div>
                 <div class="bd">
@@ -196,6 +197,39 @@
                             <!--添加角色 end-->
                         </div>
                     </ul>
+                    <ul class="theme-popbod dform" style="display: none;">
+                        <div class="am-cf admin-main" style="padding-top: 0px;">
+                            <!-- content start -->
+
+                            <div class="am-cf admin-main" style="padding-top: 0px;">
+                                <!-- content start -->
+                                <div class="admin-content">
+                                    <div class="admin-content-body">
+
+                                        <div class="am-g">
+                                            <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="/QuestionBank/ADDQuestionBankList" method="post">
+                                                <div class="am-form-group">
+                                                    <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                        导入文件
+                                                    </label>
+                                                    <div class="am-u-sm-9">
+                                                        <input type="file" id="formFile" name="formFile">
+                                                    </div>
+                                                </div>
+                                                <div class="am-form-group">
+                                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                                        <input id="btnadd" type="submit" class="am-btn am-btn-success" value="导入" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- content end -->
+                            </div>
+                            <!--添加角色 end-->
+                        </div>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -234,7 +268,7 @@
             var Answer = $("#Answer").val();
 
             //var questionBankinherit = { Subject, TypeOfExam, AnswerA, AnswerB, AnswerC, AnswerD, AnswerE, Answer };
-            
+
             var fileUpload = $("#formFile").get(0);
             var files = fileUpload.files;
             var data = new FormData();
@@ -246,7 +280,7 @@
                 type: "post",
                 url: "/QuestionBank/ADDQuestionBank",
                 data: {
-                    questionBankinherit , data
+                    questionBankinherit, data
                 },
                 //Subject: Subject, TypeOfExam: TypeOfExam, AnswerA: AnswerA, AnswerB: AnswerB, AnswerC: AnswerC, AnswerD: AnswerD, AnswerE: AnswerE, Answer: Answer
                 success: function (data) {

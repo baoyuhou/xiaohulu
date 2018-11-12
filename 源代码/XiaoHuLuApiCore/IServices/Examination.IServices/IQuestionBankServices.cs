@@ -59,7 +59,7 @@ namespace IServices.IExaminationServices
         /// 显示题类型显示题数
         /// </summary>
         /// <returns></returns>
-        List<TextTypeNum> TextTypeNums();
+        List<TextTypeNuminherit> TextTypeNums();
 
         /// <summary>
         /// 修改题量
