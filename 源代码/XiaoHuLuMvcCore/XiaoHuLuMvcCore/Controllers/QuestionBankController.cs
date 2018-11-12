@@ -165,5 +165,25 @@ namespace XiaoHuLuMvcCore.Controllers
                 Response.WriteAsync("<script>alert('修改成功!')</script>");
             }
         }
+
+        /// <summary>
+        /// 修改题
+        /// </summary>
+        /// <param name="id"></param>
+        public IActionResult UpdateQuestionBank(int id)
+        {
+            var result = WebApiHelper.GetApiResult("get", "QuestionBank", "UpdateById?id="+id);
+            return View(JsonConvert.DeserializeObject<QuestionBankinherit>(result));
+        }
+
+        /// <summary>
+        /// 修改题
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpPost]
+        public void UpdateQuestionBank(QuestionBankinherit questionBankinherit)
+        {
+            var result = WebApiHelper.GetApiResult("put", "QuestionBank", "Update", questionBankinherit);
+        }
     }
 }

@@ -2,6 +2,7 @@
 @{
     Layout = null;
 }
+@model Models.QuestionBank.QuestionBankinherit
 <html>
 <head>
     <meta charset="UTF-8">
@@ -14,7 +15,6 @@
     <link href="~/css/admin.css" rel="stylesheet" />
     <script src="~/js/jquery-1.7.2.min.js"></script>
     <script src="~/js/jquery-form.js"></script>
-
 </head>
 <body>
     <div id="divapp" class="dvcontent">
@@ -23,54 +23,10 @@
             <div class="tabs">
                 <div class="hd">
                     <ul>
-                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">查看考题</li>
-                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">添加用题</li>
-                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">Excel导入</li>
+                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">修改考题</li>
                     </ul>
                 </div>
                 <div class="bd">
-                    <ul style="display: block;padding: 20px;">
-                        <li>
-                            <!--分页显示角色信息 start-->
-                            <div id="dv1">
-                                <table class="table" id="tbRecord">
-                                    <thead>
-                                        <tr>
-                                            <th>编号</th>
-                                            <th>题目 </th>
-                                            <th>附件图片</th>
-                                            <th>答案A</th>
-                                            <th>答案B</th>
-                                            <th>答案C</th>
-                                            <th>答案D</th>
-                                            <th>答案E</th>
-                                            <th>正确答案</th>
-                                            <th>题目类型</th>
-                                            <th>是否启用</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="item in info">
-                                            <td>{{item.Id}}</td>
-                                            <td>{{item.Subject}}</td>
-                                            <td>{{item.Photo}}</td>
-                                            <td>{{item.AnswerA}}</td>
-                                            <td>{{item.AnswerB}}</td>
-                                            <td>{{item.AnswerC}}</td>
-                                            <td>{{item.AnswerD}}</td>
-                                            <td>{{item.AnswerE}}</td>
-                                            <td>{{item.Answer}}</td>
-                                            <td>{{item.ExamType}}</td>
-                                            <td>{{(item.Enable==1?"已启用":"未启用")}}</td>
-                                            <td class="edit"><button v-bind:onclick="update(item.Id)"><i class="icon-edit bigger-120"></i>编辑</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--分页显示角色信息 end-->
-                        </li>
-                    </ul>
                     <ul class="theme-popbod dform" style="display: none;">
                         <div class="am-cf admin-main" style="padding-top: 0px;">
                             <!-- content start -->
@@ -92,7 +48,7 @@
                                                             题目 / Subject
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="Subject" required
+                                                            <input type="text" id="Subject" required value="@Model.Subject"
                                                                    placeholder="题目 / Subject" name="Subject">
                                                         </div>
                                                     </div>
@@ -101,8 +57,6 @@
                                                             题型 / TypeOfExam
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            @*<input type="" id="TypeOfExam" required
-                                                                placeholder="题型 / TypeOfExam" name="TypeOfExam">*@
                                                             <select id="TypeOfExam" name="TypeOfExam">
                                                                 <option v-for="item in textType" v-bind:value="item.ID">{{item.ExamType}}</option>
                                                             </select>
@@ -115,6 +69,7 @@
                                                         <div class="am-u-sm-9">
                                                             <input type="file" id="formFile"
                                                                    placeholder="图片 / Photo" name="formFile">
+                                                            <img src="@Model.Photo" alt="暂无图片" />
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
@@ -122,7 +77,7 @@
                                                             答案A / AnswerA
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerA" required
+                                                            <input type="text" id="AnswerA" required value="@Model.AnswerA"
                                                                    placeholder="答案A / AnswerA" name="AnswerA">
                                                         </div>
                                                     </div>
@@ -131,7 +86,7 @@
                                                             答案B / AnswerB
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerB" required
+                                                            <input type="text" id="AnswerB" required value="@Model.AnswerB"
                                                                    placeholder="答案B / AnswerB" name="AnswerB">
                                                         </div>
                                                     </div>
@@ -140,7 +95,7 @@
                                                             答案C / AnswerC
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerC"
+                                                            <input type="text" id="AnswerC" value="@Model.AnswerC"
                                                                    placeholder="答案C / AnswerC" name="AnswerC">
                                                         </div>
                                                     </div>
@@ -149,7 +104,7 @@
                                                             答案D / AnswerD
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerD"
+                                                            <input type="text" id="AnswerD" value="@Model.AnswerD"
                                                                    placeholder="答案D / AnswerD" name="AnswerD">
                                                         </div>
                                                     </div>
@@ -158,7 +113,7 @@
                                                             答案E / AnswerE
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="AnswerE"
+                                                            <input type="text" id="AnswerE" value="@Model.AnswerE"
                                                                    placeholder="答案E / AnswerE" name="AnswerE">
                                                         </div>
                                                     </div>
@@ -167,7 +122,7 @@
                                                             正确答案 / Answer
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="text" id="Answer" required
+                                                            <input type="text" id="Answer" required value="@Model.Answer"
                                                                    placeholder="正确答案 / Answer" name="Answer">
                                                         </div>
                                                     </div>
@@ -195,39 +150,6 @@
                             <!--添加角色 end-->
                         </div>
                     </ul>
-                    <ul class="theme-popbod dform" style="display: none;">
-                        <div class="am-cf admin-main" style="padding-top: 0px;">
-                            <!-- content start -->
-
-                            <div class="am-cf admin-main" style="padding-top: 0px;">
-                                <!-- content start -->
-                                <div class="admin-content">
-                                    <div class="admin-content-body">
-
-                                        <div class="am-g">
-                                            <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="/QuestionBank/ADDQuestionBankList" method="post">
-                                                <div class="am-form-group">
-                                                    <label for="user-name" class="am-u-sm-3 am-form-label">
-                                                        导入文件
-                                                    </label>
-                                                    <div class="am-u-sm-9">
-                                                        <input type="file" id="formFile" name="formFile">
-                                                    </div>
-                                                </div>
-                                                <div class="am-form-group">
-                                                    <div class="am-u-sm-9 am-u-sm-push-3">
-                                                        <input id="btnadd" type="submit" class="am-btn am-btn-success" value="导入" />
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- content end -->
-                            </div>
-                            <!--添加角色 end-->
-                        </div>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -240,18 +162,9 @@
     <script>
         $(function () {
             $(".tabs").slide({ trigger: "click" });
+
+            $('#TypeOfExam').value = @Model.TypeOfExam
         });
-
-        //function btn_edit(id) {
-        //    $.ajax({
-        //        url: "/QuestionBank/UpdateQuestionBank?id=" + id,
-        //        type: "post",
-        //        success: function (data) {
-                    
-        //        }
-        //    })
-        //}
-
         function btn_save() {
             var Subject = $("#Subject").val();
             var TypeOfExam = $("#TypeOfExam").val();
@@ -292,10 +205,10 @@
                 }
             });
         }
-        function update(id) {
-            $.ajax({
-                url: "/QuestionBank/UpdateQuestionBank?id=" + id,
-                title: "编辑",
+        var btn_edit = function (id) {
+            $.jq_Panel({
+                url: "/RawMaterialsType/EditRawMaterialsType?id=" + id,
+                title: "编辑分类",
                 dialogModal: true,
                 iframeWidth: 500,
                 iframeHeight: 400
