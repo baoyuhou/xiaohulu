@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Explain>
 
 @{
+    Layout = null;
     ViewData["Title"] = "Index";
 }
 
@@ -8,8 +9,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <p>
-    <a asp-action="Create" >添加一个新的</a>
-    <button onclick="create()">添加</button>
+    <a asp-action="Create" class="btn btn-danger">添加一个新的Explain</a>
 </p>
 <table class="table  table-striped" style="text-align:center;width:100%">
     <thead >
