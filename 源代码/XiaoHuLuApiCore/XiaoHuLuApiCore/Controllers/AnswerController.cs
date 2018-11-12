@@ -25,10 +25,17 @@ namespace XiaoHuLuApiCore.Controllers
         /// <param name="Id">查询编号</param>
         /// <returns></returns>
         [HttpGet]
-        public List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0)
+        public List<AnswerModel> GetAnswerModelList()
         {
-            var answermodellist = answer.GetAnswerModelList(Id, totalCount);
+            var answermodellist = answer.GetAnswerModelList();
             return answermodellist;
+        }
+
+        [HttpGet]
+        public List<TextType> GetTextTypeList()
+        {
+            var texttypelist = answer.GetTextTypeList();
+            return texttypelist;
         }
     }
 }

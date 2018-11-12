@@ -12,12 +12,12 @@ namespace IServices.IAnswerServices
         /// 显示题型
         /// </summary>
         /// <returns></returns>
-        List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0);
+        List<AnswerModel> GetAnswerModelList();
 
         /// <summary>
-        /// 查询一共多少题
+        /// 查询题的类型
         /// </summary>
         /// <returns></returns>
-        List<QuestionBank> QuestionNumber();
+        List<TextType> GetTextTypeList();
     }
 }

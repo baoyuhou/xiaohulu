@@ -11,12 +11,17 @@ namespace Services.AnswerServices
 {
     public class Answer : IAnswer
     {
-        public List<AnswerModel> GetAnswerModelList(int Id,int totalCount=0)
+        /// <summary>
+        /// 查询可用题型
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="totalCount"></param>
+        /// <returns></returns>
+        public List<AnswerModel> GetAnswerModelList()
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                //var answermodellist = db.Ado.SqlQuery<AnswerModel>("select * from QuestionBank a INNER JOIN TextType b on a.TypeOfExam=b.ID INNER JOIN `Option` c on a.Id=c.QuestionBankId WHERE a.Id="+Id);
-                //return answermodellist;
+                var answermodels = db.Ado.SqlQuery<AnswerModel>("select * from QuestionBank a INNER JOIN TextType b on a.TypeOfExam=b.ID INNER JOIN `Option` c on a.Id=c.QuestionBankId  where a.`ENABLE`=1 ORDER BY  RAND() ");
                 //var answermodellist = db.Ado.UseStoredProcedure().GetDataTable("p_paging", new {
                 //    @tableName = pageparams.TableName,
                 //    @indexCol = pageparams.IndexCol,
@@ -27,33 +32,41 @@ namespace Services.AnswerServices
                 //    @columns= pageparams.Columns
                 //});
 
-                var answermodels = db.Queryable<QuestionBank, TextType, Option>((questionbank, texttype, op) => new object[] {
-            JoinType.Inner,questionbank.TypeOfExam==texttype.ID,
-            JoinType.Inner,questionbank.Id==op.QuestionBankId
-            })
-               //    .Where((questionbank, texttype, op) => questionbank.Id == Id)
-               .Select((questionbank, texttype, op) => new AnswerModel
-               {
-                   Id = questionbank.Id,
-                   Subject = questionbank.Subject,
-                   Answer = questionbank.Answer,
-                   Photo = questionbank.Photo,
-                   TypeOfExam = questionbank.TypeOfExam,
-                   Enable = questionbank.Enable,
-                   ExamType = texttype.ExamType,
-                   AnswerA = op.AnswerA,
-                   AnswerB = op.AnswerB,
-                   AnswerC = op.AnswerC,
-                   AnswerD = op.AnswerD,
-                   AnswerE = op.AnswerE
-               }).ToList();
+            //    var answermodels = db.Queryable<QuestionBank, TextType, Option>((questionbank, texttype, op) => new object[] {
+            //JoinType.Inner,questionbank.TypeOfExam==texttype.ID,
+            //JoinType.Inner,questionbank.Id==op.QuestionBankId
+            //})
+            //   //    .Where((questionbank, texttype, op) => questionbank.Id == Id)
+            //   .Select((questionbank, texttype, op) => new AnswerModel
+            //   {
+            //       Id = questionbank.Id,
+            //       Subject = questionbank.Subject,
+            //       Answer = questionbank.Answer,
+            //       Photo = questionbank.Photo,
+            //       TypeOfExam = questionbank.TypeOfExam,
+            //       Enable = questionbank.Enable,
+            //       ExamType = texttype.ExamType,
+            //       AnswerA = op.AnswerA,
+            //       AnswerB = op.AnswerB,
+            //       AnswerC = op.AnswerC,
+            //       AnswerD = op.AnswerD,
+            //       AnswerE = op.AnswerE
+            //   }).ToList();
                 return answermodels;
             }
         }
 
-        public List<QuestionBank> QuestionNumber()
+        /// <summary>
+        /// 显示多少题型  禁用不显示
+        /// </summary>
+        /// <returns></returns>
+        public List<TextType> GetTextTypeList()
         {
-            throw new NotImplementedException();
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var texttypelist = db.Ado.SqlQuery<TextType>("select * from texttype where `Enable`=1");
+                return texttypelist;
+            }
         }
     }
 }

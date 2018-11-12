@@ -8,14 +8,33 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="css/Site.css" />
-    <link rel="stylesheet" href="css/zy.all.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <link rel="stylesheet" href="css/amazeui.min.css" />
-    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="~/css/Site.css" />
+    <link rel="stylesheet" href="~/css/zy.all.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/amazeui.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    @*<script src="~/js/jquery-1.7.2.min.js"></script>*@
+    <script src="~/js/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function update(TextTypeId, id) {
+            var num = $("#" + id).val();
+            $.ajax({
+                url: "/QuestionBank/UpdateTextTypeNum?num=" + num + "&id=" + id + "&TextTypeId=" + TextTypeId,
+                type: "get",
+                success: function (date) {
+                    if (date > 1) {
+                        alert("修改成功!");
+                    }
+                }
+            })
+        }
+
+
+    </script>
 </head>
 <body>
-    <div class="am-cf admin-main" style="padding-top: 0px;">
+    <div id="divapp" class="am-cf admin-main" style="padding-top: 0px;">
         <!-- content start -->
 
         <div class="am-cf admin-main" style="padding-top: 0px;">
@@ -29,35 +48,17 @@
                         </div>
                         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
                              style="padding-top: 30px;">
-                            <form class="am-form am-form-horizontal"
-                                  action="user/addUser1Submit.action" method="post">
-
+                            @foreach (var item in ViewBag.num)
+                            {
                                 <div class="am-form-group">
                                     <label for="user-name" class="am-u-sm-3 am-form-label">
-                                        原密码
+                                        @item.ExamType
                                     </label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="user-name" required
-                                               placeholder="原密码" name="name">
-                                        <small>原密码...</small>
-                                    </div>
+                                    <input type="text" required id="@item.Id"  
+                                           placeholder="显示数量" name="num" value="@item.Num">
+                                    <input id="Button1" type="button" value="修改" onclick="update(@item.TextTypeId,@item.Id)" />
                                 </div>
-                                <div class="am-form-group">
-                                    <label for="user-name" class="am-u-sm-3 am-form-label">
-                                        新密码
-                                    </label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="user-name" required
-                                               placeholder="新密码" name="name">
-                                        <small>新密码...</small>
-                                    </div>
-                                </div>
-                                <div class="am-form-group">
-                                    <div class="am-u-sm-9 am-u-sm-push-3">
-                                        <input type="submit" class="am-btn am-btn-success" value="修改" />
-                                    </div>
-                                </div>
-                            </form>
+                            }
                         </div>
                     </div>
                 </div>
@@ -68,7 +69,10 @@
             </div>
             <!-- content end -->
         </div>
-        <!-- end-->
+    </div>
+    <!-- end-->
+
+   
 </body>
 </html>
 

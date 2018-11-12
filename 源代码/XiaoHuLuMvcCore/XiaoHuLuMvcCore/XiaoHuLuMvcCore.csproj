@@ -9,13 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\QuestionBank\" />
     <Folder Include="wwwroot\Content\Resources\files\" />
     <Folder Include="wwwroot\Content\Resources\icons\" />
     <Folder Include="wwwroot\Content\Resources\swf\" />
