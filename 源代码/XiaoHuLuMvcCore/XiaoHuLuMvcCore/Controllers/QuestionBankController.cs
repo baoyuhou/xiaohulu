@@ -82,68 +82,49 @@ namespace XiaoHuLuMvcCore.Controllers
             string sWebRootFolder = _hostingEnvironment.WebRootPath;
             string sFileName = $"{Guid.NewGuid()}.xlsx";
             FileInfo file = new FileInfo(Path.Combine(sWebRootFolder, sFileName));
-            //try
-            //{
-            using (FileStream fs = new FileStream(file.ToString(), FileMode.Create))
+            try
             {
-                formFile.CopyTo(fs);
-                fs.Flush();
-            }
-            using (ExcelPackage package = new ExcelPackage(file))
-            {
-                var questionBankinherits = new List<QuestionBankinherit>();
-                ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
-                int rowCount = worksheet.Dimension.Rows;
-                int ColCount = worksheet.Dimension.Columns;
-                //bool bHeaderRow = true;
-                //for (int row = 1; row <= rowCount; row++)
-                //{
-                //    for (int col = 1; col <= ColCount; col++)
-                //    {
-                //        if (bHeaderRow)
-                //        {
-                //            student.Append(worksheet.Cells[row, col].Value.ToString() + "\t");
-                //            student.Name = worksheet.Cells[row, 1].Value.ToString();
-                //        }
-                //        else
-                //        {
-                //            student.Append(worksheet.Cells[row, col].Value.ToString() + "\t");
-                //        }
-                //    }
-                //    sb.Append(Environment.NewLine);
-                //}
-                for (int row = 1 + 1; row <= rowCount; row++)
+                using (FileStream fs = new FileStream(file.ToString(), FileMode.Create))
                 {
-                    QuestionBankinherit questionBankinherit = new QuestionBankinherit();
-                    questionBankinherit.Subject = worksheet.Cells[row, 1].Value.ToString();
-                    questionBankinherit.TypeOfExam = Convert.ToInt32(worksheet.Cells[row, 2].Value);
-                    questionBankinherit.AnswerA = worksheet.Cells[row, 3].Value.ToString();
-                    questionBankinherit.AnswerB = worksheet.Cells[row, 4].Value.ToString();
-                    var AnswerC = worksheet.Cells[row, 5].Value;
-                    if (AnswerC == null)
-                        AnswerC = "";
-                    questionBankinherit.AnswerC = AnswerC.ToString();
-                    var AnswerD = worksheet.Cells[row, 6].Value;
-                    if (AnswerD == null)
-                        AnswerD = "";
-                    questionBankinherit.AnswerD = AnswerD.ToString();
-                    var AnswerE = worksheet.Cells[row, 7].Value;
-                    if (AnswerE == null)
-                        AnswerE = "";
-                    questionBankinherit.AnswerE = AnswerE.ToString();
-                    questionBankinherit.Answer = worksheet.Cells[row, 8].Value.ToString();
-                    questionBankinherit.Enable = Convert.ToInt32(worksheet.Cells[row, 9].Value.ToString());
-                    questionBankinherits.Add(questionBankinherit);
+                    formFile.CopyTo(fs);
+                    fs.Flush();
                 }
-                var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADDList", questionBankinherits);
-
-                //return Content("123");
+                using (ExcelPackage package = new ExcelPackage(file))
+                {
+                    var questionBankinherits = new List<QuestionBankinherit>();
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+                    int rowCount = worksheet.Dimension.Rows;
+                    int ColCount = worksheet.Dimension.Columns;
+                    for (int row = 1 + 1; row <= rowCount; row++)
+                    {
+                        QuestionBankinherit questionBankinherit = new QuestionBankinherit();
+                        questionBankinherit.Subject = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.TypeOfExam = Convert.ToInt32(worksheet.Cells[row, 2].Value);
+                        questionBankinherit.AnswerA = worksheet.Cells[row, 3].Value.ToString();
+                        questionBankinherit.AnswerB = worksheet.Cells[row, 4].Value.ToString();
+                        var AnswerC = worksheet.Cells[row, 5].Value;
+                        if (AnswerC == null)
+                            AnswerC = "";
+                        questionBankinherit.AnswerC = AnswerC.ToString();
+                        var AnswerD = worksheet.Cells[row, 6].Value;
+                        if (AnswerD == null)
+                            AnswerD = "";
+                        questionBankinherit.AnswerD = AnswerD.ToString();
+                        var AnswerE = worksheet.Cells[row, 7].Value;
+                        if (AnswerE == null)
+                            AnswerE = "";
+                        questionBankinherit.AnswerE = AnswerE.ToString();
+                        questionBankinherit.Answer = worksheet.Cells[row, 8].Value.ToString();
+                        questionBankinherit.Enable = Convert.ToInt32(worksheet.Cells[row, 9].Value.ToString());
+                        questionBankinherits.Add(questionBankinherit);
+                    }
+                    var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADDList", questionBankinherits);
+                }
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //return Content(ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                 Content(ex.Message);
+            }
             #endregion
         }
 

@@ -1,0 +1,180 @@
+html, body, div, span,object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, samp,small, strike, strong, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {margin: 0;padding: 0;border: 0; font: inherit;vertical-align: baseline;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+html,body{margin:0; padding:0; font-family:"Microsoft YaHei","微软雅黑","SimSun","宋体"; width: 100%; height: 100%;}
+body a{cursor: pointer; text-decoration:none;}
+ol,ul{list-style: none;}
+.clear{zoom:1;}
+.clear:after{clear:both; height:0; visibility:hidden; font-size:0; display:block; content:"";}
+.center{display: block; margin: 0 auto; text-align: center;}
+.fl{float:left;}
+.fr{float:right;}
+
+
+/*****进入页面*****/
+.join_exam{width: 100%; height: 100%; background: #068a8d; position: relative;}
+.join_exam .join_examcon{position: absolute; left: 50%; top: 50%; margin-left: -401px; margin-top: -281px; width:802px; height: 562px;}
+/*标题*/
+.join_exam .join_examcon h2{text-align: center; font-size: 40px; line-height: 40px; padding-bottom: 100px; font-weight: bold; color: #fff;}
+/*准考证号*/
+.join_exam .join_examcon .examcon_top{width:740px; height: 115px; padding: 45px 30px 0 30px; border-radius: 20px; margin-bottom:10px; background: url(../images/joinbg01.jpg);}
+.join_exam .join_examcon .examcon_top .exam_number{float: left;}
+.join_exam .join_examcon .examcon_top .exam_number p{margin-bottom: 25px;}
+.join_exam .join_examcon .examcon_top .exam_number p span{font-size: 18px; color: #fff; font-weight: bold;}
+.join_exam .join_examcon .examcon_top .exam_number p input{width: 215px; height: 30px; border-radius: 5px; border: 1px solid #cbc5b7; background: #f0f0f0; margin-left: 10px; color: #000; font-size: 20px; font-weight: bold;}
+.join_exam .join_examcon .examcon_top .exam_number a{display: inline-block; font-size: 14px; height: 26px; line-height: 26px; border-radius:3px; padding: 0 20px; border: 1px solid #ccc; color: #333; background: #f0f0f0;}
+.join_exam .join_examcon .examcon_top .exam_number a:hover{background: #dbdada;}
+.join_exam .join_examcon .examcon_top .exam_welcome{float: right; }
+.join_exam .join_examcon .examcon_top .exam_welcome strong{ color: #eb5200; display: block; line-height: 16px;}
+.join_exam .join_examcon .examcon_top .exam_welcome a{margin-top: 35px; color: #fff; display: block; line-height: 16px;}
+/*座位号*/
+.join_exam .join_examcon .examcon_left{width: 468px; height: 252px; color: #fff; border-radius: 20px; background: url(../images/joinbg02.jpg); float: left;}
+.join_exam .join_examcon .examcon_left span{ margin: 10px 0 0 30px; line-height: 16px; display: block;}
+.join_exam .join_examcon .examcon_left p{padding-top: 30px; font-size:120px; line-height: 150px; text-align: center;}
+/*数据完整*/
+.join_exam .join_examcon .examcon_right{width: 320px; height: 252px; border-radius: 20px; background: url(../images/joinbg01.jpg); float: right; background-size: 100% 100%;}
+.join_exam .join_examcon .examcon_right p{padding-top:30px; color: #eb5200; font-weight: bold; line-height: 37px;}
+.join_exam .join_examcon .examcon_right p img{margin: 0 30px 0 80px; float: left;}
+.join_exam .join_examcon .examcon_right a{color: #eb5200; text-align: center; display: block; margin: 35px 0;}
+/*弹窗*/
+.openwin{position: fixed; left: 0; top: 0; width: 100%; height: 100%; display:none;}
+.openwin .openwin_nei{position: absolute; left: 50%; top: 50%; width: 498px; height: 358px; margin-left: -249px; margin-top: -179px; background:#fff;}
+.openwin .openwin_nei h2{padding: 20px 0; height: 32px; line-height: 32px; color: #ff2d36;}
+.openwin .openwin_nei h2 img{margin-left: 45px; margin-right: 25px; float: left;}
+.openwin .openwin_nei .openwincon{width: 478px; margin: 0 auto; background: #f5f5f5; height: 240px; }
+.openwin .openwin_nei .openwincon p{text-indent: 2em; padding:20px 10px; line-height: 30px;}
+.hswinbtns{text-align: center; padding: 8px 0;}
+.hswinbtns a{display: inline-block; width: 72px; height: 28px; margin:0 23px;}
+.hswinbtns a:hover{opacity: 0.7;}
+.hswinbtns a.yes_btn{background: url(../images/yes_btn.png);}
+.hswinbtns a.no_btn{background: url(../images/no_btn.png);}
+
+/*****开始考试页面*****/
+.strart_test{width: 100%; height: 100%; background: #068a8d; position: relative;}
+.strart_test_con{position: absolute; left: 50%; top: 50%; margin-left: -400px; margin-top: -275px; width: 800px; height: 550px;}
+.strart_test_con .strart_test_conl{width: 315px; float: left;}
+.strart_test_con .strart_test_conl h3{font-size: 28px; line-height:28px; height: 56px; font-weight: bold; color: #fff;}
+.strart_test_con .strart_test_conl .seat_number{position: relative; width: 100%; height: 205px; text-align: center; color: #fff; background: url(../images/seat_numberbg.jpg); border-radius: 5px;}
+.strart_test_con .strart_test_conl .seat_number span{position: absolute; left:20px; top:20px; line-height: 16px;}
+.strart_test_con .strart_test_conl .seat_number p{line-height: 205px; font-size: 120px;}
+.strart_test_con .strart_test_conl .conl_txt{width: 285px; padding: 0 15px; height: 280px; border-radius: 5px; background: #FFF; margin-top: 7px;}
+.strart_test_con .strart_test_conl .conl_txt span{color: #ff6d43;}
+.strart_test_con .strart_test_conl .conl_txt b{line-height: 16px; padding-top: 20px; display: block;}
+.strart_test_con .strart_test_conl .conl_txt p{color: #333; font-size:14px; line-height: 25px; text-indent: 2em; padding-top: 13px;}
+.strart_test_con .strart_test_conr{float: right;}
+.strart_test_con .strart_test_conr h6{padding: 27px 0 15px; height:14px;  font-size: 14px; line-height: 14px; color: #fff; text-align: right;}
+.strart_test_con .strart_test_conr .stuinfo{width: 440px; height: 452px; padding:20px; background: #fff; border-radius: 5px;}
+.strart_test_con .strart_test_conr .stuinfo dl dt{float:right;}
+.strart_test_con .strart_test_conr .stuinfo dl dd{font-size: 14px; line-height: 14px; padding-bottom: 25px; color: #000;}
+.strart_test_con .strart_test_conr .stuinfo .strart_test_btn{text-align: center; padding-top:25px;}
+.strart_test_con .strart_test_conr .stuinfo .strart_test_btn a{display: inline-block; width: 140px; height: 50px; margin: 0 15px;}
+.strart_test_con .strart_test_conr .stuinfo .strart_test_btn a.login_again{background: url(../images/stuinfo_login.jpg);}
+.strart_test_con .strart_test_conr .stuinfo .strart_test_btn a.start_exam_btn{background: url(../images/stuinfo_start.jpg);}
+.strart_test_con .strart_test_conr .stuinfo .strart_test_btn a:hover{opacity: 0.7;}
+
+/*考试结束页面*/
+.end_page{width: 100%; height: 100%; background: #068a8d; position: relative; }
+.end_con{position: absolute; left: 50%; top: 50%; margin-left: -400px; margin-top: -231px; width: 800px; height:462px; border:3px solid #000;}
+.end_con h2{text-align: center; font-size: 40px; line-height: 40px; font-weight: bold; color: #fff; margin-bottom: 74px;}
+.end_con .end_case{width:100%; height: 348px; border-radius: 5px; background: url(../images/joinbg01.jpg); background-size:100% 100%; }
+.end_con .end_case h4{color: #e94e3c; font-size: 18px; line-height: 18px; font-weight: bold; padding: 20px 0; text-align: center;}
+.end_con .end_case .end_case_con{width: 760px; margin: 0 auto;}
+.end_con .end_case .end_case_con .end_case_con_left{width:379px; height: 191px; float: left; border-right: 1px solid #82d4d6; color: #fff;}
+.end_con .end_case .end_case_con .end_case_con_left span{line-height: 16px;}
+.end_con .end_case .end_case_con .end_case_con_left p{font-size: 120px; line-height: 170px; text-align: center;}
+.end_con .end_case .end_case_con .end_case_con_right{width:330px; height: 191px; float: right; padding-left: 50px;}
+.end_con .end_case .end_case_con .end_case_con_right p{line-height: 16px; color: #fff; padding-top: 19px;}
+.end_con .end_case .end_case_con .end_case_con_right p span{margin-left:10px;}
+.end_con .end_case h5{font-size: 14px; line-height: 14px; color: #ff6d43; font-weight: bold; text-align: center; padding: 20px 0;}
+.end_con .end_case .check{display: block; width: 118px; height: 28px; line-height: 28px; border:1px solid #068a8d; border-radius: 3px; background: #fff; font-size: 14px; color: #333; font-weight: bold; margin: 0 auto; text-align: center;}
+.end_con .end_case .check:hover{opacity: 0.8;}
+
+
+/*答题页面*/
+.start_exam{padding: 0 1.5%; background: #068a8d; padding-bottom: 30px; display:table; min-width: 1365px; position: relative;}
+.start_exam_left{display:table-cell; *display:inline-block; width:2000px; *width:auto;}
+/*左*/
+/*学生介绍*/
+.start_exam_left .intr_students{width: 100%; padding:20px 0; color: #fff; font-size: 14px;}
+.start_exam_left .intr_students p{padding-bottom:15px; line-height: 16px;}
+.start_exam_left .intr_students p b{float: right; font-size: 16px; line-height: 16px; color: #fff;}
+.start_exam_left .intr_students span{line-height: 14px; margin-right: 40px;}
+.start_exam_left iframe{height:686px; width: 100%; background: #fff;}
+/*答题*/
+.answer{width: 100%; background: #fff;}
+/*答题*//*题目*/
+.answer .topic{padding-bottom:40px;}
+.answer .topic p{color: #000; line-height: 32px; padding:20px 30px;}
+.answer .topic .topic_showimg{display: block; width: 150px; height: 60px; background: url(../images/topic_showimg.jpg); margin-left: 30px;}
+/*答题*//*问题*/
+.question{height: 110px; line-height: 110px; background: #f0f0f0; padding-left: 30px;}
+.question b{font-size: 30px; color: #000; margin-right: 60px;}
+.question span{font-size: 18px; color: #333;}
+/*答题*//*回答*/
+.reply{height:370px;}
+.reply_con{padding: 30px 0 0 165px;}
+.reply_con p{margin-bottom: 20px;}
+.reply_con p input{margin-right: 10px;}
+/*工具栏*/
+.start_exam_left .toolbar .toolbar_btns{padding: 20px 0;}
+.toolbar .toolbar_btns a{display: inline-block; width: 118px; height: 33px; line-height: 33px; color: #000; font-size: 14px; text-indent: 50px; border-radius: 3px; border:1px solid #999;}
+.toolbar .toolbar_btns a:hover{opacity: 0.9;}
+.toolbar .toolbar_btns a.prev{background: url(../images/previcon.png)no-repeat 23px center #fff;}
+.toolbar .toolbar_btns a.next{background: url(../images/nexticon.png)no-repeat 23px center #fff;}
+.toolbar .toolbar_btns a.computer{background: url(../images/computericon.png)no-repeat 23px center #fff;}
+.toolbar .toolbar_btns a.help{background: url(../images/helpicon.png)no-repeat 23px center #fff;}
+.toolbar .toolbar_btns a.finish{background: url(../images/finishicon.png)no-repeat 23px center #fff;}
+.toolbar .toolbar_txt{height: 80px; background: #08b6b9;}
+.toolbar .toolbar_txt b{display: inline-block; line-height: 80px; margin-left:2.5%; font-size: 18px;}
+.toolbar .toolbar_txt .number{float: right; width: 40%; padding: 16px 0;}
+.toolbar .toolbar_txt .number p{font-size: 16px; line-height: 16px;}
+.toolbar .toolbar_txt .number p span{margin-right:15%;}
+.toolbar .toolbar_txt .number .dtjd{margin-top: 16px; font-size: 16px; line-height: 16px;}
+.toolbar .toolbar_txt .number .dtjd .progress{width: 238px; height: 6px; border: 1px solid #6c4447; display: inline-block;}
+.toolbar .toolbar_txt .number .dtjd span{font-size: 14px; margin-left: 8px;}
+.toolbar .toolbar_txt .number .progress .bar{width: 0%; height: 100%; background:#e94e3c;}  
+/*右 答题卡*/
+.start_exam_right{width:355px; padding-left: 20px;}
+.start_exam_right .status{padding: 20px 0 10px;}
+.start_exam_right .status span{margin-right: 50px; display: inline-block;}
+.start_exam_right .status i{display: inline-block; width: 17px; height: 12px; border: 1px solid #ccc; margin-right: 10px; float: left;}
+.start_exam_right .status b{float: left; font-size: 14px; line-height: 14px; color: #fff;}
+.start_exam_right dl{width: 100%;}
+.start_exam_right dl dt{padding:10px 0; font-size: 14px; line-height: 14px; color: #fff; margin-left: 10px; cursor: pointer;}
+.start_exam_right dl dt i{display: block; width: 18px; height: 18px; background: url(../images/card.png)no-repeat; float: right; margin-right:17px;}
+.start_exam_right dl dt i.cardhide{background: url(../images/cardhide.png) no-repeat !important;}
+.start_exam_right dl dd{padding:7px 12px; background: #83c5c6;}
+.start_exam_right dl dd a{display: inline-block; margin:3px; color: #000; font-size: 12px; width: 58px; height: 28px; line-height: 28px; text-align: center; background: #e5e5e5; border: 1px solid #068a8d; border-radius: 3px; float: left;}
+.start_exam_right dl dd a.underway{background: #f79b23; border-color:#fff; }
+.start_exam_right dl dd a.already{background: #027477;}
+/*弹窗*/
+.exam_win{width: 560px; height: 365px; position: fixed; left: 50%; top: 50%; margin-left: -280px; margin-top: -183px; background: #83c5c6; display: none;}
+.exam_win h5{font-size: 18px; font-weight: bold; line-height: 35px; padding: 30px 0 18px; color: #ff2d36;}
+.exam_win h5 i{display: inline-block; width: 34px; height: 35px; background: url(../images/red_prompt.png)no-repeat; float: left; margin: 0 20px 0 40px;}
+.exam_win .exam_win_txt{width: 500px; height:190px; background: #fff;  overflow-y:auto; margin: 0 auto; padding:10px;}
+.exam_win .exam_win_txt p{color: #333; font-size: 16px; line-height: 16px; padding-top: 20px;}
+.exam_win .exam_win_txt p span{color: #ff6d43;}
+.exam_win .exam_win_txt p b{font-size: 14px; text-indent: 2em; display: block; line-height: 24px; word-wrap:break-word;}
+.exam_win .exam_win_txt p strong{font-size: 14px; font-weight: bold; text-indent: 2em; display: block;}
+.exam_win .exam_win_btn {text-align: center; padding: 20px;}
+.exam_win .exam_win_btn a{padding: 0 12px 0 40px; height: 26px; line-height: 26px; margin: 0 50px; background:url(../images/btn_yes.png)no-repeat 12px center #fff; border: 1px solid #068a8d; border-radius: 5px; font-size: 12px; color: #333; display: inline-block; }
+.exam_win .exam_win_btn a:hover{opacity: 0.9;}
+.exam_win .exam_win_btn a.dontknow{background:url(../images/btn_close.png)no-repeat 12px center #fff; }
+
+/*图片弹窗*/
+.img_win{width: 580px; height: 400px; padding: 0 20px; position: fixed; top: 50%; left: 50%; margin-top: -200px; margin-left: -310px; background: #83c5c6; display: none;}
+.img_win h5{line-height: 58px; color: #000; font-size: 16px;}
+.img_win .img_win_img{display: block; width: 580px; height: 268px; overflow: hidden;}
+.img_win .img_win_img ul li{display: block; width: 100%; height: 100%;}
+.img_win .img_win_img ul li img{vertical-align: top; width: 100%; height: 100%;}
+.img_win .img_win_btns{text-align: center; padding: 20px 0;}
+.img_win .img_win_btns a{width: 118px; height: 32px; line-height: 32px; text-align: center; border: 1px solid #999; border-radius: 3px; background: #fff; margin: 0 35px; display: inline-block; color: #000;}
+.img_win .img_win_btns a:hover{background: #f0f0f0; color: #666;}
+/*计算器*/
+.ui-widget-content {border: 1px solid #dddddd; background: #f2f5f7 url(../images/ui-bgall.png) 50% top repeat-x; color: #362b36;}
+.ui-widget-header{border: 1px solid #aed0ea;  background: #deedf7; color: #222; font-weight: bold;}
+.calc-title-bar{padding: 0 0 0 5px!important;}
+.calc-title-bar-button-close{background: url(../images/ui-icons.png)no-repeat center; cursor: pointer;}
+.calc-buttons-wrapper .calc-button-wrapper{font-size: 16px; background: #d7ebf9 url(../images/ui-btn-bg.png) 50% 50% repeat-x; font-weight: bold; color: #2779aa;}
+.calc-buttons-wrapper .calc-button-wrapper:hover{background: #59b6f9; color: #fff;}
+.calc-text{font-size: 20px;}
+.body_p{background: #fff; line-height:30px;}
