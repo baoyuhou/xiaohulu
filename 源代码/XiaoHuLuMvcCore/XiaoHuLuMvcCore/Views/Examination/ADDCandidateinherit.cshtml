@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/zy.all.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/amazeui.min.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="divapp" class="dvcontent">
+        <div>
+            <!--tab start-->
+            <div class="tabs">
+                <div class="hd">
+                    <ul>
+                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">添加考生信息</li>
+                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">Excel导入</li>
+                    </ul>
+                </div>
+                <div class="bd">
+                    <ul style="display: block;padding: 20px;">
+                        <div class="am-cf admin-main" style="padding-top: 0px;">
+                            <!-- content start -->
+
+                            <div class="am-cf admin-main" style="padding-top: 0px;">
+                                <!-- content start -->
+                                <div class="admin-content">
+                                    <div class="admin-content-body">
+
+                                        <div class="am-g">
+                                            <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+                                            </div>
+                                            <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
+                                                 style="padding-top: 30px;">
+                                                <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="" method="post">
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            姓名 / Name
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Name" required
+                                                                   placeholder="姓名 / Name" name="Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            性别 / Sex
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input id="Sex" type="radio" name="Sex" checked="checked" value="1" />男
+                                                            <input id="Sex" type="radio" name="Sex" value="0" />女
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            头像 / Photo
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="file" id="formFile"
+                                                                   placeholder="头像 / Photo" name="formFile">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            准考证号码 / ExamNumber
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="ExamNumber" required
+                                                                   placeholder="准考证号码 / ExamNumber" name="ExamNumber">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            证件类型 / DocumentType
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="DocumentType" required
+                                                                   placeholder="证件类型 / DocumentType" name="DocumentType">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            证件号 / Certificates
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Certificates" required
+                                                                   placeholder="证件号 / Certificates" name="Certificates">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            所在考场 / ExamRoomID
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <select id="TypeOfExam" name="TypeOfExam">
+                                                                @foreach (var item in ViewBag.ExamRoom)
+                                                                {
+                                                                    <option value="@item.Id">@item.Name</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            当前场次 / Field
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="Field" required
+                                                                   placeholder="当前场次 / Field" name="Field">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            座位号 / Answer
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="SeatNumber" required
+                                                                   placeholder="座位号 / SeatNumber" name="SeatNumber">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            所在试室 / TestRoomID
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <select id="TypeOfExam" name="TypeOfExam">
+                                                                @foreach (var item in ViewBag.TestRoom)
+                                                                {
+                                                                    <option value="@item.Id">@item.Name</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            所在单位 / CompanyID
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <select id="TypeOfExam" name="TypeOfExam">
+                                                                @foreach (var item in ViewBag.Company)
+                                                                {
+                                                                    <option value="@item.Id">@item.Name</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            是否启用 / Enable
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input id="Enable" type="radio" name="Enable" checked="checked" value="1" />启用
+                                                            <input id="Enable" type="radio" name="Enable" value="0" />禁用
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <div class="am-u-sm-9 am-u-sm-push-3">
+                                                            <input id="btnadd" onclick="btn_save()" type="submit" class="am-btn am-btn-success" value="添加考生" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- content end -->
+                            </div>
+                            <!--添加角色 end-->
+                        </div>
+                    </ul>
+                    <ul class="theme-popbod dform" style="display: none;">
+                        <div class="am-cf admin-main" style="padding-top: 0px;">
+                            <!-- content start -->
+
+                            <div class="am-cf admin-main" style="padding-top: 0px;">
+                                <!-- content start -->
+                                <div class="admin-content">
+                                    <div class="admin-content-body">
+
+                                        <div class="am-g">
+                                            <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="/QuestionBank/ADDQuestionBankList" method="post">
+                                                <div class="am-form-group">
+                                                    <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                        导入文件
+                                                    </label>
+                                                    <div class="am-u-sm-9">
+                                                        <input type="file" id="formFile" name="formFile">
+                                                    </div>
+                                                </div>
+                                                <div class="am-form-group">
+                                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                                        <input id="btnadd" type="submit" class="am-btn am-btn-success" value="导入" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- content end -->
+                            </div>
+                            <!--添加角色 end-->
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery-1.7.2.min.js"></script>
+    <script src="~/js/jquery-form.js"></script>
+    <script src="~/js/vue.js"></script>
+    <script src="~/js/axios.js"></script>
+    <script src="~/js/Jqueryplugs.js"></script>
+    <script src="~/js/_layout.js"></script>
+    <script src="~/js/jquery.SuperSlide.source.js"></script>
+    <script>
+        $(function () {
+            $(".tabs").slide({ trigger: "click" });
+        });
+        function btn_save() {
+            var fileUpload = $("#formFile").get(0);
+            var files = fileUpload.files;
+            var data = new FormData();
+            //for (var i = 0; i < files.length; i++) {
+            //    data.append(files[i].name, files[i]);
+            //}
+            data.append(formFile[0].name, files[0]);
+            $.ajax({
+                type: "post",
+                url: "/Examination/ADDCandidateinheritData",
+                data: {
+                    dadidate, data
+                },
+                success: function (data) {
+                    if (data > 0) {
+                        $.jq_Alert({
+                            message: "添加成功",
+                            btnOktext: "确认",
+                            dialogModal: true,
+                            btnOkClick: function () {
+                                //$("#RawMaterialsTypeName").val("");
+                                //$("#RawMaterialsTypeDescription").val("");
+                                //$("#Ramark").val("");
+                                //page1();
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

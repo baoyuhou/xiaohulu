@@ -63,5 +63,23 @@ namespace IServices.Examination.IServices
         /// <param name="pwd"></param>
         /// <returns></returns>
         Users GetUsersByNameAndPwd(string name,string pwd);
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        List<Company> GetCompanies();
+
+        /// <summary>
+        /// 获取试室
+        /// </summary>
+        /// <returns></returns>
+        List<TestRoom> GetTestRooms();
+
+        /// <summary>
+        /// 获取考场
+        /// </summary>
+        /// <returns></returns>
+        List<ExamRoom> GetExamRooms();
     }
 }

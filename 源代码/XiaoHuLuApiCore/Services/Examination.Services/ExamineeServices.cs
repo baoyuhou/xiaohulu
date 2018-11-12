@@ -112,5 +112,47 @@ namespace Services.Examination.Services
             Candidateinherit candidateinherit = sugarClient.Queryable<Candidate, TestRoom, ExamRoom, Company, TestTime>((CD, TR, ER, CP, TT) => CD.CompanyID == CP.Id && CD.ExamRoomID == ER.Id && CD.TestRoomID == TR.ID && CD.ExamNumber == TT.ExamNumberId).Select((CD, TR, ER, CP, TT) => new Candidateinherit { Certificates = CD.Certificates, CompanyName = CP.Name, DocumentType = CD.DocumentType, Enable = CD.Enable, ExamNumber = CD.ExamNumber, ExamRoomName = ER.Name, Field = CD.Field, ID = CD.ID, LongExam = TT.LongExam, Name = CD.Name, Photo = CD.Photo, ProgressOfAnswer = TT.ProgressOfAnswer, RemainderLength = TT.RemainderLength, SeatNumber = CD.SeatNumber, Sex = CD.Sex, TestRoomName = TR.Name, TimeUsed = TT.TimeUsed }).Where(m => m.ID == candidateId).First();
             return candidateinherit;
         }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        public List<Company> GetCompanies()
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.SqlQueryable<Company>("select * from Company").ToList();
+                return result;
+
+
+
+            }
+        }
+
+        /// <summary>
+        /// 获取试室
+        /// </summary>
+        /// <returns></returns>
+        public List<TestRoom> GetTestRooms()
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.SqlQueryable<TestRoom>("select * from TestRoom").ToList();
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        public List<ExamRoom> GetExamRooms()
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.SqlQueryable<ExamRoom>("select * from ExamRoom").ToList();
+                return result;
+            }
+        }
     }
 }
