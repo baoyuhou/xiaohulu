@@ -10,12 +10,7 @@ namespace XiaoHuLuMvcCore.Models.Authoritys
         /// <summary>
         /// 主键ID
         /// </summary>
-        public int RoleId { get; set; }
-
-        /// <summary>
-        /// 角色名
-        /// </summary>
-        public string RoleName { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 权限名称
         /// </summary>
@@ -27,21 +22,9 @@ namespace XiaoHuLuMvcCore.Models.Authoritys
         public int Level { get; set; }
 
         /// <summary>
-        /// 父级权限
+        /// 权限路径
         /// </summary>
-        public int Father { get; set; }
-        /// <summary>
-        /// 子级权限
-        /// </summary>
-        public int Child { get; set; }
-        /// <summary>
-        /// 角色id
-        /// </summary>
-        public int RolesId { get; set; }
+        public string Url { get; set; }
 
-        /// <summary>
-        /// 权限id
-        /// </summary>
-        public int JurisdictionId { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// 获取角色和权限信息
         /// </summary>
         /// <returns></returns>
-        [Route("GetRoleList")]
+        [Route("GetJurisdictionInfos")]
         [HttpGet]
         public List<JurisdictionInfo> GetJurisdictionInfos()
         {

@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = null;
+}
+@model IEnumerable<XiaoHuLuMvcCore.Models.Authoritys.JurisdictionInfo>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/zy.all.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/amazeui.min.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="dvcontent">
+
+        <div>
+            <!--tab start-->
+            <div class="tabs">
+                <div class="hd">
+                    <ul>
+                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">查看用户</li>
+                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">添加用户</li>
+                    </ul>
+                </div>
+                <div class="bd">
+                    <ul style="display: block;padding: 20px;">
+                        <li>
+                            <!--分页显示角色信息 start-->
+                            <div id="dv1">
+                                <table class="table" id="tbRecord">
+                                    <thead>
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>角色名 </th>
+                                            <th>权限名</th>
+                                            <th>修改</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.RoleName</td>
+                                                <td>@item.Name</td>
+                                                <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--分页显示角色信息 end-->
+                        </li>
+                    </ul>
+                    <ul class="theme-popbod dform" style="display: none;">
+                        <div class="am-cf admin-main" style="padding-top: 0px;">
+                            <!-- content start -->
+
+                            <div class="am-cf admin-main" style="padding-top: 0px;">
+                                <!-- content start -->
+                                <div class="admin-content">
+                                    <div class="admin-content-body">
+
+                                        <div class="am-g">
+                                            <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+
+                                            </div>
+                                            <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
+                                                 style="padding-top: 30px;">
+                                                <form class="am-form am-form-horizontal"
+                                                      action="index" method="post">
+
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            角色名 / RoleName
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            <input type="text" id="RoleName" required
+                                                                   placeholder="角色名 / RoleName" name="RoleName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <label for="user-name" class="am-u-sm-3 am-form-label">
+                                                            权限名称 / Name
+                                                        </label>
+                                                        <div class="am-u-sm-9">
+                                                            @foreach (var item in ViewBag.jurisresult as List<XiaoHuLuMvcCore.Models.Authoritys.Jurisdictions>)
+                                                            {
+                                                                <input name="CheckJuris" type="checkbox" value="@item.Id" /> @item.Name
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="am-form-group">
+                                                        <div class="am-u-sm-9 am-u-sm-push-3">
+                                                            <input type="button" class="am-btn am-btn-success" value="添加用户" onclick="btn_save()" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- content end -->
+                            </div>
+                            <!--添加角色 end-->
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery-1.7.2.min.js"></script>
+    <script src="~/js/Jqueryplugs.js"></script>
+    <script src="~/js/_layout.js"></script>
+    <script src="~/js/jquery.SuperSlide.source.js"></script>
+    <script>
+        var num = 1;
+        $(function () {
+
+            $(".tabs").slide({ trigger: "click" });
+
+        });
+
+
+        function btn_save() {
+            var strnum = [];
+            $("[name='CheckJuris']:checked").each(function () {
+                strnum += $(this).val() + ","
+            })
+
+            var pid = $("#RawMaterialsTypePageId  option:selected").val();
+            var name = $("#RawMaterialsTypeName").val();
+            var desc = $("#RawMaterialsTypeDescription").val();
+            var ramark = $("#Ramark").val();
+            $.ajax({
+                type: "post",
+                url: "/Role/RolesAdd",
+                data: { "RoleName": $("#RoleName").val(), "Name": strnum.toString() },
+                success: function (data) {
+                    if (data > 0) {
+                        $.jq_Alert({
+                            message: "添加成功",
+                            btnOktext: "确认",
+                            dialogModal: true,
+                            btnOkClick: function () {
+                                //$("#RawMaterialsTypeName").val("");
+                                //$("#RawMaterialsTypeDescription").val("");
+                                //page1();
+                                location.reload();
+
+                            }
+                        });
+                    }
+                }
+            });
+            alert(t);
+        }
+
+        var btn_edit = function (id) {
+            $.jq_Panel({
+                url: "/RawMaterialsType/EditRawMaterialsType?id=" + id,
+                title: "编辑分类",
+                dialogModal: true,
+                iframeWidth: 500,
+                iframeHeight: 400
+            });
+        }
+    </script>
+
+    </div>
+</body>

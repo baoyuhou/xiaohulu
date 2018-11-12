@@ -8,6 +8,8 @@ using XiaoHuLuMvcCore.Models.Authority;
 using XiaoHuLuMvcCore.Models.Authoritys;
 using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace XiaoHuLuMvcCore.Controllers
 {
     public class UsersController : Controller
@@ -37,11 +39,14 @@ namespace XiaoHuLuMvcCore.Controllers
         }
 
         /// <summary>
-        /// 首页
+        /// 后台首页
         /// </summary>
         /// <returns></returns>
         public IActionResult Login()
         {
+
+            var result = WebApiHelper.GetApiResult("get", "Permissions", "GetJurisdictions");
+            ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);          
             return View();
         }
 
