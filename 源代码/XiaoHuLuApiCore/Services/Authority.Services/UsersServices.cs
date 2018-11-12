@@ -52,7 +52,35 @@ namespace Services.Authority.Services
             }
             return 0;
         }
-   
+
+        /// <summary>
+        /// 编辑修改信息
+        /// </summary>
+        /// <param name="usersInfo"></param>
+        /// <returns></returns>
+        public int EditById(UsersInfo usersInfo)
+        {
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var result = db.Updateable<UsersInfo>(usersInfo).ExecuteCommand();
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 反填信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public UsersInfo GetUsersInfoById(int id)
+        {
+            using (SqlSugarClient db = Educationcontext.GetClient())
+            {
+                var result = db.SqlQueryable<UsersInfo>("select a.Id,a.UserName,a.`Password`,b.RoleName,c.UsersId,c.RolesId from Users a,Role b,UserandRole c where a.Id="+id).First();
+                return result;
+            }
+        }
+
         /// <summary>
         /// 获取用户角色信息
         /// </summary>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>答题页面</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/calculator.min.js"></script>
+</head>
+<body>
+
+	<div class="start_exam clear">
+		
+		<div class="start_exam_left">
+				
+			<!-- 学生介绍 -->
+			<div class="intr_students">
+				<p>当前考场：阿斯卡仕达<b>座位号：1</b></p>
+				<span>姓名：阿斯卡仕达</span><span>性别：男</span><span>准考证号：00001</span>
+			</div>	
+
+			<!--iframe -->
+			<iframe src="question.html" scrolling="no" frameborder="0"></iframe>
+
+			<!-- 工具栏 -->
+			<div class="toolbar">
+				<p class="toolbar_btns">
+					<a href="javascript:;" class="prev">上一题</a>
+					<a href="javascript:;" class="next">下一题</a>
+					<a href="javascript:;" class="computer" onclick="showCalc();">计算机</a>
+					<a href="javascript:;" class="help">帮助</a>
+					<a href="javascript:;" class="finish">交卷</a>
+				</p>
+				<div class="toolbar_txt">
+					<b>考试总时间：100分钟</b>
+					<b>剩余时间：剩余<span id="countdown">01时40分钟0秒</span></b>
+					<div class="number">
+						<p><span>总题数：120题</span><span>已答题量：已答107道</span></p>
+						<div class="dtjd">
+							答题进度：
+							<div class="progress"><div class="bar" style="width:20%;"></div></div>
+							<span>20%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="start_exam_right">
+			<h6 class="status">
+				<span><i style="background:#027477;"></i><b>已答</b></span>
+				<span><i style="background:#f79b23;"></i><b>再答</b></span>
+				<span><i style="background:#e5e5e5;"></i><b>末答</b></span>
+			</h6>
+			<dl class="listcard">
+				<dt>第一部分&#12288;单选题<i class="card"></i></dt>
+				<dd class="cardcon clear">
+					<a href="javascript:;" class="already">1</a><a href="javascript:;" class="underway">2</a><a href="javascript:;">3</a><a href="javascript:;">4</a><a href="javascript:;">5</a>
+					<a href="javascript:;">6</a><a href="javascript:;">7</a><a href="javascript:;">8</a><a href="javascript:;">9</a><a href="javascript:;">10</a>
+					<a href="javascript:;">11</a><a href="javascript:;">12</a><a href="javascript:;">13</a><a href="javascript:;">14</a><a href="javascript:;">15</a>
+					<a href="javascript:;">16</a><a href="javascript:;">17</a><a href="javascript:;">18</a><a href="javascript:;">19</a><a href="javascript:;">20</a>
+					<a href="javascript:;">21</a><a href="javascript:;">22</a><a href="javascript:;">23</a><a href="javascript:;">24</a>
+				</dd>
+			</dl>
+			<dl class="listcard">
+				<dt>第二部分&#12288;单选题<i class="card"></i></dt>
+				<dd class="cardcon clear">
+					<a href="javascript:;">25</a><a href="javascript:;">26</a><a href="javascript:;">27</a><a href="javascript:;">28</a><a href="javascript:;">29</a>
+					<a href="javascript:;">30</a><a href="javascript:;">31</a><a href="javascript:;">32</a><a href="javascript:;">33</a><a href="javascript:;">34</a>
+					<a href="javascript:;">35</a><a href="javascript:;">36</a><a href="javascript:;">37</a><a href="javascript:;">38</a><a href="javascript:;">39</a>
+					<a href="javascript:;">40</a><a href="javascript:;">41</a><a href="javascript:;">42</a><a href="javascript:;">43</a><a href="javascript:;">44</a>
+					<a href="javascript:;">45</a><a href="javascript:;">46</a><a href="javascript:;">47</a><a href="javascript:;">48</a>
+				</dd>
+			</dl>
+			<dl class="listcard">
+				<dt>第三部分&#12288;单选题<i class="card"></i></dt>
+				<dd class="cardcon clear">
+					<a href="javascript:;">49</a><a href="javascript:;">50</a><a href="javascript:;">51</a><a href="javascript:;">52</a><a href="javascript:;">53</a>
+					<a href="javascript:;">54</a><a href="javascript:;">55</a><a href="javascript:;">56</a><a href="javascript:;">57</a><a href="javascript:;">58</a>
+					<a href="javascript:;">59</a><a href="javascript:;">60</a><a href="javascript:;">61</a><a href="javascript:;">62</a><a href="javascript:;">63</a>
+					<a href="javascript:;">64</a><a href="javascript:;">65</a><a href="javascript:;">66</a><a href="javascript:;">67</a><a href="javascript:;">68</a>
+					<a href="javascript:;">69</a><a href="javascript:;">70</a><a href="javascript:;">71</a><a href="javascript:;">72</a>
+				</dd>
+			</dl>
+			<dl class="listcard">
+				<dt>第四部分&#12288;单选题<i class="card"></i></dt>
+				<dd class="cardcon clear">
+					<a href="javascript:;">73</a><a href="javascript:;">74</a><a href="javascript:;">75</a><a href="javascript:;">76</a><a href="javascript:;">77</a>
+					<a href="javascript:;">78</a><a href="javascript:;">79</a><a href="javascript:;">80</a><a href="javascript:;">81</a><a href="javascript:;">82</a>
+					<a href="javascript:;">83</a><a href="javascript:;">84</a><a href="javascript:;">85</a><a href="javascript:;">86</a><a href="javascript:;">87</a>
+					<a href="javascript:;">88</a><a href="javascript:;">89</a><a href="javascript:;">90</a><a href="javascript:;">91</a><a href="javascript:;">92</a>
+					<a href="javascript:;">93</a><a href="javascript:;">94</a><a href="javascript:;">95</a><a href="javascript:;">96</a>
+				</dd>
+			</dl>
+			<dl class="listcard">
+				<dt>第五部分&#12288;单选题<i class="card"></i></dt>
+				<dd class="cardcon clear">
+					<a href="javascript:;">73</a><a href="javascript:;">74</a><a href="javascript:;">75</a><a href="javascript:;">76</a><a href="javascript:;">77</a>
+					<a href="javascript:;">78</a><a href="javascript:;">79</a><a href="javascript:;">80</a><a href="javascript:;">81</a><a href="javascript:;">82</a>
+					<a href="javascript:;">83</a><a href="javascript:;">84</a><a href="javascript:;">85</a><a href="javascript:;">86</a><a href="javascript:;">87</a>
+					<a href="javascript:;">88</a><a href="javascript:;">89</a><a href="javascript:;">90</a><a href="javascript:;">91</a><a href="javascript:;">92</a>
+					<a href="javascript:;">93</a><a href="javascript:;">94</a><a href="javascript:;">95</a><a href="javascript:;">96</a>
+				</dd>
+			</dl>
+		</div>
+	</div>
+
+	<!-- 弹窗 -->
+	<!-- 试卷描述 -->
+	<div class="exam_win describe">
+		<h5><i></i>试卷描述</h5>
+		<div class="exam_win_txt">
+			<p>答题规则：</p>
+			<p>
+				<b>可直接使用鼠标作答，或使用键盘：<span>←</span>进入上一题，<span>→</span>进入下一题。</b>
+				<b>本试卷由五部分组成，各部分之间不可回退，同一部分在答题过程中可以回退（对已作答试题可返回检查或修改答案）</b>
+				<b>单选题（每题1个得分点）：以下每道试题有5个备选答案，请从中选择1个最佳答案</b>
+			</p>
+		</div>
+		<div class="exam_win_btn">
+			<a href="javascript:;" class="know">知道了</a>
+		</div>
+	</div>
+	<!-- 帮助弹窗 -->
+	<div class="exam_win helpcon">
+		<h5><i></i>帮助</h5>
+		<div class="exam_win_txt">
+			<p>答题规则：</p>
+			<p><span>一、所有按键均可使用鼠标操作</span></p>
+			<p><span>二、考试过程中需要用到的按键</span></p>
+			<p>
+				<b>1、按字母键A-Z选择相应答案，重新按相应键会删除原来选择的答案。</b>
+				<b>2、<span>→</span>进入下一题，<span>←</span>进入上一题，<span>2</span>&nbsp;调出计算器，<span>3</span>&nbsp;查看帮助，<span>4</span>&nbsp;交卷。</b>
+				<b>3、答题过程中可以通过点击“帮助”按钮查看该操作说明，并可以查看各题型说明。</b>
+			</p>
+			<p><span>三、当前题型说明</span></p>
+			<p>
+				<b>本部分在答题过程中<span>可以回退</span>（对已作答试题可返回检查或修改答案）。</b>
+				<b> 单选题（每题1个得分点），以下每道试题有5个备选答案，请从总选择1个最佳答案。</b>
+			</p>
+		</div>
+		<div class="exam_win_btn">
+			<a href="javascript:;" class="know">知道了</a>
+		</div>
+	</div>
+	<!-- 交卷弹窗1 -->
+	<div class="exam_win jj1">
+		<h5><i></i>提示</h5>
+		<div class="exam_win_txt">
+			<p>您还存在未答完的试题：</p>
+			<p>
+				<b>6，7，9，10，11.1，11.1，11.1，11.1，11.1，11.1，11.1，11.1，6，7，9，10，11.1，11.1，11.1，11.1，11.1，11.1，11.1，11.1，11.1，6，7，9，10，11.1，11.1，11.1，11.1，11.1，11.1，11.1，11.1，11.1，6，7，9，10，11.1，11.1，11.1，11.1，11.1，11.1，11.1，11.1，11.1，</b>
+			</p>
+			<p><strong>交卷以后不能再继续答题，您是否要交卷？</strong></p>
+		</div>
+		<div class="exam_win_btn">
+			<a href="javascript:;" class="know dontknow">暂不交卷</a>
+			<a href="javascript:;" class="showjj2">我要交卷</a>
+		</div>
+	</div>
+	<!-- 交卷弹窗2 -->
+	<div class="exam_win jj2">
+		<h5><i></i>提示</h5>
+		<div class="exam_win_txt">
+			<p>你确定要交卷</p>
+		</div>
+		<div class="exam_win_btn">
+			<a href="javascript:;" class="know dontknow">取消</a>
+			<a href="javascript:;" class="yesfinish">确定</a>
+		</div>
+	</div>
+	<!-- 题型之间不可回退弹窗 -->
+	<div class="exam_win">
+		<h5><i></i>提示</h5>
+		<div class="exam_win_txt">
+			<p>题型之间不可回退，请继续完成后续试题！</p>
+		</div>
+		<div class="exam_win_btn">
+			<a href="javascript:;" class="know">确定</a>
+		</div>
+	</div>
+	<!-- 答题时各部分之间不可回退 -->
+	<div class="exam_win">
+		<h5><i></i>提示</h5>
+		<div class="exam_win_txt">
+			<p>答题时各部分之间不可回退，是否进入下一部分？</p>
+		</div>
+		<div class="exam_win_btn">
+			<a href="javascript:;" class="know">确定</a>
+			<a href="javascript:;" class="know dontknow">取消</a>
+		</div>
+	</div>
+	
+	<!-- 图片弹窗 -->
+	<div class="img_win">
+		<h5>当前试题共有<span class="imgsum"></span>张图片，这是第<span class="imgnum">1</span>张图</h5>
+		<div class="img_win_img">
+			<ul class="pic">
+				<li><img src="images/img_win.jpg"></li>
+				<li><img src="images/stuimg.jpg"></li>
+				<li><img src="images/topic_showimg.jpg"></li>
+			</ul>
+		</div>
+		<p class="img_win_btns">
+			<a href="javascript:;" class="previmg">上一页(Q)</a>
+			<a href="javascript:;" class="nextimg">下一页(A)</a>
+			<a href="javascript:;" class="goback_topic">返回题目</a>
+		</p>
+	</div>
+
+	<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

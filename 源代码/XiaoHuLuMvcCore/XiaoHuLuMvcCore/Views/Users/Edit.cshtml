@@ -1,0 +1,76 @@
+﻿@model XiaoHuLuMvcCore.Models.Authority.UsersInfo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+<script src="~/js/jquery-3.1.1.js"></script>
+<script src="~/css/wangEditor.js"></script>
+<h4>UsersInfo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="user-name" class="am-u-sm-3 am-form-label">
+                    角色名称 / RoleName
+                </label>
+                <div class="am-u-sm-9">
+                    @foreach (var item in ViewBag.roleResult as List<XiaoHuLuMvcCore.Models.Authoritys.Role>)
+                    {
+                        <input name="CheckRole" type="checkbox" value="@item.Id" /> @item.RoleName
+                    }
+
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" onclick="Save()" value="编辑" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+    
+    function Save() {
+        var strnum = [];
+        $("[name='CheckRole']:checked").each(function () {
+            strnum += $(this).val() + ","
+        })
+
+        $.ajax({
+            url: '/Users/Edit',
+            data: { "UserName": $("[name='UserName']").val(), "Password": $("[name='Password']").val(), "RoleName": strnum.toString()},
+            type: "post",
+            success: function (data) {
+
+                if (data > 0) {
+                    alert("修改成功")
+                    document.location.href='/Users/index'
+                }
+            }
+        })
+    }
+
+</script>
+

@@ -6,16 +6,16 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<h2>小葫芦程远护士模考</h2>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>小葫芦程远护士模考</title>
     <link href="~/css/main.css" rel="stylesheet" />
-    <link href="iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/iconfont.css" rel="stylesheet" type="text/css" />
     <link href="~/css/test.css" rel="stylesheet" />
-
+    <link href="~/css/jisuanqi.css" rel="stylesheet" />
     <style>
         .hasBeenAnswer {
             background: #5d9cec;
@@ -34,9 +34,9 @@
                             <p class="test_time">
                                 <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">01:40</b>
                             </p>
-                            <font><input type="button" name="test_jiaojuan" value="交卷"></font>
+                            <font><input type="button" name="test_jiaojuan" id="end" value="交卷"></font>
+                            <font><input type="button" name="button1" id="button1" value="计算器"></font>
                         </div>
-
                         @foreach (var item in ViewBag.texttype as List<TextType>)
                         {
                             <div class="test_content">
@@ -67,39 +67,61 @@
                                                     </div>
                                                     <div class="test_content_nr_main">
                                                         <ul>
-                                                            <li class="option">
-                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                       id="@item1.Id" />
-                                                                <label for="@item1.Id">
-                                                                    A.
-                                                                    <p class="ue" style="display: inline;">@item1.AnswerA</p>
-                                                                </label>
-                                                            </li>
-                                                            <li class="option">
-                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                       id="@item1.Id" />
-                                                                <label for="@item1.Id">
-                                                                    B.
-                                                                    <p class="ue" style="display: inline;">@item1.AnswerB</p>
-                                                                </label>
-                                                            </li>
-                                                            <li class="option">
-                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                       id="@item1.Id" />
-                                                                <label for="@item1.Id">
-                                                                    C.
-                                                                    <p class="ue" style="display: inline;">@item1.AnswerC</p>
-                                                                </label>
-                                                            </li>
-                                                            <li class="option">
-                                                                <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                       id="@item1.Id" />
-
-                                                                <label for="@item1.Id">
-                                                                    D.
-                                                                    <p class="ue" style="display: inline;">@item1.AnswerD</p>
-                                                                </label>
-                                                            </li>
+                                                            @if (@item1.AnswerA != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                           id="@item1.Id+1" />
+                                                                    <label for="@item1.Id+1">
+                                                                        A.
+                                                                        <p class="ue" style="display: inline;">@item1.AnswerA</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (@item1.AnswerB != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                           id="@item1.Id+2" />
+                                                                    <label for="@item1.Id+2">
+                                                                        B.
+                                                                        <p class="ue" style="display: inline;">@item1.AnswerB</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (@item1.AnswerC != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                           id="@item1.Id+3" />
+                                                                    <label for="@item1.Id+3">
+                                                                        C.
+                                                                        <p class="ue" style="display: inline;">@item1.AnswerC</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (@item1.AnswerD != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                           id="@item1.Id+4" />
+                                                                    <label for="@item1.Id+4">
+                                                                        D.
+                                                                        <p class="ue" style="display: inline;">@item1.AnswerD</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (@item1.AnswerE != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                           id="@item1.Id+4" />
+                                                                    <label for="@item1.Id+4">
+                                                                        E.
+                                                                        <p class="ue" style="display: inline;">@item1.AnswerE</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
                                                         </ul>
                                                     </div>
                                                 </li>
@@ -123,41 +145,223 @@
                                                     </div>
                                                     <div class="test_content_nr_main">
                                                         <ul>
-                                                            <li class="option">
-                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                                       id="1_answer_1_option_1" />
+                                                            @if (item2.AnswerA != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                           id="@item2.Id+1" />
+                                                                    <label for="@item2.Id+1">
+                                                                        A.
+                                                                        <p class="ue" style="display: inline;">@item2.AnswerA</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (item2.AnswerB != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                           id="@item2.Id+2" />
 
-                                                                <label for="1_answer_1_option_1">
+                                                                    <label for="@item2.Id+2">
+                                                                        B.
+                                                                        <p class="ue" style="display: inline;">@item2.AnswerB</p>
+                                                                    </label>
+
+                                                                </li>
+                                                            }
+                                                            @if (item2.AnswerC != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                           id="@item2.Id+3" />
+
+                                                                    <label for="@item2.Id+3">
+                                                                        C.
+                                                                        <p class="ue" style="display: inline;">@item2.AnswerC</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (item2.AnswerD != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                           id="@item2.Id+4" />
+
+                                                                    <label for="@item2.Id+4">
+                                                                        D.
+                                                                        <p class="ue" style="display: inline;">@item2.AnswerD</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (item2.AnswerE != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="checkbox" class="radioOrCheck" name="answer1"
+                                                                           id="@item2.Id+4" />
+
+                                                                    <label for="@item2.Id+4">
+                                                                        E.
+                                                                        <p class="ue" style="display: inline;">@item2.AnswerE</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            }
+                            if (item.ID == 3)
+                            {
+                                @foreach (var item3 in Model)
+                                {
+                                    if (@item3.TypeOfExam == 3)
+                                    {
+                                        num++;
+                                        <div class="test_content_nr">
+                                            <ul>
+                                                <li id="@item3.Id">
+                                                    <div class="test_content_nr_tt">
+                                                        <i>1</i><span>(1分)</span><font>@item3.Subject</font><b class="icon iconfont">&#xe881;</b>
+                                                    </div>
+                                                    <div class="test_content_nr_main">
+                                                        <ul>
+                                                            <li class="option">
+                                                                <input type="radio" class="radioOrCheck" name="@item3.Id"
+                                                                       id="@item3.Id+1" />
+                                                                <label for="@item3.Id+1">
                                                                     A.
-                                                                    <p class="ue" style="display: inline;">@item2.AnswerA</p>
+                                                                    <p class="ue" style="display: inline;">@item3.AnswerA</p>
                                                                 </label>
                                                             </li>
                                                             <li class="option">
-                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                                       id="1_answer_1_option_2" />
+                                                                <input type="radio" class="radioOrCheck" name="@item3.Id"
+                                                                       id="@item3.Id+2" />
 
-                                                                <label for="1_answer_1_option_2">
+                                                                <label for="@item3.Id+2">
                                                                     B.
-                                                                    <p class="ue" style="display: inline;">@item2.AnswerB</p>
+                                                                    <p class="ue" style="display: inline;">@item3.AnswerB</p>
                                                                 </label>
 
                                                             </li>
-                                                            <li class="option">
-                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                                       id="1_answer_1_option_3" />
 
-                                                                <label for="1_answer_1_option_3">
-                                                                    C.
-                                                                    <p class="ue" style="display: inline;">@item2.AnswerC</p>
-                                                                </label>
-                                                            </li>
-                                                            <li class="option">
-                                                                <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                                       id="1_answer_1_option_4" />
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            }
+                            if (item.ID == 4)
+                            {
+                                @foreach (var item4 in Model)
+                                {
+                                    if (@item4.TypeOfExam == 4)
+                                    {
+                                        num++;
+                                        <div class="test_content_nr">
+                                            <ul>
+                                                <li id="@item4.Id">
+                                                    <div class="test_content_nr_tt">
+                                                        <i>@num</i><span>(1分)</span><font>
+                                                            @item4.Subject
+                                                            <img src="~/img/@item4.Photo" />
+                                                        </font><b class="icon iconfont">&#xe881;</b>
+                                                    </div>
+                                                    <div class="test_content_nr_main">
+                                                        <ul>
 
-                                                                <label for="1_answer_1_option_4">
-                                                                    D.
-                                                                    <p class="ue" style="display: inline;">@item2.AnswerD</p>
+                                                            @if (item4.AnswerA != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item4.Id"
+                                                                           id="@item4.Id+1" />
+                                                                    <label for="@item4.Id+1">
+                                                                        A.
+                                                                        <p class="ue" style="display: inline;">@item4.AnswerA</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (item4.AnswerB != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item4.Id"
+                                                                           id="@item4.Id+2" />
+                                                                    <label for="@item4.Id+2">
+                                                                        B.
+                                                                        <p class="ue" style="display: inline;">@item4.AnswerB</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (item4.AnswerC != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item4.Id"
+                                                                           id="@item4.Id+3" />
+                                                                    <label for="@item4.Id+3">
+                                                                        C.
+                                                                        <p class="ue" style="display: inline;">@item4.AnswerC</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (item4.AnswerD != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item4.Id"
+                                                                           id="@item4.Id+4" />
+
+                                                                    <label for="@item4.Id+4">
+                                                                        D.
+                                                                        <p class="ue" style="display: inline;">@item4.AnswerD</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                            @if (item4.AnswerE != "")
+                                                            {
+                                                                <li class="option">
+                                                                    <input type="radio" class="radioOrCheck" name="@item4.Id"
+                                                                           id="@item4.Id+4" />
+
+                                                                    <label for="@item4.Id+4">
+                                                                        E.
+                                                                        <p class="ue" style="display: inline;">@item4.AnswerE</p>
+                                                                    </label>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            }
+                            if (item.ID == 5)
+                            {
+                                @foreach (var item5 in Model)
+                                {
+                                    if (@item5.TypeOfExam == 5)
+                                    {
+                                        num++;
+                                        <div class="test_content_nr">
+                                            <ul>
+                                                <li id="@item5.Id">
+                                                    <div class="test_content_nr_tt">
+                                                        <i>@num</i><span>(1分)</span><font>
+                                                            @item5.Subject
+                                                        </font><b class="icon iconfont">&#xe881;</b>
+                                                    </div>
+                                                    <div class="test_content_nr_main">
+                                                        <ul>
+                                                            <li class="option">
+                                                                <label style="font-size :30px;">答案:</label><input type="text" class="radioOrCheck" name="@item5.Id" id="@item5.Id+1" style="height:30px;width:300px;" />
+                                                                <label for="@item5.Id+1">
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
                                                                 </label>
                                                             </li>
                                                         </ul>
@@ -223,6 +427,39 @@
                                                 }
                                             }
                                         }
+                                        @if (item7.ID == 3)
+                                        {
+                                            @foreach (var item73 in Model)
+                                            {
+                                                if (@item73.TypeOfExam == 3)
+                                                {
+                                                    num444++;
+                                                    <li><a href="#@item73.Id">@num444</a></li>
+                                                }
+                                            }
+                                        }
+                                        @if (item7.ID == 4)
+                                        {
+                                            @foreach (var item74 in Model)
+                                            {
+                                                if (@item74.TypeOfExam == 4)
+                                                {
+                                                    num444++;
+                                                    <li><a href="#@item74.Id">@num444</a></li>
+                                                }
+                                            }
+                                        }
+                                        @if (item7.ID == 5)
+                                        {
+                                            @foreach (var item75 in Model)
+                                            {
+                                                if (@item75.TypeOfExam == 5)
+                                                {
+                                                    num444++;
+                                                    <li><a href="#@item75.Id">@num444</a></li>
+                                                }
+                                            }
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -234,7 +471,30 @@
         <!--nr end-->
         <div class="foot"></div>
     </div>
-
+    <div class="wrap" id="jisuanqi" style="display:none">
+        <div class="result"></div>
+        <div class="box">
+            <div class="box">
+                <div class="button big">c</div>
+                <div class="button">1</div>
+                <div class="button">2</div>
+                <div class="button orange">+</div>
+                <div class="button">3</div>
+                <div class="button">4</div>
+                <div class="button">5</div>
+                <div class="button">6</div>
+                <div class="button orange">-</div>
+                <div class="button">7</div>
+                <div class="button">8</div>
+                <div class="button">9</div>
+                <div class="button position">×</div>
+                <div class="button big">0</div>
+                <div class="button">.</div>
+                <div class="button spe spe2">=</div>
+                <div class="button orange">÷</div>
+            </div>
+        </div>
+    </div>
     <script src="~/js/jquery-1.11.3.min.js"></script>
     <script src="~/js/jquery.easy-pie-chart.js"></script>
     <!--时间js-->
@@ -242,7 +502,6 @@
     <script>
         window.jQuery(function ($) {
             "use strict";
-
             $('time').countDown({
                 with_separators: false
             });
@@ -263,6 +522,55 @@
                     cardLi.addClass('hasBeenAnswer');
                 }
             });
+        });
+        var num1 = 0;
+        var num2 = '+';
+        var num3 = 0;
+        var x = null;
+        var arr = [];
+        var con = document.getElementsByClassName('result')[0];
+        for (var i = 0; i < 17; i++) {
+            var but = document.getElementsByClassName('button')[i];
+            but.onclick = function () {
+                x = this.innerHTML;
+                main();
+            }
+        }
+        function main() {
+            if (!isNaN(x) || x === '.') {
+                arr.push(x);
+                con.innerHTML = arr.join('');
+            } else if (x === 'c') {
+                num1 = 0;
+                num2 = '+';
+                num3 = 0;
+                x = null;
+                arr = [];
+                con.innerHTML = num1;
+            } else {
+                num3 = parseFloat(arr.join(''));
+                count();
+                con.innerHTML = num1;
+                arr = [];
+                num2 = x;
+            }
+        }
+        function count() {
+            if (num2 === '+') {
+                num1 += num3;
+            }
+            if (num2 === '-') {
+                num1 -= num3;
+            }
+            if (num2 === '×') {
+                num1 *= num3;
+            }
+            if (num2 === '÷') {
+                num1 /= num3;
+            }
+        }
+        $("#button1").click(function () {
+            $("#jisuanqi").toggle();
         });
     </script>
 </body>
