@@ -6,6 +6,7 @@ using IServices.IExaminationServices;
 using Microsoft.AspNetCore.Mvc;
 
 using Models.Examination;
+using Newtonsoft.Json;
 
 namespace XiaoHuLuApiCore.Controllers
 {
@@ -38,9 +39,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("ADDList")]
         [HttpPost]
-        public int ADDList(List<QuestionBankinherit> questionBankinherits)
+        public int ADDList(object obj)
         {
-            var result = _questionBankServices.ADDList(questionBankinherits);
+            var result = _questionBankServices.ADDList(JsonConvert.DeserializeObject<List<QuestionBankinherit>>(obj.ToString()));
             return result;
         }
 
