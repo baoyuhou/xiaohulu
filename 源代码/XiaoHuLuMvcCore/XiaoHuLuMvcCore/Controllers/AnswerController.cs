@@ -23,5 +23,14 @@ namespace XiaoHuLuMvcCore.Controllers
             var result = WebApiHelper.GetApiResult("Get", "Answer", "GetAnswerModelList");
             return View(JsonConvert.DeserializeObject<List<AnswerModel>>(result));
         }
+
+        /// <summary>
+        /// 考试交卷页面
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult End()
+        {
+            return View();
+        }
     }
 }
