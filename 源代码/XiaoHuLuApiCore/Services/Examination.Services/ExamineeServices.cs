@@ -57,8 +57,8 @@ namespace Services.Examination.Services
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var CandList = db.Queryable<Candidateinherit>().ToList();
-                return CandList as List<Candidateinherit>;
+                var CandList = db.SqlQueryable<Candidateinherit>("select a.*,c.`Name` as CompanyName,t.`Name` as TestRoomName,e.`Name` as ExamRoomName from  candidate a join company c on a.CompanyID=c.ID join testroom t on a.TestRoomID=t.ID join examroom e on a.ExamRoomID=e.ID join testtime s on a.ExamNumber=s.ExamNumberId");
+                return CandList.ToList();
             }
         }
 
