@@ -100,6 +100,11 @@ namespace XiaoHuLuApiCore.Controllers
             return candidateAdd;
         }
 
+        /// <summary>
+        /// 根据id找出考生的信息
+        /// </summary>
+        /// <param name="candidateId"></param>
+        /// <returns></returns>
         [Route("GetCandidateinheritById")]
         [HttpPut]
         public Candidateinherit GetCandidateinheritById(int candidateId)
@@ -108,6 +113,12 @@ namespace XiaoHuLuApiCore.Controllers
             return result;
         }
 
+        /// <summary>
+        ///根据名称和密码找出后台人员的信息 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
         [Route("GetUsersByNameAndPwd")]
         [HttpGet]
         public Users GetUsersByNameAndPwd(string name,string pwd)

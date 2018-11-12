@@ -38,7 +38,7 @@
                                             <th>用户名 </th>
                                             <th>用户密码</th>
                                             <th>角色名</th>
-                                            <th>修改</th>
+                                            <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,11 +46,13 @@
                                         {
 
                                             <tr>
-                                                <td>@item.UserId</td>
+                                                <td>@item.Id</td>
                                                 <td>@item.UserName</td>
                                                 <td>@item.Password</td>
                                                 <td>@item.RoleName</td>
-                                                <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                                <td class="edit">
+                                                    @Html.ActionLink("修改", "Edit", new { id = item.Id })
+                                                </td>
                                             </tr>
 
                                         }

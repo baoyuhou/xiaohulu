@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using XiaoHuLuMvcCore.Models.Authority;
-using XiaoHuLuMvcCore.Models.Authoritys;
 using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
+using XiaoHuLuMvcCore.Models.Authoritys;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -46,9 +47,29 @@ namespace XiaoHuLuMvcCore.Controllers
         {
 
             var result = WebApiHelper.GetApiResult("get", "Permissions", "GetJurisdictions");
-            ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);          
+            ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);
+            UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo> (HttpContext.Session.GetString("candidate"));
+            ViewBag.Name = usersInfo.UserName;
             return View();
         }
 
+        /// <summary>
+        /// 反填修改的信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Edit(int id)
+        {
+            var result = WebApiHelper.GetApiResult("get", "User", "GetInfoById?Id=" + id);
+            var roleResult = WebApiHelper.GetApiResult("Get", "Role", "GetRoleList");
+            ViewBag.roleResult = JsonConvert.DeserializeObject<List<Role>>(roleResult);
+            return View(JsonConvert.DeserializeObject<UsersInfo>(result));
+        }
+        [HttpPost]
+        public int Edit(UsersInfo usersInfo)
+        {
+            var result = WebApiHelper.GetApiResult("get", "User", "EditInfoById",usersInfo);
+            return int.Parse(result);
+        }
     }
 }

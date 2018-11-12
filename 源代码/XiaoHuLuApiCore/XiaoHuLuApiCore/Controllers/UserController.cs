@@ -44,5 +44,29 @@ namespace XiaoHuLuApiCore.Controllers
             var useradd = _userServices.Add(usersInfo);
             return useradd;
         }
+
+        /// <summary>
+        /// 反填信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("GetInfoById")]
+        [HttpGet]
+        public UsersInfo GetInfoById(int id)
+        {
+            return _userServices.GetUsersInfoById(id);
+        }
+
+        /// <summary>
+        /// 编辑修改信息
+        /// </summary>
+        /// <param name="usersInfo"></param>
+        /// <returns></returns>
+        [Route("EditInfoById")]
+        [HttpPost]
+        public int EditInfoById(UsersInfo usersInfo)
+        {
+            return _userServices.EditById(usersInfo);
+        }
     }
 }

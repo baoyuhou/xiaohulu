@@ -64,6 +64,18 @@ namespace XiaoHuLuApiCore.Controllers
         {
             return _explainsIServices.UpdExplain(explain);
         }
+
+        /// <summary>
+        /// 获取考生是不是今天考试过了？
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("GetTypeByUid")]
+        [HttpGet]
+        public bool GetTypeByUid(string id)
+        {
+            return _explainsIServices.GetTypeByUid(id);
+        }
     }
 }
 

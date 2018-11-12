@@ -24,5 +24,19 @@ namespace IServices.IAuthority
         /// </summary>
         /// <returns></returns>
         List<UsersInfo> GetUsersList();
+
+        /// <summary>
+        /// 反填信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        UsersInfo GetUsersInfoById(int id);
+
+        /// <summary>
+        /// 编辑修改信息
+        /// </summary>
+        /// <param name="usersInfo"></param>
+        /// <returns></returns>
+        int EditById(UsersInfo usersInfo);
     }
 }
