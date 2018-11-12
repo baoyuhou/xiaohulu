@@ -94,7 +94,6 @@
                                                             <li class="option">
                                                                 <input type="radio" class="radioOrCheck" name="@item1.Id"
                                                                        id="@item1.Id+4" />
-
                                                                 <label for="@item1.Id+4">
                                                                     D.
                                                                     <p class="ue" style="display: inline;">@item1.AnswerD</p>
@@ -268,6 +267,39 @@
                                     }
                                 }
                             }
+                            if (item.ID == 5)
+                            {
+                                @foreach (var item5 in Model)
+                                {
+                                    if (@item5.TypeOfExam == 5)
+                                    {
+                                        num++;
+                                        <div class="test_content_nr">
+                                            <ul>
+                                                <li id="@item5.Id">
+                                                    <div class="test_content_nr_tt">
+                                                        <i>@num</i><span>(1分)</span><font>
+                                                            @item5.Subject
+                                                        </font><b class="icon iconfont">&#xe881;</b>
+                                                    </div>
+                                                    <div class="test_content_nr_main">
+                                                        <ul>
+                                                            <li class="option">
+                                                                <label style="font-size :30px;">答案:</label><input type="text" class="radioOrCheck" name="@item5.Id" id="@item5.Id+1" style="height:30px;width:300px;" />
+                                                                <label for="@item5.Id+1">
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            }
                         }
                         }
                     </form>
@@ -342,6 +374,17 @@
                                                 {
                                                     num444++;
                                                     <li><a href="#@item74.Id">@num444</a></li>
+                                                }
+                                            }
+                                        }
+                                        @if (item7.ID == 5)
+                                        {
+                                            @foreach (var item75 in Model)
+                                            {
+                                                if (@item75.TypeOfExam == 5)
+                                                {
+                                                    num444++;
+                                                    <li><a href="#@item75.Id">@num444</a></li>
                                                 }
                                             }
                                         }
