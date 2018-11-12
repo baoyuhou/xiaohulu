@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
+using OfficeOpenXml;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -70,7 +71,73 @@ namespace XiaoHuLuMvcCore.Controllers
                 var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADD", questionBankinherit);
             }
         }
-        
+
+        /// <summary>
+        /// 批量添加题库
+        /// </summary>
+        /// <param name="file"></param>
+        public void ADDQuestionBankList(IFormFile formFile)
+        {
+            #region 导入
+            string sWebRootFolder = _hostingEnvironment.WebRootPath;
+            string sFileName = $"{Guid.NewGuid()}.xlsx";
+            FileInfo file = new FileInfo(Path.Combine(sWebRootFolder, sFileName));
+            try
+            {
+                using (FileStream fs = new FileStream(file.ToString(), FileMode.Create))
+                {
+                    formFile.CopyTo(fs);
+                    fs.Flush();
+                }
+                using (ExcelPackage package = new ExcelPackage(file))
+                {
+                    var questionBankinherits = new List<QuestionBankinherit>();
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+                    int rowCount = worksheet.Dimension.Rows;
+                    int ColCount = worksheet.Dimension.Columns;
+                    //bool bHeaderRow = true;
+                    //for (int row = 1; row <= rowCount; row++)
+                    //{
+                    //    for (int col = 1; col <= ColCount; col++)
+                    //    {
+                    //        if (bHeaderRow)
+                    //        {
+                    //            student.Append(worksheet.Cells[row, col].Value.ToString() + "\t");
+                    //            student.Name = worksheet.Cells[row, 1].Value.ToString();
+                    //        }
+                    //        else
+                    //        {
+                    //            student.Append(worksheet.Cells[row, col].Value.ToString() + "\t");
+                    //        }
+                    //    }
+                    //    sb.Append(Environment.NewLine);
+                    //}
+                    for (int row = 1; row <= rowCount; row++)
+                    {
+                        QuestionBankinherit questionBankinherit = new QuestionBankinherit();
+                        questionBankinherit.Subject = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.TypeOfExam = Convert.ToInt32(worksheet.Cells[row, 1].Value.ToString());
+                        questionBankinherit.AnswerA = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.AnswerB = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.AnswerC = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.AnswerD = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.AnswerE = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.Answer = worksheet.Cells[row, 1].Value.ToString();
+                        questionBankinherit.Enable = Convert.ToInt32(worksheet.Cells[row, 1].Value.ToString());
+                        questionBankinherits.Add(questionBankinherit);
+                    }
+                    var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADDList", questionBankinherits);
+
+                    //return Content("123");
+                }
+            }
+            catch (Exception ex)
+            {
+                //return Content(ex.Message);
+            }
+            #endregion
+        }
+
         /// <summary>
         /// 绑定题类型下拉框
         /// </summary>
@@ -88,16 +155,21 @@ namespace XiaoHuLuMvcCore.Controllers
         public IActionResult GetTextTypeNum()
         {
             var result = WebApiHelper.GetApiResult("get", "QuestionBank", "TextTypeNums");
-            return View(result);
+            ViewBag.num = JsonConvert.DeserializeObject<List<TextTypeNuminherit>>(result);
+            return View();
         }
 
         /// <summary>
-        /// 显示题型所显示题量
+        /// 修改题量
         /// </summary>
         /// <returns></returns>
-        public void UpdateTextType()
+        public void UpdateTextTypeNum(int num,int id,int TextTypeId)
         {
-            var result = WebApiHelper.GetApiResult("get", "QuestionBank", "UpdateTextTypeNum");
+            TextTypeNum textType = new TextTypeNum{ };
+            textType.Id = id;
+            textType.Num = num;
+            textType.TextTypeId = TextTypeId;
+            var result = WebApiHelper.GetApiResult("put", "QuestionBank", "UpdateTextTypeNum", textType);
             if (result != null)
             {
                 Response.WriteAsync("<script>alert('修改成功!')</script>");

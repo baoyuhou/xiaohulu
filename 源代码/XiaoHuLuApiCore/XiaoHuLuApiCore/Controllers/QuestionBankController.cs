@@ -113,7 +113,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("TextTypeNums")]
         [HttpGet]
-        public List<TextTypeNum> TextTypeNums()
+        public List<TextTypeNuminherit> TextTypeNums()
         {
             var result = _questionBankServices.TextTypeNums();
             return result;

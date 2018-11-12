@@ -181,11 +181,11 @@ namespace Services.ExaminationServices
         /// 显示题类型显示题数
         /// </summary>
         /// <returns></returns>
-        public List<TextTypeNum> TextTypeNums()
+        public List<TextTypeNuminherit> TextTypeNums()
         {
             using (SqlSugarClient sugarClient = Educationcontext.GetClient())
             {
-                List<TextTypeNum>  textTypeNums = sugarClient.SqlQueryable<TextTypeNum>("select * from TextTypeNum").ToList();
+                List<TextTypeNuminherit>  textTypeNums = sugarClient.SqlQueryable<TextTypeNuminherit>("select t.*,p.ExamType from TextTypeNum t join texttype p on t.TextTypeId = p.id").ToList();
                 return textTypeNums;
             }
         }
@@ -198,8 +198,9 @@ namespace Services.ExaminationServices
         {
             using (SqlSugarClient sugarClient = Educationcontext.GetClient())
             {
-                var result = sugarClient.Updateable<TextTypeNum>(textTypeNum);
-                if (result!=null)
+                var result = sugarClient.Updateable<TextTypeNum>(textTypeNum).ExecuteCommand();
+                //var result = sugarClient.Updateable(textTypeNum);
+                if (result == 1)
                 {
                     return 1;
                 }
