@@ -33,7 +33,7 @@ namespace XiaoHuLuMvcCore.Controllers
                 //如果为空表示不是考生，开始查询是不是后台人员
                 var roleResult = WebApiHelper.GetApiResult("get", "Examination", "GetUsersByNameAndPwd?name="+name+"&pwd="+pwd);
                 ///把老师信息存入session
-                HttpContext.Session.SetString("candidate", roleResult);
+                HttpContext.Session.SetString("user", roleResult);
                 if (string.IsNullOrEmpty(roleResult))
                 {
                     //如果为空表示不是后台人员，确定输入密码错误
