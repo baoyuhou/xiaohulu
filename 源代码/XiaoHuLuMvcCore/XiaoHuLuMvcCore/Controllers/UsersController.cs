@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using XiaoHuLuMvcCore.Models.Authority;
-using XiaoHuLuMvcCore.Models.Authoritys;
 using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
+using XiaoHuLuMvcCore.Models.Authoritys;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -46,7 +47,9 @@ namespace XiaoHuLuMvcCore.Controllers
         {
 
             var result = WebApiHelper.GetApiResult("get", "Permissions", "GetJurisdictions");
-            ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);          
+            ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);
+            UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo> (HttpContext.Session.GetString("candidate"));
+            ViewBag.Name = usersInfo.UserName;
             return View();
         }
 
