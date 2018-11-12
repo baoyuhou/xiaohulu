@@ -103,7 +103,7 @@
                                                         <div class="am-u-sm-9">
                                                             @*<input type="" id="TypeOfExam" required
                                                                 placeholder="题型 / TypeOfExam" name="TypeOfExam">*@
-                                                            <select id="TypeOfExam">
+                                                            <select id="TypeOfExam" name="TypeOfExam">
                                                                 <option v-for="item in textType" v-bind:value="item.ID">{{item.ExamType}}</option>
                                                             </select>
                                                         </div>
@@ -167,7 +167,6 @@
                                                             正确答案 / Answer
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            required
                                                             <input type="text" id="Answer" required
                                                                    placeholder="正确答案 / Answer" name="Answer">
                                                         </div>
@@ -177,7 +176,6 @@
                                                             是否启用 / Enable
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            required
                                                             <input id="Radio1" type="radio" name="Enable" checked="checked" value="1" />启用
                                                             <input id="Radio1" type="radio" name="Enable" value="0" />禁用
                                                         </div>
@@ -234,9 +232,8 @@
             </div>
         </div>
     </div>
-
-    <script src="~/js/axios.js"></script>
     <script src="~/js/vue.js"></script>
+    <script src="~/js/axios.js"></script>
     <script src="~/js/Jqueryplugs.js"></script>
     <script src="~/js/_layout.js"></script>
     <script src="~/js/jquery.SuperSlide.source.js"></script>
@@ -245,19 +242,7 @@
         $(function () {
             $(".tabs").slide({ trigger: "click" });
         });
-
         function btn_save() {
-            //var questionBankinherit = {
-            //    var Subject = $("#Subject").val(),
-            //    var TypeOfExam = $("#TypeOfExam").val(),
-            //    var AnswerA = $("#AnswerA").val(),
-            //    var AnswerB = $("#AnswerB").val(),
-            //    var AnswerC = $("#AnswerC").val(),
-            //    var AnswerD = $("#AnswerD").val(),
-            //    var AnswerE = $("#AnswerE").val(),
-            //    var Answer = $("#Answer").val()
-            //}
-
             var Subject = $("#Subject").val();
             var TypeOfExam = $("#TypeOfExam").val();
             var AnswerA = $("#AnswerA").val();
@@ -266,9 +251,6 @@
             var AnswerD = $("#AnswerD").val();
             var AnswerE = $("#AnswerE").val();
             var Answer = $("#Answer").val();
-
-            //var questionBankinherit = { Subject, TypeOfExam, AnswerA, AnswerB, AnswerC, AnswerD, AnswerE, Answer };
-
             var fileUpload = $("#formFile").get(0);
             var files = fileUpload.files;
             var data = new FormData();
@@ -282,7 +264,6 @@
                 data: {
                     questionBankinherit, data
                 },
-                //Subject: Subject, TypeOfExam: TypeOfExam, AnswerA: AnswerA, AnswerB: AnswerB, AnswerC: AnswerC, AnswerD: AnswerD, AnswerE: AnswerE, Answer: Answer
                 success: function (data) {
                     if (data > 0) {
                         $.jq_Alert({
@@ -295,7 +276,6 @@
                                 //$("#Ramark").val("");
                                 //page1();
                                 location.reload();
-
                             }
                         });
                     }
@@ -312,8 +292,6 @@
                 iframeHeight: 400
             });
         }
-
-
     </script>
     <script>
         var divapp = new Vue({
@@ -340,6 +318,5 @@
             },
         })
     </script>
-
 </body>
 </html>
