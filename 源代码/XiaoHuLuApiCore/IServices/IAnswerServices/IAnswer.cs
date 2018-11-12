@@ -12,7 +12,7 @@ namespace IServices.IAnswerServices
         /// 显示题型
         /// </summary>
         /// <returns></returns>
-        List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0);
+        List<AnswerModel> GetAnswerModelList();
 
         /// <summary>
         /// 查询题的类型

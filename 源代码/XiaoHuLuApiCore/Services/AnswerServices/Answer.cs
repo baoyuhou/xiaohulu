@@ -17,11 +17,11 @@ namespace Services.AnswerServices
         /// <param name="Id"></param>
         /// <param name="totalCount"></param>
         /// <returns></returns>
-        public List<AnswerModel> GetAnswerModelList(int Id, int totalCount = 0)
+        public List<AnswerModel> GetAnswerModelList()
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var answermodels = db.Ado.SqlQuery<AnswerModel>("select * from QuestionBank a INNER JOIN TextType b on a.TypeOfExam=b.ID INNER JOIN `Option` c on a.Id=c.QuestionBankId  ORDER BY  RAND()");
+                var answermodels = db.Ado.SqlQuery<AnswerModel>("select * from QuestionBank a INNER JOIN TextType b on a.TypeOfExam=b.ID INNER JOIN `Option` c on a.Id=c.QuestionBankId  where a.`ENABLE`=1 ORDER BY  RAND() ");
                 //var answermodellist = db.Ado.UseStoredProcedure().GetDataTable("p_paging", new {
                 //    @tableName = pageparams.TableName,
                 //    @indexCol = pageparams.IndexCol,
