@@ -12,8 +12,7 @@
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/css/amazeui.min.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
-    <script src="~/js/jquery-1.7.2.min.js"></script>
-    <script src="~/js/jquery-form.js"></script>
+ 
 
 </head>
 <body>
@@ -63,7 +62,7 @@
                                             <td>{{item.Answer}}</td>
                                             <td>{{item.ExamType}}</td>
                                             <td>{{(item.Enable==1?"已启用":"未启用")}}</td>
-                                            <td class="edit"><button v-bind:onclick="update(item.Id)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                            <td class="edit"><button v-on:click="update(item.Id)"><i class="icon-edit bigger-120"></i>编辑</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -232,6 +231,8 @@
             </div>
         </div>
     </div>
+    <script src="~/js/jquery-1.7.2.min.js"></script>
+    <script src="~/js/jquery-form.js"></script>
     <script src="~/js/vue.js"></script>
     <script src="~/js/axios.js"></script>
     <script src="~/js/Jqueryplugs.js"></script>
@@ -241,17 +242,6 @@
         $(function () {
             $(".tabs").slide({ trigger: "click" });
         });
-
-        //function btn_edit(id) {
-        //    $.ajax({
-        //        url: "/QuestionBank/UpdateQuestionBank?id=" + id,
-        //        type: "post",
-        //        success: function (data) {
-                    
-        //        }
-        //    })
-        //}
-
         function btn_save() {
             var Subject = $("#Subject").val();
             var TypeOfExam = $("#TypeOfExam").val();
@@ -292,15 +282,6 @@
                 }
             });
         }
-        function update(id) {
-            $.ajax({
-                url: "/QuestionBank/UpdateQuestionBank?id=" + id,
-                title: "编辑",
-                dialogModal: true,
-                iframeWidth: 500,
-                iframeHeight: 400
-            });
-        }
     </script>
     <script>
         var divapp = new Vue({
@@ -325,6 +306,11 @@
                         that.textType = res.data;
                     })
             },
+            methods:{
+                update: function (id) {
+                    location.href = "/QuestionBank/UpdateQuestionBank?id=" + id
+                }
+            }
         })
     </script>
 </body>
