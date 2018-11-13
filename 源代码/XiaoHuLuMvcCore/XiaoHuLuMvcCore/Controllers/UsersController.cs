@@ -48,7 +48,7 @@ namespace XiaoHuLuMvcCore.Controllers
 
             var result = WebApiHelper.GetApiResult("get", "Permissions", "GetJurisdictions");
             ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);
-            UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo> (HttpContext.Session.GetString("candidate"));
+            UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo> (HttpContext.Session.GetString("user"));
             ViewBag.Name = usersInfo.UserName;
             return View();
         }

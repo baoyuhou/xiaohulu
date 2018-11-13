@@ -35,7 +35,7 @@
                             <p class="test_time">
                                 <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">00:10</b>
                             </p>
-                            <font><input type="button" name="test_jiaojuan" id="endCommit" onclick="Commit()" value="交卷"></font>  <font>  </font>
+                            <font><input type="button" name="test_jiaojuan" id="endCommit" onclick="lll()" value="交卷"></font>  <font>  </font>
                             <font><input type="button" name="test_jiaojuan" id="end" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" value="帮助"></font><font>  </font>
                             <font><input type="button" name="button1" id="button1" value="计算器"></font>
                         </div>
@@ -65,15 +65,17 @@
                                             <ul>
                                                 <li id="@item1.Id">
                                                     <div class="test_content_nr_tt">
-                                                        <i>@num</i><span>(1分)</span><font>@item1.Subject</font><b class="icon iconfont">&#xe881;</b>
+                                                        <i>@num</i><span>(1分)</span><font>@item1.Subject</font><b class="icon iconfont">
+                                                            &#xe881;
+                                                        </b>
                                                     </div>
                                                     <div class="test_content_nr_main">
                                                         <ul>
                                                             @if (@item1.AnswerA != "")
                                                             {
                                                                 <li class="option">
-                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                           id="@item1.Id+1" />
+                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id" data-value="@item.ID+1"
+                                                                           id="@item1.Id+1" value="A" />
                                                                     <label for="@item1.Id+1">
                                                                         A.
                                                                         <p class="ue" style="display: inline;">@item1.AnswerA</p>
@@ -84,7 +86,7 @@
                                                             {
                                                                 <li class="option">
                                                                     <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                           id="@item1.Id+2" />
+                                                                           id="@item1.Id+2" value="B" />
                                                                     <label for="@item1.Id+2">
                                                                         B.
                                                                         <p class="ue" style="display: inline;">@item1.AnswerB</p>
@@ -95,7 +97,7 @@
                                                             {
                                                                 <li class="option">
                                                                     <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                           id="@item1.Id+3" />
+                                                                           id="@item1.Id+3" value="C" />
                                                                     <label for="@item1.Id+3">
                                                                         C.
                                                                         <p class="ue" style="display: inline;">@item1.AnswerC</p>
@@ -106,7 +108,7 @@
                                                             {
                                                                 <li class="option">
                                                                     <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                           id="@item1.Id+4" />
+                                                                           id="@item1.Id+4" value="D" />
                                                                     <label for="@item1.Id+4">
                                                                         D.
                                                                         <p class="ue" style="display: inline;">@item1.AnswerD</p>
@@ -117,7 +119,7 @@
                                                             {
                                                                 <li class="option">
                                                                     <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                           id="@item1.Id+5" />
+                                                                           id="@item1.Id+5" value="E" />
                                                                     <label for="@item1.Id+5">
                                                                         E.
                                                                         <p class="ue" style="display: inline;">@item1.AnswerE</p>
@@ -199,9 +201,9 @@
                                                             {
                                                                 <li class="option">
                                                                     <input type="checkbox" class="radioOrCheck" name="answer1"
-                                                                           id="@item2.Id+4" />
+                                                                           id="@item2.Id+5" />
 
-                                                                    <label for="@item2.Id+4">
+                                                                    <label for="@item2.Id+5">
                                                                         E.
                                                                         <p class="ue" style="display: inline;">@item2.AnswerE</p>
                                                                     </label>
@@ -514,6 +516,8 @@
             </div><!-- /.modal-dialog -->
         </div>
     </div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/js/jquery-1.11.3.min.js"></script>
     <script src="~/js/jquery.easy-pie-chart.js"></script>
     <!--时间js-->
@@ -536,7 +540,7 @@
 
         //题目跳转和改变颜色
         $(function () {
-            $('li.option label').click(function () {
+            $('li.option input').click(function () {
                 debugger;
                 var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
                 var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
@@ -546,8 +550,9 @@
                 }
             });
             $('#myModal').modal('hide');
-
         });
+
+        //计算器
         var num1 = 0;
         var num2 = '+';
         var num3 = 0;
@@ -560,6 +565,12 @@
                 x = this.innerHTML;
                 main();
             }
+        }
+        function lll() {
+            var r = $("[type='radio']:checked")
+            $(r).each(function () {
+                alert($(this).val())
+            })
         }
         function main() {
             if (!isNaN(x) || x === '.') {
@@ -600,14 +611,16 @@
             $("#jisuanqi").toggle();
         });
 
+
         //确认框
         function Commit() {
             var r = confirm("请检查是否有题未提交!\n一旦交卷不可从新答题！");
             if (r == true) {
+
                 location.href = "";
             }
         }
-
+        
     </script>
 </body>
 </html>
