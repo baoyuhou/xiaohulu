@@ -71,8 +71,8 @@ namespace Services.Examination.Services
         {
             SqlSugarClient sugarClient = Educationcontext.GetClient();
             //var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
-            var candidate = sugarClient.SqlQueryable<Candidateinherit>("select a.*,c.`Name` as CompanyName,t.`Name` as TestRoomName,e.`Name` as ExamRoomName from  candidate a join company c on a.CompanyID=c.ID join testroom t on a.TestRoomID=t.ID join examroom e on a.ExamRoomID=e.ID join testtime s on a.ExamNumber=s.ExamNumberId where a.ExamNumber="+examNumber).First();
-            return candidate;
+           var   candidate = sugarClient.SqlQueryable<Candidateinherit>(" select * from ( select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id) info where ExamNumber =" + examNumber);
+            return candidate.Single();
         }
 
         /// <summary>
