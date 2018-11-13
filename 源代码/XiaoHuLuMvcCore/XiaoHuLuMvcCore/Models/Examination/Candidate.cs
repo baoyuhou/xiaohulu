@@ -25,7 +25,7 @@ namespace XiaoHuLuMvcCore.Models.Examination
         /// <summary>
         /// 头像
         /// </summary>
-        public string Phone { get; set; }
+        public string Photo { get; set; }
 
         /// <summary>
         /// 准考证号

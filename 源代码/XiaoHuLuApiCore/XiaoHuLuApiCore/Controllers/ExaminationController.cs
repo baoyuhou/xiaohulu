@@ -88,7 +88,7 @@ namespace XiaoHuLuApiCore.Controllers
         }
 
         /// <summary>
-        /// 根据id返填修改的题
+        /// 根据id返填修改的考生
         /// </summary>
         /// <param name="candidateId"></param>
         /// <returns></returns>
@@ -124,6 +124,39 @@ namespace XiaoHuLuApiCore.Controllers
         public Users GetUsersByNameAndPwd(string name,string pwd)
         {
             return _examineeServices.GetUsersByNameAndPwd(name,pwd);
+        }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetCompanies")]
+        [HttpGet]
+        public List<Company> GetCompanies()
+        {
+            return _examineeServices.GetCompanies();
+        }
+
+        /// <summary>
+        /// 获取试室
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetTestRooms")]
+        [HttpGet]
+        public List<TestRoom> GetTestRooms()
+        {
+            return _examineeServices.GetTestRooms();
+        }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetExamRooms")]
+        [HttpGet]
+        public List<ExamRoom> GetExamRooms()
+        {
+            return _examineeServices.GetExamRooms();
         }
     }
 }
