@@ -12,6 +12,7 @@ using XiaoHuLuMvcCore.Models.Authority;
 using Microsoft.AspNetCore.Authentication;
 using AutherationTest;
 using Newtonsoft.Json;
+using XiaoHuLuMvcCore.Models.Examination;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -29,7 +30,7 @@ namespace XiaoHuLuMvcCore.Controllers
        [HttpPost]
         public async Task<string> IndexAsync(string name,string pwd)
         {
-            UsersInfo usersInfo = null;
+           
             //查看学生表里有没有匹配的人
             var result = WebApiHelper.GetApiResult("get", "Examination", "GetCandidate/?examNumber=" + name);
             if (string.IsNullOrEmpty(result))
@@ -42,14 +43,14 @@ namespace XiaoHuLuMvcCore.Controllers
                     //如果为空表示不是后台人员，确定输入密码错误
                     return "3";
                 }
-                usersInfo = JsonConvert.DeserializeObject<UsersInfo>(roleResult);
+               var  usersInfo = JsonConvert.DeserializeObject<UsersInfo>(roleResult);
                 ///存入Redis
-                await SaveRedisAsync(usersInfo);
+                await SaveRedisAsync<UsersInfo>(usersInfo);
                 return "2";
             }
-            usersInfo = JsonConvert.DeserializeObject<UsersInfo>(result);
+           var candidate = JsonConvert.DeserializeObject<Candidateinherit>(result);
             ///存入Redis
-            await SaveRedisAsync(usersInfo);
+            await SaveRedisAsync<Candidateinherit>(candidate);
             return  "1";
         }
 
@@ -58,18 +59,37 @@ namespace XiaoHuLuMvcCore.Controllers
         /// </summary>
         /// <param name="usersInfo"></param>
         /// <returns></returns>
-        public async Task SaveRedisAsync(UsersInfo  usersInfo)
+        public async Task SaveRedisAsync<T>(T  t)
         {
-            //构造ClaimsIdentity 对象
-            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            //创建 Claim 类型,传入 ClaimsIdentity 中
-            identity.AddClaim(new Claim("key",usersInfo.UserName ));
+            try
+            {
+                UsersInfo usersInfo = t as UsersInfo;
+                //构造ClaimsIdentity 对象
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                //创建 Claim 类型,传入 ClaimsIdentity 中
+                identity.AddClaim(new Claim("key", usersInfo.UserName));
 
-            //创建ClaimsPrincipal对象,传入ClaimsIdentity 对象,调用HttpContext.SignInAsync完成登录
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                //创建ClaimsPrincipal对象,传入ClaimsIdentity 对象,调用HttpContext.SignInAsync完成登录
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
-            //存储redis
-            RedisHelper.Set<UsersInfo>(usersInfo.UserName, usersInfo);
+                //存储redis
+                RedisHelper.Set<UsersInfo>(usersInfo.UserName, usersInfo);
+            }
+            catch
+            {
+                Candidate candidate = t as Candidate;
+                //构造ClaimsIdentity 对象
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                //创建 Claim 类型,传入 ClaimsIdentity 中
+                identity.AddClaim(new Claim("key", candidate.Name));
+
+                //创建ClaimsPrincipal对象,传入ClaimsIdentity 对象,调用HttpContext.SignInAsync完成登录
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
+                //存储redis
+                RedisHelper.Set<Candidate>(candidate.Name, candidate);
+            }
+          
 
             //取Redis
             //var user2 = RedisHelper.Get<ApplicationUser>(lookupUser.UserName);
