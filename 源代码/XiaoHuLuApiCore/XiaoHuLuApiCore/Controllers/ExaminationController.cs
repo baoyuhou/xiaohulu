@@ -68,7 +68,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("GetCandidate")]
         [HttpGet]
-        public Candidate GetCandidate(string examNumber)
+        public Candidateinherit GetCandidate(string examNumber)
         {
             var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
