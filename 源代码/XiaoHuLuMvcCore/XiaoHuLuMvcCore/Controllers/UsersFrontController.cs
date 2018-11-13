@@ -21,8 +21,8 @@ namespace XiaoHuLuMvcCore.Controllers
         public IActionResult Index(string examNumber)
         {
             examNumber = HttpContext.Session.GetString("candidate");
-            var result = WebApiHelper.GetApiResult("Get", "Examination", "GetCandidate?examNumber=" + examNumber);
-            return View(JsonConvert.DeserializeObject<Candidateinherit>(result));
+           
+            return View(JsonConvert.DeserializeObject<Candidateinherit>(examNumber));
         }
     }
 }
