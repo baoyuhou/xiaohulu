@@ -54,7 +54,7 @@ namespace IServices.Examination.IServices
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        Candidate GetCandidatesByExamNumber(string examNumber);
+        Candidateinherit GetCandidatesByExamNumber(string examNumber);
 
         /// <summary>
         /// 获取后台登陆人的信息

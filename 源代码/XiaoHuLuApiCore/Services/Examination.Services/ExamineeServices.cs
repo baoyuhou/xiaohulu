@@ -67,11 +67,11 @@ namespace Services.Examination.Services
         /// </summary>
         /// <param name="examNumber"></param>
         /// <returns></returns>
-        public Candidate GetCandidatesByExamNumber(string examNumber)
+        public Candidateinherit GetCandidatesByExamNumber(string examNumber)
         {
             SqlSugarClient sugarClient = Educationcontext.GetClient();
-           var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
-            
+            //var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
+            var candidate = sugarClient.SqlQueryable<Candidateinherit>("select a.*,c.`Name` as CompanyName,t.`Name` as TestRoomName,e.`Name` as ExamRoomName from  candidate a join company c on a.CompanyID=c.ID join testroom t on a.TestRoomID=t.ID join examroom e on a.ExamRoomID=e.ID join testtime s on a.ExamNumber=s.ExamNumberId where a.ExamNumber="+examNumber).First();
             return candidate;
         }
 
