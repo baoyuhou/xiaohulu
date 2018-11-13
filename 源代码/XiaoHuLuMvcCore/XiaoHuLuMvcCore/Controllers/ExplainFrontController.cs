@@ -19,7 +19,7 @@ namespace XiaoHuLuMvcCore.Controllers.Front
         /// <returns></returns>
         public IActionResult Index()
         {
-            Candidate candidate = JsonConvert.DeserializeObject<Candidate> (HttpContext.Session.GetString("candidate"));
+            Candidate candidate = JsonConvert.DeserializeObject<Candidate> (HttpContext.Session.GetString("user"));
             ViewBag.CandidateName = candidate.Name;
             ViewBag.CandidateId = candidate.ID;
             return View();
