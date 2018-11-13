@@ -71,10 +71,10 @@ namespace XiaoHuLuApiCore.Controllers
         [HttpGet]
         public Candidateinherit GetCandidate(string examNumber)
         {
-            var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
+            var  candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
         }
-        
+
         /// <summary>
         /// 修改考生信息
         /// </summary>
@@ -122,9 +122,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("GetUsersByNameAndPwd")]
         [HttpGet]
-        public Users GetUsersByNameAndPwd(string name,string pwd)
+        public Users GetUsersByNameAndPwd(string name, string pwd)
         {
-            return _examineeServices.GetUsersByNameAndPwd(name,pwd);
+            return _examineeServices.GetUsersByNameAndPwd(name, pwd);
         }
 
         /// <summary>

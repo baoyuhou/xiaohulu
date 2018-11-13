@@ -71,10 +71,18 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public Candidateinherit GetCandidatesByExamNumber(string examNumber)
         {
-            SqlSugarClient sugarClient = Educationcontext.GetClient();
-            //var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
-           var   candidate = sugarClient.SqlQueryable<Candidateinherit>(" select * from ( select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id) info where ExamNumber =" + examNumber);
-            return candidate.Single();
+           Candidateinherit candidate = null;
+            try
+            {
+                SqlSugarClient sugarClient = Educationcontext.GetClient();
+                //var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
+                 candidate = sugarClient.SqlQueryable<Candidateinherit>(" select * from ( select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id) info where ExamNumber =" + examNumber).Single();
+                return candidate;
+            }
+            catch(Exception)
+            {
+                return candidate;
+            }
         }
 
         /// <summary>
@@ -85,11 +93,20 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public Users GetUsersByNameAndPwd(string name, string pwd)
         {
-            using (SqlSugarClient  sqlsc =Educationcontext.GetClient())
+            Users user = null;
+            try
             {
-              var user=  sqlsc.Queryable<Users>().First(s=>(s.UserName==name)&&(s.Password==pwd));
+                using (SqlSugarClient sqlsc = Educationcontext.GetClient())
+                {
+                    user = sqlsc.Queryable<Users>().First(s => (s.UserName == name) && (s.Password == pwd));
+                    return user;
+                }
+            }
+            catch (Exception)
+            {
                 return user;
             }
+
         }
 
         /// <summary>
@@ -125,9 +142,6 @@ namespace Services.Examination.Services
             {
                 var result = sugarClient.SqlQueryable<Company>("select * from Company").ToList();
                 return result;
-
-
-
             }
         }
 
