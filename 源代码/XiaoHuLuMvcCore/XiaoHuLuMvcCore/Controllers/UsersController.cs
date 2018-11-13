@@ -10,6 +10,7 @@ using XiaoHuLuMvcCore.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 using XiaoHuLuMvcCore.Models.Authoritys;
+using Microsoft.AspNetCore.Authorization;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -43,13 +44,17 @@ namespace XiaoHuLuMvcCore.Controllers
         /// 后台首页
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public IActionResult Login()
         {
-
-            var result = WebApiHelper.GetApiResult("get", "Permissions", "GetJurisdictions");
-            ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);
-            UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo> (HttpContext.Session.GetString("user"));
-            ViewBag.Name = usersInfo.UserName;
+            //判断是否登陆
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var result = WebApiHelper.GetApiResult("get", "Permissions", "GetJurisdictions");
+                ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);
+                //取出KEy值也就是名字
+                ViewBag.Name = User.Claims.ToList().Where(m => m.Type == "key").First().Value;
+            }
             return View();
         }
 
