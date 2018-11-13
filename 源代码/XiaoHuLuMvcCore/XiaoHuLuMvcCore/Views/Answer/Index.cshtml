@@ -13,9 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>小葫芦程远护士模考</title>
 
-    <script src="~/js/jquery-3.1.1.js"></script>
-    <script src="~/css/bootstrap.js"></script>
-    <link href="~/MUBAN/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/main.css" rel="stylesheet" />
     <link href="~/css/iconfont.css" rel="stylesheet" type="text/css" />
     <link href="~/css/test.css" rel="stylesheet" />
@@ -36,9 +33,9 @@
                     <form action="" method="post">
                         <div class="test_title">
                             <p class="test_time">
-                                <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">01:40</b>
+                                <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">00:10</b>
                             </p>
-                            <font><input type="button" name="test_jiaojuan" id="end" value="交卷"></font>  <font>  </font>
+                            <font><input type="button" name="test_jiaojuan" id="endCommit" onclick="Commit()" value="交卷"></font>  <font>  </font>
                             <font><input type="button" name="test_jiaojuan" id="end" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" value="帮助"></font><font>  </font>
                             <font><input type="button" name="button1" id="button1" value="计算器"></font>
                         </div>
@@ -120,8 +117,8 @@
                                                             {
                                                                 <li class="option">
                                                                     <input type="radio" class="radioOrCheck" name="@item1.Id"
-                                                                           id="@item1.Id+4" />
-                                                                    <label for="@item1.Id+4">
+                                                                           id="@item1.Id+5" />
+                                                                    <label for="@item1.Id+5">
                                                                         E.
                                                                         <p class="ue" style="display: inline;">@item1.AnswerE</p>
                                                                     </label>
@@ -328,9 +325,9 @@
                                                             {
                                                                 <li class="option">
                                                                     <input type="radio" class="radioOrCheck" name="@item4.Id"
-                                                                           id="@item4.Id+4" />
+                                                                           id="@item4.Id+5" />
 
-                                                                    <label for="@item4.Id+4">
+                                                                    <label for="@item4.Id+5">
                                                                         E.
                                                                         <p class="ue" style="display: inline;">@item4.AnswerE</p>
                                                                     </label>
@@ -390,7 +387,7 @@
                                 <i class="icon iconfont">&#xe692;</i>答题卡
                             </h1>
                             <p class="test_time">
-                                <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">01:40</b>
+                                <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">00:10</b>
                             </p>
                         </div>
                         @foreach (var item7 in ViewBag.texttype as List<TextType>)
@@ -501,7 +498,7 @@
         </div>
     </div>
     <div>
-       @*模态窗*@
+        @*模态窗*@
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -521,7 +518,9 @@
     <script src="~/js/jquery.easy-pie-chart.js"></script>
     <!--时间js-->
     <script src="~/js/jquery.countdown.js"></script>
+    <script src="~/js/bootstrap.js"></script>
     <script>
+        //时间设定
         window.jQuery(function ($) {
             "use strict";
             $('time').countDown({
@@ -534,6 +533,8 @@
                 css_class: 'countdown-alt-2'
             });
         });
+
+        //题目跳转和改变颜色
         $(function () {
             $('li.option label').click(function () {
                 debugger;
@@ -593,11 +594,20 @@
                 num1 /= num3;
             }
         }
+
+        //显示隐藏计算器
         $("#button1").click(function () {
             $("#jisuanqi").toggle();
         });
 
-       
+        //确认框
+        function Commit() {
+            var r = confirm("请检查是否有题未提交!\n一旦交卷不可从新答题！");
+            if (r == true) {
+                location.href = "";
+            }
+        }
+
     </script>
 </body>
 </html>
