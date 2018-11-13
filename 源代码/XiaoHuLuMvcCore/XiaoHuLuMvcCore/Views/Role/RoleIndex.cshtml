@@ -35,9 +35,9 @@
                                     <thead>
                                         <tr>
                                             <th>编号</th>
-                                            <th>角色名 </th>
-                                            <th>权限名</th>
-                                            <th>修改</th>
+                                            <th>角色名称</th>
+                                            <th>权限名称</th>
+                                            <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,7 +48,9 @@
                                                 <td>@item.Id</td>
                                                 <td>@item.RoleName</td>
                                                 <td>@item.Name</td>
-                                                <td class="edit"><button onclick="btn_edit(1)"><i class="icon-edit bigger-120"></i>编辑</button></td>
+                                                <td class="edit">
+                                                    @Html.ActionLink("修改", "Edit", new { id = item.Id })
+                                                </td>
                                             </tr>
 
                                         }
@@ -78,11 +80,11 @@
 
                                                     <div class="am-form-group">
                                                         <label for="user-name" class="am-u-sm-3 am-form-label">
-                                                            角色名 / RoleName
+                                                            角色名称 / RoleName
                                                         </label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" id="RoleName" required
-                                                                   placeholder="角色名 / RoleName" name="RoleName">
+                                                                   placeholder="角色名称 / RoleName" name="RoleName">
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
@@ -99,7 +101,7 @@
                                                     </div>
                                                     <div class="am-form-group">
                                                         <div class="am-u-sm-9 am-u-sm-push-3">
-                                                            <input type="button" class="am-btn am-btn-success" value="添加用户" onclick="btn_save()" />
+                                                            <input type="button" class="am-btn am-btn-success" value="添加角色" onclick="btn_save()" />
                                                         </div>
                                                     </div>
                                                 </form>
@@ -143,7 +145,7 @@
             $.ajax({
                 type: "post",
                 url: "/Role/RolesAdd",
-                data: { "RoleName": $("#RoleName").val(), "Name": strnum.toString() },
+                data: { "RoleName": $("#RoleName").val(),"Name": strnum.toString() },
                 success: function (data) {
                     if (data > 0) {
                         $.jq_Alert({
@@ -161,7 +163,6 @@
                     }
                 }
             });
-            alert(t);
         }
 
         var btn_edit = function (id) {
@@ -175,5 +176,4 @@
         }
     </script>
 
-    </div>
 </body>
