@@ -70,10 +70,11 @@ namespace XiaoHuLuMvcCore.Controllers
             ViewBag.roleResult = JsonConvert.DeserializeObject<List<Role>>(roleResult);
             return View(JsonConvert.DeserializeObject<UsersInfo>(result));
         }
+
         [HttpPost]
         public int Edit(UsersInfo usersInfo)
         {
-            var result = WebApiHelper.GetApiResult("get", "User", "EditInfoById",usersInfo);
+            var result = WebApiHelper.GetApiResult("put", "User", "EditInfoById",usersInfo);
             return int.Parse(result);
         }
     }

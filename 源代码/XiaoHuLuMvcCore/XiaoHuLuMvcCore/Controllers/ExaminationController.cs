@@ -23,6 +23,15 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
+            //单位
+            var GetCompanies = WebApiHelper.GetApiResult("Get", "Examination", "GetCompanies");
+            ViewBag.Company = JsonConvert.DeserializeObject<List<Company>>(GetCompanies); ;
+            //试室
+            var GetTestRooms = WebApiHelper.GetApiResult("Get", "Examination", "GetTestRooms");
+            ViewBag.TestRoom = JsonConvert.DeserializeObject<List<TestRoom>>(GetTestRooms);
+            //考试
+            var GetExamRooms = WebApiHelper.GetApiResult("Get", "Examination", "GetExamRooms");
+            ViewBag.ExamRoom = JsonConvert.DeserializeObject<List<ExamRoom>>(GetExamRooms);
             var result = WebApiHelper.GetApiResult("Get", "Examination", "GetCandidateList");
             return View(JsonConvert.DeserializeObject<List<Candidateinherit>>(result));
         }
@@ -41,7 +50,7 @@ namespace XiaoHuLuMvcCore.Controllers
             ViewBag.TestRoom = JsonConvert.DeserializeObject<List<TestRoom>>(GetTestRooms);
             //考试
             var GetExamRooms = WebApiHelper.GetApiResult("Get", "Examination", "GetExamRooms");
-            ViewBag.ExamRoom = JsonConvert.DeserializeObject<List<ExamRoom>>(GetExamRooms); ;
+            ViewBag.ExamRoom = JsonConvert.DeserializeObject<List<ExamRoom>>(GetExamRooms); 
             return View();
         }
 
@@ -145,6 +154,8 @@ namespace XiaoHuLuMvcCore.Controllers
                         candidates.Add(candidate);
                     }
                     var result = WebApiHelper.GetApiResult("post", "Examination", "ADDList", candidates);
+                    BadRequest("添加成功!");
+                    Redirect("/Examination/Index");
                 }
             }
             catch (Exception ex)

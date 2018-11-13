@@ -63,7 +63,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <param name="usersInfo"></param>
         /// <returns></returns>
         [Route("EditInfoById")]
-        [HttpPost]
+        [HttpPut]
         public int EditInfoById(UsersInfo usersInfo)
         {
             return _userServices.EditById(usersInfo);

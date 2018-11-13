@@ -1,7 +1,6 @@
 ﻿@model XiaoHuLuMvcCore.Models.Authority.UsersInfo
-
 @{
-    ViewData["Title"] = "Edit";
+    Layout = null;
 }
 
 <h2>Edit</h2>
@@ -51,7 +50,7 @@
     <a asp-action="Index">Back to List</a>
 </div>
 <script>
-    
+
     function Save() {
         var strnum = [];
         $("[name='CheckRole']:checked").each(function () {
@@ -60,13 +59,13 @@
 
         $.ajax({
             url: '/Users/Edit',
-            data: { "UserName": $("[name='UserName']").val(), "Password": $("[name='Password']").val(), "RoleName": strnum.toString()},
+            data: { "UserName": $("[name='UserName']").val(), "Password": $("[name='Password']").val(), "RoleName": strnum.toString() },
             type: "post",
             success: function (data) {
 
                 if (data > 0) {
                     alert("修改成功")
-                    document.location.href='/Users/index'
+                    document.location.href = '/Users/index'
                 }
             }
         })
