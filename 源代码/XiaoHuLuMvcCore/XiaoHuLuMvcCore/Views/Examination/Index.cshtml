@@ -1,15 +1,15 @@
-﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Examination.Candidate>
+﻿@model IEnumerable<XiaoHuLuMvcCore.Models.Examination.Candidateinherit>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
-用户登录后显示用户的所有信息怎么写啊
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered ">
     <thead>
         <tr>
             <th>
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Sex)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                @Html.DisplayNameFor(model => model.Photo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ExamNumber)
@@ -51,6 +51,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.Enable)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExamNumberId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LongExam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeUsed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RemainderLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgressOfAnswer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestRoomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExamRoomName)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -67,7 +91,7 @@
                 @Html.DisplayFor(modelItem => item.Sex)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Phone)
+                @Html.DisplayFor(modelItem => item.Photo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExamNumber)
@@ -95,6 +119,30 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Enable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExamNumberId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LongExam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeUsed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RemainderLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgressOfAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestRoomName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExamRoomName)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
