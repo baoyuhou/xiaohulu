@@ -129,6 +129,7 @@ namespace Services.ExaminationServices
         /// <returns></returns>
         public int Update(QuestionBankinherit questionBankinherit)
         {
+            SqlSugarClient sugarClient = Educationcontext.GetClient();
             //修改题库
             QuestionBank questionBank = new QuestionBank();
             questionBank.Subject = questionBankinherit.Subject;
@@ -138,23 +139,19 @@ namespace Services.ExaminationServices
             questionBank.Enable = questionBankinherit.Enable;
             questionBank.Id = questionBankinherit.Id;
             var questionBankId = questionBankinherit.Id;
-            var resultquestionBank = QuestionBankDB.Update(questionBank);
-            if (resultquestionBank)
+            var resultquestionBank = sugarClient.Updateable<QuestionBank>(questionBank).ExecuteCommand();
+            if (resultquestionBank != 0)
             {
                 //修改选项
-                SqlSugarClient sugarClient = Educationcontext.GetClient();
-                Option option = sugarClient.SqlQueryable<Option>("select * from Option where QuestionBankId == " + resultquestionBank).First();
+                Option option = sugarClient.SqlQueryable<Option>("select * from `Option` where QuestionBankId = " + questionBankinherit.Id).First();
                 option.AnswerA = questionBankinherit.AnswerA;
                 option.AnswerB = questionBankinherit.AnswerB;
                 option.AnswerC = questionBankinherit.AnswerC;
                 option.AnswerD = questionBankinherit.AnswerD;
                 option.AnswerE = questionBankinherit.AnswerE;
-                var resultoption = OptionDB.Update(option);
-                if (resultoption)
-                {
+                var resultoption = sugarClient.Updateable<Option>(option).ExecuteCommand();
+                if (resultoption != 0)
                     return 1;
-                }
-                return 0;
             }
             return 0;
         }
@@ -167,7 +164,7 @@ namespace Services.ExaminationServices
         public QuestionBankinherit UpdateById(int id)
         {
             SqlSugarClient sugarClient = Educationcontext.GetClient();
-            QuestionBankinherit questionBankinherit = sugarClient.Queryable<QuestionBank, Option, TextType>((QB, OP, TT) => QB.Id == OP.QuestionBankId && QB.TypeOfExam == TT.ID).Select((QB, OP, TT) => new QuestionBankinherit { Answer = QB.Answer, AnswerA = OP.AnswerA, AnswerB = OP.AnswerB, AnswerC = OP.AnswerC, AnswerD = OP.AnswerD, AnswerE = OP.AnswerE, Subject = QB.Subject, Enable = QB.Enable, Photo = QB.Photo, ExamType = TT.ExamType }).Where(m => m.Id == id).First();
+            QuestionBankinherit questionBankinherit = sugarClient.SqlQueryable<QuestionBankinherit>("select q.*,o.AnswerA,o.AnswerB,o.AnswerC,o.AnswerD,o.AnswerE,t.ExamType from QuestionBank q join `Option` o on q.Id = o.QuestionBankId join TextType t on q.TypeOfExam = t.ID where q.Id = " + id).First();
             return questionBankinherit;
         }
 

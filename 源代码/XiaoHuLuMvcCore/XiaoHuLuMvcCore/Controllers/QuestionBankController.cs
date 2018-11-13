@@ -167,7 +167,7 @@ namespace XiaoHuLuMvcCore.Controllers
         }
 
         /// <summary>
-        /// 修改题
+        /// 修改题页面
         /// </summary>
         /// <param name="id"></param>
         public IActionResult UpdateQuestionBank(int id)
@@ -180,9 +180,26 @@ namespace XiaoHuLuMvcCore.Controllers
         /// 修改题
         /// </summary>
         /// <param name="id"></param>
-        [HttpPost]
-        public void UpdateQuestionBank(QuestionBankinherit questionBankinherit)
+        public void UpdateQuestionBankData(QuestionBankinherit questionBankinherit)
         {
+            long size = 0;
+            var files = Request.Form.Files;
+            foreach (var file in files)
+            {
+                //var fileName = file.FileName;
+                var fileName = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                fileName = _hostingEnvironment.WebRootPath + $@"\{fileName}";
+                size += file.Length;
+                using (FileStream fs = System.IO.File.Create(fileName))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+                questionBankinherit.Photo = fileName;
+            }
             var result = WebApiHelper.GetApiResult("put", "QuestionBank", "Update", questionBankinherit);
         }
     }
