@@ -22,8 +22,11 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public int ADD(Candidate candidate)
         {
-            var result = Convert.ToInt32(CandidateDB.Insert(candidate));
-            return result;
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.Insertable<Candidate>(candidate).ExecuteCommand();
+                return result;
+            }
         }
 
         /// <summary>
@@ -35,7 +38,6 @@ namespace Services.Examination.Services
         {
             var result = Convert.ToInt16(CandidateDB.InsertRange(candidates.ToArray()));
             return result;
-
         }
 
         /// <summary>

@@ -9,6 +9,7 @@ using Models;
 using Models.Examination;
 using IServices.Examination.IServices;
 using Models.Authority;
+using Newtonsoft.Json;
 
 namespace XiaoHuLuApiCore.Controllers
 {
@@ -29,9 +30,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("CandidateAdd")]
         [HttpPost]
-        public int CandidateAdd(Candidateinherit candidateinherit)
+        public int CandidateAdd(Candidate candidate)
         {
-            var candidateAdd = _examineeServices.ADD(candidateinherit);
+            var candidateAdd = _examineeServices.ADD(candidate);
             return candidateAdd;
         }
 
@@ -42,9 +43,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("ADDList")]
         [HttpPost]
-        public int ADDList(List<Candidate> candidates)
+        public int ADDList(object obj)
         {
-            var result = _examineeServices.ADDList(candidates);
+            var result = _examineeServices.ADDList(JsonConvert.DeserializeObject<List<Candidate>>(obj.ToString()));
             return result;
         }
 
@@ -94,7 +95,7 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("CandidateAdd")]
         [HttpPost]
-        public int CandidateAdd(Candidate candidate)
+        public int UpdateCandidate(Candidate candidate)
         {
             var candidateAdd = _examineeServices.ADD(candidate);
             return candidateAdd;
