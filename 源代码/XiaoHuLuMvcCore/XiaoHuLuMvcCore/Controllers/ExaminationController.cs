@@ -33,17 +33,27 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public IActionResult ADDCandidateinherit()
         {
+            //单位
             var GetCompanies = WebApiHelper.GetApiResult("Get", "Examination", "GetCompanies");
             ViewBag.Company = JsonConvert.DeserializeObject<List<Company>>(GetCompanies); ;
+            //试室
             var GetTestRooms = WebApiHelper.GetApiResult("Get", "Examination", "GetTestRooms");
             ViewBag.TestRoom = JsonConvert.DeserializeObject<List<TestRoom>>(GetTestRooms);
+            //考试
             var GetExamRooms = WebApiHelper.GetApiResult("Get", "Examination", "GetExamRooms");
             ViewBag.ExamRoom = JsonConvert.DeserializeObject<List<ExamRoom>>(GetExamRooms); ;
             return View();
         }
 
+        /// <summary>
+        /// 上传接口属性
+        /// </summary>
         private readonly IHostingEnvironment _hostingEnvironment;
 
+        /// <summary>
+        /// 控制反转
+        /// </summary>
+        /// <param name="hostingEnvironment"></param>
         public ExaminationController(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
@@ -55,17 +65,22 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public int ADDCandidateinheritData(Candidate candidate)
         {
+            #region 上传
             long size = 0;
+            //获取form中的图片
             var files = Request.Form.Files;
+            //循环获取
             foreach (var file in files)
             {
                 //var fileName = file.FileName;
+                //去掉图片的双引号并转换成ContentDispositionHeaderValue
                 var fileName = ContentDispositionHeaderValue
                                 .Parse(file.ContentDisposition)
                                 .FileName
                                 .Trim('"');
                 fileName = _hostingEnvironment.WebRootPath + $@"\{fileName}";
                 size += file.Length;
+                //保存图片
                 using (FileStream fs = System.IO.File.Create(fileName))
                 {
                     file.CopyTo(fs);
@@ -73,11 +88,10 @@ namespace XiaoHuLuMvcCore.Controllers
                 }
                 candidate.Photo = fileName;
             }
+            #endregion
             var GetExamRooms = WebApiHelper.GetApiResult("post", " Examination", "CandidateAdd", candidate);
             if (GetExamRooms!=null)
-            {
                 return 1;
-            }
             return 0;
         }
 
@@ -104,6 +118,7 @@ namespace XiaoHuLuMvcCore.Controllers
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
                     int rowCount = worksheet.Dimension.Rows;
                     int ColCount = worksheet.Dimension.Columns;
+                    //循环Excel里面的数据
                     for (int row = 1 + 1; row <= rowCount; row++)
                     {
                         Candidate candidate = new Candidate();

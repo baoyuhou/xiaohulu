@@ -17,7 +17,15 @@ namespace XiaoHuLuApiCore.Controllers
     [ApiController]
     public class ExaminationController : ControllerBase
     {
+        /// <summary>
+        /// 实例化接口
+        /// </summary>
         private readonly IExamineeServices _examineeServices;
+
+        /// <summary>
+        /// 控制反转
+        /// </summary>
+        /// <param name="examineeServices"></param>
         public ExaminationController(IExamineeServices examineeServices)
         {
             _examineeServices = examineeServices;

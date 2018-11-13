@@ -12,9 +12,16 @@ namespace Services.Examination.Services
 {
     public class ExamineeServices : IExamineeServices
     {
-        //实例化
+        /// <summary>
+        /// 实例化
+        /// </summary>
         public SimpleClient<Candidate> CandidateDB = new SimpleClient<Candidate>(Educationcontext.GetClient());
+
+        /// <summary>
+        /// 实例化
+        /// </summary>
         public SimpleClient<TestTime> TestTimeDB = new SimpleClient<TestTime>(Educationcontext.GetClient());
+
         /// <summary>
         /// 单条数据添加考生
         /// </summary>
@@ -71,15 +78,15 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public Candidateinherit GetCandidatesByExamNumber(string examNumber)
         {
-           Candidateinherit candidate = null;
+            Candidateinherit candidate = null;
             try
             {
                 SqlSugarClient sugarClient = Educationcontext.GetClient();
                 //var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
-                 candidate = sugarClient.SqlQueryable<Candidateinherit>(" select * from ( select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id) info where ExamNumber =" + examNumber).Single();
+                candidate = sugarClient.SqlQueryable<Candidateinherit>(" select * from ( select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id) info where ExamNumber =" + examNumber).Single();
                 return candidate;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return candidate;
             }

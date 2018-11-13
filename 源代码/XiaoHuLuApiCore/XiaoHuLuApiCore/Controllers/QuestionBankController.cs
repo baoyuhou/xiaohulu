@@ -14,14 +14,22 @@ namespace XiaoHuLuApiCore.Controllers
     [ApiController]
     public class QuestionBankController : ControllerBase
     {
+        /// <summary>
+        /// 实例化接口
+        /// </summary>
         private readonly IQuestionBankServices _questionBankServices;
+
+        /// <summary>
+        /// 控制反转
+        /// </summary>
+        /// <param name="questionBankServices"></param>
         public QuestionBankController(IQuestionBankServices questionBankServices)
         {
             _questionBankServices = questionBankServices;
         }
 
         /// <summary>
-        /// 单挑 添加题
+        /// 单道添加题
         /// </summary>
         /// <returns></returns>
         [Route("ADD")]
