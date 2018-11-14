@@ -96,6 +96,8 @@ namespace XiaoHuLuMvcCore.Controllers
                     fs.Flush();
                 }
                 candidate.Photo = fileName;
+<<<<<<< HEAD
+=======
             }
             #endregion
             var GetExamRooms = WebApiHelper.GetApiResult("post", " Examination", "CandidateAdd", candidate);
@@ -155,6 +157,7 @@ namespace XiaoHuLuMvcCore.Controllers
                     BadRequest("添加成功!");
                     Redirect("/Examination/Index");
                 }
+>>>>>>> b5ff0d4e984ea24aac822dcf64dcb55d5ddf4c19
             }
             catch (Exception ex)
             {
