@@ -70,7 +70,7 @@ namespace XiaoHuLuMvcCore.Controllers
                     file.CopyTo(fs);
                     fs.Flush();
                 }
-                candidate.Phone = fileName;
+                candidate.Photo = fileName;
             }
             var GetExamRooms = WebApiHelper.GetApiResult("Get", "Examination", "CandidateAdd", candidate);
             if (GetExamRooms!=null)
