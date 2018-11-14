@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models;
 using XiaoHuLuMvcCore.Models.Examination;
 using XiaoHuLuMvcCore.Models.Authority;
+using AutherationTest;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -20,14 +21,18 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
+            ///获取考试题
             var texttypelist = WebApiHelper.GetApiResult("Get", "Answer", "GetTextTypeList");
             ViewBag.texttype = JsonConvert.DeserializeObject<List<TextType>>(texttypelist);
             var result = WebApiHelper.GetApiResult("Get", "Answer", "GetAnswerModelList");
-
-            UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo>(HttpContext.Session.GetString("candidate"));
-
-            var explain = WebApiHelper.GetApiResult("get", "explain", "GetExplainById?id=" + usersInfo.Id);
+            //获取登陆人信息
+            var examNumber = User.Claims.First(m => m.Type == "key").Value;
+            var user = RedisHelper.Get<Candidate>(examNumber);
+            //UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo>(HttpContext.Session.GetString("candidate"));
+            //说明显示
+            var explain = WebApiHelper.GetApiResult("get", "explain", "GetExplainById?id=" + user.ID);
             ViewBag.explain = JsonConvert.DeserializeObject<Explain>(explain).Description;
+
             return View(JsonConvert.DeserializeObject<List<AnswerModel>>(result));
         }
 
