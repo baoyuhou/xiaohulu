@@ -23,6 +23,22 @@
             color: #fff;
         }
     </style>
+    <script>
+
+        b = "";
+        function aaa() {
+            
+            for (var i = 1; i < @Model.Count; i++) {
+                c=""
+                $("[name=" + i + "]:checked").each(function () {
+                   c = $(this).val();
+                   
+                })
+                b += (c + ",");
+            }
+            alert(b);
+        }
+    </script>
 </head>
 <body>
     <div class="main">
@@ -35,16 +51,22 @@
                             <p class="test_time">
                                 <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">00:10</b>
                             </p>
-                            <font><input type="button" name="test_jiaojuan" id="endCommit" onclick="lll()" value="交卷"></font>  <font>  </font>
+                            <font><input type="button" name="test_jiaojuan" id="endCommit" onclick="aaa()" value="交卷"></font>  <font>  </font>
                             <font><input type="button" name="test_jiaojuan" id="end" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" value="帮助"></font><font>  </font>
                             <font><input type="button" name="button1" id="button1" value="计算器"></font>
                         </div>
+                        @{
+                            var num = 0;
+
+                        }
                         @foreach (var item in ViewBag.texttype as List<TextType>)
                         {
                             <div class="test_content">
                                 <div class="test_content_title">
                                     <h2>@item.ExamType</h2>
                                     @{
+
+
                                         var num1 = 0;
                                         num1 = Model.Where(s => s.TypeOfExam == item.ID).Count();
                                     }
@@ -53,7 +75,6 @@
                                     </p>
                                 </div>
                             </div>
-                            var num = 0;
                             if (item.ID == 1)
                             {
                                 @foreach (var item1 in Model)
@@ -74,7 +95,7 @@
                                                             @if (@item1.AnswerA != "")
                                                             {
                                                                 <li class="option">
-                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id" data-value="@item.ID+1"
+                                                                    <input type="radio" class="radioOrCheck" name="@num"
                                                                            id="@item1.Id+1" value="A" />
                                                                     <label for="@item1.Id+1">
                                                                         A.
@@ -85,7 +106,7 @@
                                                             @if (@item1.AnswerB != "")
                                                             {
                                                                 <li class="option">
-                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                    <input type="radio" class="radioOrCheck" name="@num"
                                                                            id="@item1.Id+2" value="B" />
                                                                     <label for="@item1.Id+2">
                                                                         B.
@@ -96,7 +117,7 @@
                                                             @if (@item1.AnswerC != "")
                                                             {
                                                                 <li class="option">
-                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                    <input type="radio" class="radioOrCheck" name="@num"
                                                                            id="@item1.Id+3" value="C" />
                                                                     <label for="@item1.Id+3">
                                                                         C.
@@ -107,7 +128,7 @@
                                                             @if (@item1.AnswerD != "")
                                                             {
                                                                 <li class="option">
-                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                    <input type="radio" class="radioOrCheck" name="@num"
                                                                            id="@item1.Id+4" value="D" />
                                                                     <label for="@item1.Id+4">
                                                                         D.
@@ -118,7 +139,7 @@
                                                             @if (@item1.AnswerE != "")
                                                             {
                                                                 <li class="option">
-                                                                    <input type="radio" class="radioOrCheck" name="@item1.Id"
+                                                                    <input type="radio" class="radioOrCheck" name="@num"
                                                                            id="@item1.Id+5" value="E" />
                                                                     <label for="@item1.Id+5">
                                                                         E.
@@ -145,7 +166,7 @@
                                             <ul>
                                                 <li id="@item2.Id">
                                                     <div class="test_content_nr_tt">
-                                                        <i>1</i><span>(1分)</span><font>@item2.Subject</font><b class="icon iconfont">&#xe881;</b>
+                                                        <i>@num</i><span>(1分)</span><font>@item2.Subject</font><b class="icon iconfont">&#xe881;</b>
                                                     </div>
                                                     <div class="test_content_nr_main">
                                                         <ul>
@@ -228,7 +249,7 @@
                                             <ul>
                                                 <li id="@item3.Id">
                                                     <div class="test_content_nr_tt">
-                                                        <i>1</i><span>(1分)</span><font>@item3.Subject</font><b class="icon iconfont">&#xe881;</b>
+                                                        <i>@num</i><span>(1分)</span><font>@item3.Subject</font><b class="icon iconfont">&#xe881;</b>
                                                     </div>
                                                     <div class="test_content_nr_main">
                                                         <ul>
@@ -392,6 +413,7 @@
                                 <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">00:10</b>
                             </p>
                         </div>
+                        @{ var num444 = 0;}
                         @foreach (var item7 in ViewBag.texttype as List<TextType>)
                         {
                             <div class="rt_content">
@@ -408,7 +430,7 @@
                                 </div>
                                 <div class="rt_content_nr answerSheet">
                                     <ul>
-                                        @{ var num444 = 0;}
+
                                         @if (item7.ID == 1)
                                         {
                                             @foreach (var item71 in Model)
@@ -566,12 +588,28 @@
                 main();
             }
         }
-        function lll() {
-            var r = $("[type='radio']:checked")
-            $(r).each(function () {
-                alert($(this).val())
-            })
-        }
+        //var AllNum = 0;
+        //var array1 = [];
+        //var obj1 = { answer: "", id: 0 };
+        @*function aaa() {
+            alert(1);
+             for (var i = 1; i < = @Model.Count; i++) {
+                var b = "";
+                alert(2);
+                var a = $("[name='"+i+"']")
+                $(a).each(function () {
+                    if ($(this).val() ){
+                        b += $(this).val() + ',';
+                        alert(3);
+                    }
+                    else {
+                        b += '' + ',';
+                        alert(4);
+                    }
+                })
+            }
+            alert(5);
+        }*@
         function main() {
             if (!isNaN(x) || x === '.') {
                 arr.push(x);
@@ -614,13 +652,17 @@
 
         //确认框
         function Commit() {
-            var r = confirm("请检查是否有题未提交!\n一旦交卷不可从新答题！");
-            if (r == true) {
+            //var r = confirm("请检查是否有题未提交!\n一旦交卷不可从新答题！");
+            //if (r == true) {
 
-                location.href = "";
-            }
+            //    location.href = "";
+            //}
+
+
         }
-        
+
+
+
     </script>
 </body>
 </html>
