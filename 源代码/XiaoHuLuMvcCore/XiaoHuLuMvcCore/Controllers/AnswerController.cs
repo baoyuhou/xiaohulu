@@ -24,10 +24,10 @@ namespace XiaoHuLuMvcCore.Controllers
             ViewBag.texttype = JsonConvert.DeserializeObject<List<TextType>>(texttypelist);
             var result = WebApiHelper.GetApiResult("Get", "Answer", "GetAnswerModelList");
 
-            //UsersInfo usersInfo =JsonConvert.DeserializeObject<UsersInfo>( HttpContext.Session.GetString("candidate"));
+            UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo>(HttpContext.Session.GetString("candidate"));
 
-            //var explain = WebApiHelper.GetApiResult("get","explain", "GetExplainById?id="+usersInfo.Id);
-            //ViewBag.explain = JsonConvert.DeserializeObject<Explain>(explain).Description;
+            var explain = WebApiHelper.GetApiResult("get", "explain", "GetExplainById?id=" + usersInfo.Id);
+            ViewBag.explain = JsonConvert.DeserializeObject<Explain>(explain).Description;
             return View(JsonConvert.DeserializeObject<List<AnswerModel>>(result));
         }
 

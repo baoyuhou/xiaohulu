@@ -23,22 +23,7 @@
             color: #fff;
         }
     </style>
-    <script>
 
-        b = "";
-        function aaa() {
-            
-            for (var i = 1; i < @Model.Count; i++) {
-                c=""
-                $("[name=" + i + "]:checked").each(function () {
-                   c = $(this).val();
-                   
-                })
-                b += (c + ",");
-            }
-            alert(b);
-        }
-    </script>
 </head>
 <body>
     <div class="main">
@@ -51,7 +36,7 @@
                             <p class="test_time">
                                 <i class="icon iconfont">&#xe6fb;</i><b class="alt-1">00:10</b>
                             </p>
-                            <font><input type="button" name="test_jiaojuan" id="endCommit" onclick="aaa()" value="交卷"></font>  <font>  </font>
+                            <font><input type="button" name="test_jiaojuan" id="endCommit" onclick="Commit()" value="交卷"></font>  <font>  </font>
                             <font><input type="button" name="test_jiaojuan" id="end" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" value="帮助"></font><font>  </font>
                             <font><input type="button" name="button1" id="button1" value="计算器"></font>
                         </div>
@@ -652,11 +637,11 @@
 
         //确认框
         function Commit() {
-            //var r = confirm("请检查是否有题未提交!\n一旦交卷不可从新答题！");
-            //if (r == true) {
+            var r = confirm("请检查是否有题未提交!\n一旦交卷不可从新答题！");
+            if (r == true) {
 
-            //    location.href = "";
-            //}
+                location.href = "";
+            }
 
 
         }
