@@ -64,7 +64,7 @@ namespace Services.Authority
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var result = db.SqlQueryable<JurisdictionInfo>("SELECT a.Id,a.RoleName,b.`Name`,b.`level`,b.Url,c.RolesId,c.JurisdictionId FROM role a,jurisdiction b,roleandjurisdiction c WHERE a.Id=c.RolesId AND b.Id=c.JurisdictionId");
+                var result = db.SqlQueryable<JurisdictionInfo>("SELECT a.Id,a.RoleName,b.`Name`,b.`level`,b.Url,c.RolesId,c.JurisdictionId FROM role a,jurisdiction b,roleanjurisdiction c WHERE a.Id=c.RolesId AND b.Id=c.JurisdictionId");
                 return result.ToList();
             }
         }
