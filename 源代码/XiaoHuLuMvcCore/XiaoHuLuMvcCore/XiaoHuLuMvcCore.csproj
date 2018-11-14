@@ -24,4 +24,8 @@
     <Folder Include="wwwroot\Content\Resources\video\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Unititly\Unititly.csproj" />
+  </ItemGroup>
+
 </Project>

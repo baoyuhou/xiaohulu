@@ -12,9 +12,16 @@ namespace Services.Examination.Services
 {
     public class ExamineeServices : IExamineeServices
     {
-        //实例化
+        /// <summary>
+        /// 实例化
+        /// </summary>
         public SimpleClient<Candidate> CandidateDB = new SimpleClient<Candidate>(Educationcontext.GetClient());
+
+        /// <summary>
+        /// 实例化
+        /// </summary>
         public SimpleClient<TestTime> TestTimeDB = new SimpleClient<TestTime>(Educationcontext.GetClient());
+
         /// <summary>
         /// 单条数据添加考生
         /// </summary>
@@ -22,8 +29,11 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public int ADD(Candidate candidate)
         {
-            var result = Convert.ToInt32(CandidateDB.Insert(candidate));
-            return result;
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.Insertable<Candidate>(candidate).ExecuteCommand();
+                return result;
+            }
         }
 
         /// <summary>
@@ -35,7 +45,6 @@ namespace Services.Examination.Services
         {
             var result = Convert.ToInt16(CandidateDB.InsertRange(candidates.ToArray()));
             return result;
-
         }
 
         /// <summary>
@@ -57,7 +66,7 @@ namespace Services.Examination.Services
         {
             using (SqlSugarClient db = Educationcontext.GetClient())
             {
-                var CandList = db.SqlQueryable<Candidateinherit>("select a.*,c.`Name` as CompanyName,t.`Name` as TestRoomName,e.`Name` as ExamRoomName from  candidate a join company c on a.CompanyID=c.ID join testroom t on a.TestRoomID=t.ID join examroom e on a.ExamRoomID=e.ID join testtime s on a.ExamNumber=s.ExamNumberId");
+                var CandList = db.SqlQueryable<Candidateinherit>("select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id");
                 return CandList.ToList();
             }
         }
@@ -69,10 +78,18 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public Candidateinherit GetCandidatesByExamNumber(string examNumber)
         {
-            SqlSugarClient sugarClient = Educationcontext.GetClient();
-            //var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
-           var   candidate = sugarClient.SqlQueryable<Candidateinherit>(" select * from ( select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id) info where ExamNumber =" + examNumber);
-            return candidate.Single();
+            Candidateinherit candidate = null;
+            try
+            {
+                SqlSugarClient sugarClient = Educationcontext.GetClient();
+                //var  candidate  = sugarClient.Queryable<Candidate>().First(s=>s.ExamNumber==examNumber);
+                candidate = sugarClient.SqlQueryable<Candidateinherit>(" select * from ( select a.*,c.`Name` as CompanyName,b.`Name` as  TestRoomName, d.`Name` as ExamRoomName from candidate a,testroom b, examroom c ,company d where a.TestRoomID=b.Id and a.CompanyID=d.Id and a.ExamRoomID=c.Id) info where ExamNumber =" + examNumber).Single();
+                return candidate;
+            }
+            catch (Exception)
+            {
+                return candidate;
+            }
         }
 
         /// <summary>
@@ -83,11 +100,20 @@ namespace Services.Examination.Services
         /// <returns></returns>
         public Users GetUsersByNameAndPwd(string name, string pwd)
         {
-            using (SqlSugarClient  sqlsc =Educationcontext.GetClient())
+            Users user = null;
+            try
             {
-              var user=  sqlsc.Queryable<Users>().First(s=>(s.UserName==name)&&(s.Password==pwd));
+                using (SqlSugarClient sqlsc = Educationcontext.GetClient())
+                {
+                    user = sqlsc.Queryable<Users>().First(s => (s.UserName == name) && (s.Password == pwd));
+                    return user;
+                }
+            }
+            catch (Exception)
+            {
                 return user;
             }
+
         }
 
         /// <summary>
@@ -111,6 +137,45 @@ namespace Services.Examination.Services
             SqlSugarClient sugarClient = Educationcontext.GetClient();
             Candidateinherit candidateinherit = sugarClient.Queryable<Candidate, TestRoom, ExamRoom, Company, TestTime>((CD, TR, ER, CP, TT) => CD.CompanyID == CP.Id && CD.ExamRoomID == ER.Id && CD.TestRoomID == TR.ID && CD.ExamNumber == TT.ExamNumberId).Select((CD, TR, ER, CP, TT) => new Candidateinherit { Certificates = CD.Certificates, CompanyName = CP.Name, DocumentType = CD.DocumentType, Enable = CD.Enable, ExamNumber = CD.ExamNumber, ExamRoomName = ER.Name, Field = CD.Field, ID = CD.ID, LongExam = TT.LongExam, Name = CD.Name, Photo = CD.Photo, ProgressOfAnswer = TT.ProgressOfAnswer, RemainderLength = TT.RemainderLength, SeatNumber = CD.SeatNumber, Sex = CD.Sex, TestRoomName = TR.Name, TimeUsed = TT.TimeUsed }).Where(m => m.ID == candidateId).First();
             return candidateinherit;
+        }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        public List<Company> GetCompanies()
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.SqlQueryable<Company>("select * from Company").ToList();
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 获取试室
+        /// </summary>
+        /// <returns></returns>
+        public List<TestRoom> GetTestRooms()
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.SqlQueryable<TestRoom>("select * from TestRoom").ToList();
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        public List<ExamRoom> GetExamRooms()
+        {
+            using (SqlSugarClient sugarClient = Educationcontext.GetClient())
+            {
+                var result = sugarClient.SqlQueryable<ExamRoom>("select * from ExamRoom").ToList();
+                return result;
+            }
         }
     }
 }

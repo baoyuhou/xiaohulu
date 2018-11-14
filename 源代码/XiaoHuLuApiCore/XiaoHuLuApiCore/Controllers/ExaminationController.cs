@@ -9,6 +9,7 @@ using Models;
 using Models.Examination;
 using IServices.Examination.IServices;
 using Models.Authority;
+using Newtonsoft.Json;
 
 namespace XiaoHuLuApiCore.Controllers
 {
@@ -16,7 +17,15 @@ namespace XiaoHuLuApiCore.Controllers
     [ApiController]
     public class ExaminationController : ControllerBase
     {
+        /// <summary>
+        /// 实例化接口
+        /// </summary>
         private readonly IExamineeServices _examineeServices;
+
+        /// <summary>
+        /// 控制反转
+        /// </summary>
+        /// <param name="examineeServices"></param>
         public ExaminationController(IExamineeServices examineeServices)
         {
             _examineeServices = examineeServices;
@@ -29,9 +38,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("CandidateAdd")]
         [HttpPost]
-        public int CandidateAdd(Candidateinherit candidateinherit)
+        public int CandidateAdd(Candidate candidate)
         {
-            var candidateAdd = _examineeServices.ADD(candidateinherit);
+            var candidateAdd = _examineeServices.ADD(candidate);
             return candidateAdd;
         }
 
@@ -42,9 +51,9 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("ADDList")]
         [HttpPost]
-        public int ADDList(List<Candidate> candidates)
+        public int ADDList(object obj)
         {
-            var result = _examineeServices.ADDList(candidates);
+            var result = _examineeServices.ADDList(JsonConvert.DeserializeObject<List<Candidate>>(obj.ToString()));
             return result;
         }
 
@@ -70,10 +79,10 @@ namespace XiaoHuLuApiCore.Controllers
         [HttpGet]
         public Candidateinherit GetCandidate(string examNumber)
         {
-            var candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
+            var  candidate = _examineeServices.GetCandidatesByExamNumber(examNumber);
             return candidate;
         }
-        
+
         /// <summary>
         /// 修改考生信息
         /// </summary>
@@ -88,13 +97,13 @@ namespace XiaoHuLuApiCore.Controllers
         }
 
         /// <summary>
-        /// 根据id返填修改的题
+        /// 根据id返填修改的考生
         /// </summary>
         /// <param name="candidateId"></param>
         /// <returns></returns>
         [Route("CandidateAdd")]
         [HttpPost]
-        public int CandidateAdd(Candidate candidate)
+        public int UpdateCandidate(Candidate candidate)
         {
             var candidateAdd = _examineeServices.ADD(candidate);
             return candidateAdd;
@@ -121,9 +130,42 @@ namespace XiaoHuLuApiCore.Controllers
         /// <returns></returns>
         [Route("GetUsersByNameAndPwd")]
         [HttpGet]
-        public Users GetUsersByNameAndPwd(string name,string pwd)
+        public Users GetUsersByNameAndPwd(string name, string pwd)
         {
-            return _examineeServices.GetUsersByNameAndPwd(name,pwd);
+            return _examineeServices.GetUsersByNameAndPwd(name, pwd);
+        }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetCompanies")]
+        [HttpGet]
+        public List<Company> GetCompanies()
+        {
+            return _examineeServices.GetCompanies();
+        }
+
+        /// <summary>
+        /// 获取试室
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetTestRooms")]
+        [HttpGet]
+        public List<TestRoom> GetTestRooms()
+        {
+            return _examineeServices.GetTestRooms();
+        }
+
+        /// <summary>
+        /// 获取单位
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetExamRooms")]
+        [HttpGet]
+        public List<ExamRoom> GetExamRooms()
+        {
+            return _examineeServices.GetExamRooms();
         }
     }
 }

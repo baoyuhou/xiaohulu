@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models.Examination;
 using XiaoHuLuMvcCore.Models;
-
+using AutherationTest;
+using Microsoft.AspNetCore.Authorization;
 
 namespace XiaoHuLuMvcCore.Controllers.Front
 {
@@ -17,9 +18,14 @@ namespace XiaoHuLuMvcCore.Controllers.Front
         /// 考生首页
         /// </summary>
         /// <returns></returns>
+        /// 
+        [Authorize]
         public IActionResult Index()
         {
-            Candidate candidate = JsonConvert.DeserializeObject<Candidate> (HttpContext.Session.GetString("candidate"));
+            //取出登陆人的名字
+            var candidateName = User.Claims.First(m => m.Type == "key").Value;
+            //根据key值取出Redis的数据
+            var candidate = RedisHelper.Get<Candidate>(candidateName);
             ViewBag.CandidateName = candidate.Name;
             ViewBag.CandidateId = candidate.ID;
             return View();
@@ -40,7 +46,7 @@ namespace XiaoHuLuMvcCore.Controllers.Front
         /// <returns></returns>
         public string GetTypeByUid(string id)
         {
-            var result = WebApiHelper.GetApiResult("get", "Explain", "GetTypeByUid?id="+id);
+            var result = WebApiHelper.GetApiResult("get", "Explain", "GetTypeByUid?id=" + id);
             return result;
         }
     }

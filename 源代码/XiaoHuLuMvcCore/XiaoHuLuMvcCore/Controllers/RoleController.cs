@@ -19,6 +19,7 @@ namespace XiaoHuLuMvcCore.Controllers
         public IActionResult RoleIndex()
         {
             var result = WebApiHelper.GetApiResult("Get", "Role", "GetJurisdictionInfos");
+
             var jurisresult=WebApiHelper.GetApiResult("Get", "Permissions", "GetJurisdictions");
             ViewBag.jurisresult = JsonConvert.DeserializeObject<List<Jurisdictions>>(jurisresult);
             return View(JsonConvert.DeserializeObject<List<JurisdictionInfo>>(result));
@@ -31,7 +32,7 @@ namespace XiaoHuLuMvcCore.Controllers
         /// <returns></returns>
         public string RolesAdd(JurisdictionInfo jurisdictionInfo)
         {
-            var result = WebApiHelper.GetApiResult("Post", "Role", "RoleAdd");
+            var result = WebApiHelper.GetApiResult("Post", "Role", "RoleAdd",jurisdictionInfo);
             return result;
         }
     }

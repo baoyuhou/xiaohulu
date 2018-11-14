@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-@model IEnumerable<XiaoHuLuMvcCore.Models.Examination.Candidateinherit>
+<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -14,72 +14,17 @@
     <link href="~/css/admin.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="dvcontent">
-
+    <div id="divapp" class="dvcontent">
         <div>
             <!--tab start-->
             <div class="tabs">
                 <div class="hd">
                     <ul>
-                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">查看考生</li>
-                        <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">添加考生</li>
+                        <li class="on" style="box-sizing: initial;-webkit-box-sizing: initial;">添加考生信息</li>
                         <li class="" style="box-sizing: initial;-webkit-box-sizing: initial;">Excel导入</li>
                     </ul>
                 </div>
                 <div class="bd">
-                    <ul style="display: block;padding: 20px;">
-                        <li>
-                            <!--分页显示考生信息 start-->
-                            <div id="dv1">
-                                <table class="table" id="tbRecord">
-                                    <thead>
-                                        <tr>
-                                            <th>编号</th>
-                                            <th>姓名</th>
-                                            <th>性别</th>
-                                            <th>头像</th>
-                                            <th>准考证号</th>
-                                            <th>证件类型</th>
-                                            <th>证件号</th>
-                                            <th>所在考场</th>
-                                            <th>当前场次</th>
-                                            <th>座位号</th>
-                                            <th>所在试室</th>
-                                            <th>所在单位</th>
-                                            <th>是否启用</th>
-                                            <th>操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-
-                                            <tr>
-                                                <td>@item.ID</td>
-                                                <td>@item.Name</td>
-                                                <td>@item.Sex</td>
-                                                <td>@item.Photo</td>
-                                                <td>@item.ExamNumber</td>
-                                                <td>@item.DocumentType</td>
-                                                <td>@item.Certificates</td>
-                                                <td>@item.ExamRoomName </td>
-                                                <td>@item.Field </td>
-                                                <td>@item.SeatNumber </td>
-                                                <td>@item.TestRoomName </td>
-                                                <td>@item.CompanyName  </td>
-                                                <td>@item.Enable </td>
-                                                <td class="edit">
-                                                    @Html.ActionLink("修改", "Edit", new { id = item.ID })
-                                                </td>
-                                            </tr>
-
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--分页显示考生信息 end-->
-                        </li>
-                    </ul>
                     <ul style="display: block;padding: 20px;">
                         <div class="am-cf admin-main" style="padding-top: 0px;">
                             <!-- content start -->
@@ -110,8 +55,8 @@
                                                             性别 / Sex
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input type="radio" name="Sex" checked="checked" value="true" />男
-                                                            <input type="radio" name="Sex" value="false" />女
+                                                            <input  type="radio" name="Sex" checked="checked" value="true" />男
+                                                            <input  type="radio" name="Sex" value="false" />女
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
@@ -291,7 +236,7 @@
                 type: "post",
                 url: "/Examination/ADDCandidateinheritData",
                 data: {
-                    data
+                     data
                 },
                 success: function (data) {
                     if (data > 0) {
@@ -312,5 +257,5 @@
             });
         }
     </script>
-
 </body>
+</html>
