@@ -37,8 +37,15 @@ namespace XiaoHuLuMvcCore.Controllers
             return questionBankList;
         }
 
+        /// <summary>
+        /// 上传接口
+        /// </summary>
         private readonly IHostingEnvironment _hostingEnvironment;
 
+        /// <summary>
+        /// 控制反转
+        /// </summary>
+        /// <param name="hostingEnvironment"></param>
         public QuestionBankController(IHostingEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
@@ -49,13 +56,13 @@ namespace XiaoHuLuMvcCore.Controllers
         /// </summary>
         /// <param name="questionBank"></param>
         /// <returns></returns>
-        public void ADDQuestionBank(QuestionBankinherit questionBankinherit)
+        public IActionResult ADDQuestionBank(QuestionBankinherit questionBankinherit)
         {
+            #region 上传
             long size = 0;
             var files = Request.Form.Files;
             foreach (var file in files)
             {
-                //var fileName = file.FileName;
                 var fileName = ContentDispositionHeaderValue
                                 .Parse(file.ContentDisposition)
                                 .FileName
@@ -69,14 +76,17 @@ namespace XiaoHuLuMvcCore.Controllers
                 }
                 questionBankinherit.Photo = fileName;
             }
+            #endregion
             var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADD", questionBankinherit);
+            BadRequest("添加成功!");
+            return Redirect("/QuestionBank/QuestionsManagement");
         }
 
         /// <summary>
         /// 批量添加题库
         /// </summary>
         /// <param name="file"></param>
-        public void ADDQuestionBankList(IFormFile formFile)
+        public IActionResult ADDQuestionBankList(IFormFile formFile)
         {
             #region 导入
             string sWebRootFolder = _hostingEnvironment.WebRootPath;
@@ -119,11 +129,12 @@ namespace XiaoHuLuMvcCore.Controllers
                         questionBankinherits.Add(questionBankinherit);
                     }
                     var result = WebApiHelper.GetApiResult("post", "QuestionBank", "ADDList", questionBankinherits);
+                    return Redirect("/QuestionBank/QuestionsManagement");
                 }
             }
             catch (Exception ex)
             {
-                 Content(ex.Message);
+                return Redirect("/QuestionBank/QuestionsManagement");
             }
             #endregion
         }
@@ -153,7 +164,7 @@ namespace XiaoHuLuMvcCore.Controllers
         /// 修改题量
         /// </summary>
         /// <returns></returns>
-        public void UpdateTextTypeNum(int num, int id, int TextTypeId)
+        public IActionResult UpdateTextTypeNum(int num, int id, int TextTypeId)
         {
             TextTypeNum textType = new TextTypeNum { };
             textType.Id = id;
@@ -164,6 +175,7 @@ namespace XiaoHuLuMvcCore.Controllers
             {
                 Response.WriteAsync("<script>alert('修改成功!')</script>");
             }
+            return Redirect("/QuestionBank/GetTextTypeNum");
         }
 
         /// <summary>
@@ -180,8 +192,9 @@ namespace XiaoHuLuMvcCore.Controllers
         /// 修改题
         /// </summary>
         /// <param name="id"></param>
-        public void UpdateQuestionBankData(QuestionBankinherit questionBankinherit)
+        public IActionResult UpdateQuestionBankData(QuestionBankinherit questionBankinherit)
         {
+            #region 上传
             long size = 0;
             var files = Request.Form.Files;
             foreach (var file in files)
@@ -200,7 +213,9 @@ namespace XiaoHuLuMvcCore.Controllers
                 }
                 questionBankinherit.Photo = fileName;
             }
+            #endregion
             var result = WebApiHelper.GetApiResult("put", "QuestionBank", "Update", questionBankinherit);
+            return Redirect("/QuestionBank/QuestionsManagement");
         }
     }
 }

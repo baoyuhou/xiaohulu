@@ -56,7 +56,7 @@
             var pwd = $("#pwd").val();
 
             $.ajax({
-                url: '/login/index',
+                url: '/login/IndexAsync',
                 type: "post",
                 data: { "name": name, "pwd":pwd },
                 success: function (data) {

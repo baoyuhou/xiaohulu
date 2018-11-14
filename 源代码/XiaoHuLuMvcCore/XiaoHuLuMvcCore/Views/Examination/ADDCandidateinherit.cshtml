@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4"
                                                  style="padding-top: 30px;">
-                                                <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="" method="post">
+                                                <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="/Examination/ADDCandidateinheritData" method="post">
                                                     <div class="am-form-group">
                                                         <label for="user-name" class="am-u-sm-3 am-form-label">
                                                             姓名 / Name
@@ -55,8 +55,8 @@
                                                             性别 / Sex
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <input id="Sex" type="radio" name="Sex" checked="checked" value="1" />男
-                                                            <input id="Sex" type="radio" name="Sex" value="0" />女
+                                                            <input  type="radio" name="Sex" checked="checked" value="true" />男
+                                                            <input  type="radio" name="Sex" value="false" />女
                                                         </div>
                                                     </div>
                                                     <div class="am-form-group">
@@ -100,7 +100,7 @@
                                                             所在考场 / ExamRoomID
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <select id="TypeOfExam" name="TypeOfExam">
+                                                            <select id="TypeOfExam" name="ExamRoomID">
                                                                 @foreach (var item in ViewBag.ExamRoom)
                                                                 {
                                                                     <option value="@item.Id">@item.Name</option>
@@ -131,7 +131,7 @@
                                                             所在试室 / TestRoomID
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <select id="TypeOfExam" name="TypeOfExam">
+                                                            <select id="TypeOfExam" name="TestRoomID">
                                                                 @foreach (var item in ViewBag.TestRoom)
                                                                 {
                                                                     <option value="@item.Id">@item.Name</option>
@@ -144,7 +144,7 @@
                                                             所在单位 / CompanyID
                                                         </label>
                                                         <div class="am-u-sm-9">
-                                                            <select id="TypeOfExam" name="TypeOfExam">
+                                                            <select id="TypeOfExam" name="CompanyID">
                                                                 @foreach (var item in ViewBag.Company)
                                                                 {
                                                                     <option value="@item.Id">@item.Name</option>
@@ -186,7 +186,7 @@
                                     <div class="admin-content-body">
 
                                         <div class="am-g">
-                                            <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="/QuestionBank/ADDQuestionBankList" method="post">
+                                            <form class="am-form am-form-horizontal" enctype="multipart/form-data" action="/Examination/ADDQuestionBankList" method="post">
                                                 <div class="am-form-group">
                                                     <label for="user-name" class="am-u-sm-3 am-form-label">
                                                         导入文件
@@ -231,12 +231,12 @@
             //for (var i = 0; i < files.length; i++) {
             //    data.append(files[i].name, files[i]);
             //}
-            data.append(formFile[0].name, files[0]);
+            data.append(files[0].name, files[0]);
             $.ajax({
                 type: "post",
                 url: "/Examination/ADDCandidateinheritData",
                 data: {
-                    dadidate, data
+                     data
                 },
                 success: function (data) {
                     if (data > 0) {

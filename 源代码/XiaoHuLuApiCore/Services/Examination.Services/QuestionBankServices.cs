@@ -10,7 +10,14 @@ namespace Services.ExaminationServices
 {
     public class QuestionBankServices : IQuestionBankServices
     {
+        /// <summary>
+        /// 实例化
+        /// </summary>
         public SimpleClient<QuestionBank> QuestionBankDB = new SimpleClient<QuestionBank>(Educationcontext.GetClient());
+
+        /// <summary>
+        /// 实例化
+        /// </summary>
         public SimpleClient<Option> OptionDB = new SimpleClient<Option>(Educationcontext.GetClient());
 
         /// <summary>
@@ -201,9 +208,7 @@ namespace Services.ExaminationServices
             {
                 var result = sugarClient.Updateable<TextTypeNum>(textTypeNum).ExecuteCommand();
                 if (result == 1)
-                {
                     return 1;
-                }
                 return 0;
             }
         }
