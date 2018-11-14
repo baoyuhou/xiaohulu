@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using XiaoHuLuMvcCore.Models;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
+using AutherationTest;
 
 namespace XiaoHuLuMvcCore.Controllers
 {
@@ -18,11 +19,11 @@ namespace XiaoHuLuMvcCore.Controllers
         /// 显示全部考生信息
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index(string examNumber)
+        public IActionResult Index()
         {
-            examNumber = HttpContext.Session.GetString("candidate");
-           
-            return View(JsonConvert.DeserializeObject<Candidateinherit>(examNumber));
+           var  examNumber = User.Claims.First(m => m.Type == "key").Value;
+            var user = RedisHelper.Get<Candidate>(examNumber);
+            return View(user);
         }
     }
 }

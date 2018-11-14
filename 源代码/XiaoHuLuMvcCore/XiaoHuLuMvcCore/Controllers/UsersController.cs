@@ -53,7 +53,7 @@ namespace XiaoHuLuMvcCore.Controllers
                 var result = WebApiHelper.GetApiResult("get", "Permissions", "GetJurisdictions");
                 ViewBag.PerssionList = JsonConvert.DeserializeObject<List<Jurisdictions>>(result);
                 //取出KEy值也就是名字
-                ViewBag.Name = User.Claims.First(m => m.Type == "key").Value;
+                ViewBag.Name = User.Claims.First(m => m.Type == "keyhou").Value;
             }
             return View();
         }

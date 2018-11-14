@@ -47,7 +47,8 @@ namespace Services.Authority
                 {
                     roleanJurisdiction.JurisdictionId = int.Parse(item);
                     roledb += sqlSugarClient.Insertable<RoleanJurisdiction>(roleanJurisdiction).ExecuteCommand();
-                }
+                }                                       
+               
                 if (roledb == num.Length)
                 {
                     return 1;
