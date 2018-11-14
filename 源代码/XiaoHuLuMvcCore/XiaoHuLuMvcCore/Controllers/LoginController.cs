@@ -63,11 +63,11 @@ namespace XiaoHuLuMvcCore.Controllers
         {
             try
             {
-                UsersInfo usersInfo = t as UsersInfo;
+                UsersInfo usersInfo = JsonConvert.DeserializeObject<UsersInfo>(JsonConvert.SerializeObject(t)); 
                 //构造ClaimsIdentity 对象
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 //创建 Claim 类型,传入 ClaimsIdentity 中
-                identity.AddClaim(new Claim("key", usersInfo.UserName));
+                identity.AddClaim(new Claim("keyhou", usersInfo.UserName));
 
                 //创建ClaimsPrincipal对象,传入ClaimsIdentity 对象,调用HttpContext.SignInAsync完成登录
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
@@ -77,7 +77,7 @@ namespace XiaoHuLuMvcCore.Controllers
             }
             catch
             {
-                Candidate candidate = t as Candidate;
+                Candidate candidate = JsonConvert.DeserializeObject<Candidate>(JsonConvert.SerializeObject(t));
                 //构造ClaimsIdentity 对象
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 //创建 Claim 类型,传入 ClaimsIdentity 中
@@ -100,7 +100,7 @@ namespace XiaoHuLuMvcCore.Controllers
         /// </summary>
         public void OutLogin()
         {
-            RedisHelper.Remove(User.Claims.ToList().Where(m => m.Type == "key").First().Value);
+            RedisHelper.Remove(User.Claims.ToList().Where(m => m.Type == "keyhou").First().Value);
             HttpContext.SignOutAsync();
             
         }
