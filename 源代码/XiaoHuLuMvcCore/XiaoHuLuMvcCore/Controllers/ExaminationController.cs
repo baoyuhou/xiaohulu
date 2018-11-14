@@ -50,7 +50,7 @@ namespace XiaoHuLuMvcCore.Controllers
             ViewBag.TestRoom = JsonConvert.DeserializeObject<List<TestRoom>>(GetTestRooms);
             //考试
             var GetExamRooms = WebApiHelper.GetApiResult("Get", "Examination", "GetExamRooms");
-            ViewBag.ExamRoom = JsonConvert.DeserializeObject<List<ExamRoom>>(GetExamRooms); 
+            ViewBag.ExamRoom = JsonConvert.DeserializeObject<List<ExamRoom>>(GetExamRooms);
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace XiaoHuLuMvcCore.Controllers
         /// 添加考生
         /// </summary>
         /// <returns></returns>
-        public int ADDCandidateinheritData(Candidate candidate)
+        public IActionResult ADDCandidateinheritData(Candidate candidate)
         {
             #region 上传
             long size = 0;
@@ -99,9 +99,7 @@ namespace XiaoHuLuMvcCore.Controllers
             }
             #endregion
             var GetExamRooms = WebApiHelper.GetApiResult("post", " Examination", "CandidateAdd", candidate);
-            if (GetExamRooms!=null)
-                return 1;
-            return 0;
+            return Redirect("/Examination/Index");
         }
 
         /// <summary>
